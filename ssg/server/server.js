@@ -5,7 +5,7 @@ const cors = require('cors');
 
 
 const app = express();
-const port = 3001;
+const port = 3002;
 app.use(express.json());
 app.use(cors());
 
@@ -24,6 +24,12 @@ app.post('/getUsers', async (req, res) => {
     if (user) 
     {
         return res.status(200).send({message: "User already registered."});
+    }
+    else
+    {
+        const newUser = new Users({email: req.body.email});
+        await newUser.save();
+        return res.status(200).send({message: "User registered successfully."});
     }
 });
 
