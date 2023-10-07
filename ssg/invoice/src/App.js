@@ -1,5 +1,4 @@
-import './App.css';
-import Login from './components/login';
+import LandingPage from './Landing Page/LandingPage.js';
 import Logout from './components/logout';
 // import Home from './components/home';
 import React from 'react';
@@ -13,7 +12,7 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />}/>
+        <Route path="/" Component={LandingPage}/>
           {/* <Route path='/home' element={<Home />} /> */}
           <Route path='/logout' element={<Logout />} />
           <Route path='/admin' element={<Admin />} />
