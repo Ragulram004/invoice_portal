@@ -50,38 +50,28 @@ export const HomePageMain = styled.div`
     width: 83vw;
 `;
 
-export const HomePageAction = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-end;
-    background-color: transparent;
-    height: 10vh;
-    width: 100%;
-
-`;
-
 export const HomePageActionButtons = styled.button`
     font-family: inherit;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 8em;
-    height: 2.6em;
+    width: 10vw;
+    height: 90%;
     line-height: 2.5em;
-    margin: 20px;
     position: relative;
     overflow: hidden;
     border: 2px solid var(--primary);
+    margin-top: .5vh;
     transition: color .5s;
     z-index: 1;
     font-size: 17px;
     border-radius: 6px;
     font-weight: 500;
     color: var(--text);
-    background: var(--background);
+    background: var(--accent);
     cursor: pointer;
+    margin-left: 23vw;
 
     &:before {
         content: "";
@@ -120,8 +110,9 @@ export const HomePageActionContent = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     background-color: var(--accent);
-    height: 72vh;
+    height: 80vh;
     width: 95%;
+    margin-top: 2vh;
 `;
 
 export const HomePageActionTabs = styled.div`
@@ -130,38 +121,47 @@ export const HomePageActionTabs = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     background-color: transparent;
-    border-bottom: 2px solid var(--primary);
     height: 8vh;
     width: 100%;
 `;
 
-export const HomePageTabConatainer = styled.div`
-    &input[type="radio"] {
-        display: none;
+export const HomePageActionTabsInput = styled.input`
+    width: 5vh;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: color .5s;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .5s ease-in-out;
+
+    &:checked + label {
+        background-color: var(--tab-active);
+        transition: background-color .5s ease-in-out;
+        border-bottom: 2px solid var(--primary);
     }
 `;
 
-export const HomePageTab = styled.div`
-    display: flex;
-    position: relative;
-    background-color: #fff;
-    box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
-    padding: 0.75rem;
-    border-radius: 99px;
-
-    * {
-        z-index: 2;
-    }
-
+export const HomePageActionTabsLabel = styled.label`
+    width: 15vw;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: color .5s;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 30px;
-    width: 50px;
-    font-size: .8rem;
-    color: black;
-    font-weight: 500;
-    border-radius: 99px;
-    cursor: pointer;
-    transition: color 0.15s ease-in;
 `;
