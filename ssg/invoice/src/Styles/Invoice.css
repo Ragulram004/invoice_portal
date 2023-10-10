@@ -1,0 +1,17 @@
+:root {
+    --background: #cbd0dd;
+    --accent: #ffffff;
+    --primary: #4A94CD;
+    --secondary: #FF7C7C;
+    --text: #000000;
+    --sidebar: #71b4e7a9;
+}
+
+.GoogleSignin {
+    width: 98%;
+    height: 9vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
