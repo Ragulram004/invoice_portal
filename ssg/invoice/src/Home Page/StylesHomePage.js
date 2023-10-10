@@ -106,13 +106,14 @@ export const HomePageActionButtons = styled.button`
 
 export const HomePageActionContent = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     background-color: var(--accent);
     height: 80vh;
     width: 95%;
     margin-top: 2vh;
+    overflow-y: auto;
 `;
 
 export const HomePageActionTabs = styled.div`
@@ -164,4 +165,15 @@ export const HomePageActionTabsLabel = styled.label`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+export const HomePageTabContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: transparent;
+    height: 72vh;
+    width: 100%;
+    margin-top: 2vh;
 `;

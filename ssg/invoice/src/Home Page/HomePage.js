@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import '../Styles/Invoice.css';
 import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent, 
         HomePageMain, HomePageActionButtons, HomePageActionTabs, 
-        HomePageActionContent, HomePageActionTabsInput, HomePageActionTabsLabel, } from './StylesHomePage.js';
+        HomePageActionContent, HomePageActionTabsInput, HomePageActionTabsLabel, HomePageTabContent, } from './StylesHomePage.js';
 
 //Components
 
@@ -36,6 +36,12 @@ function HomePage() {
 
                             <HomePageActionButtons>Apply Invoice</HomePageActionButtons>
                         </HomePageActionTabs>
+                        
+                        <HomePageTabContent>
+                            {activeTab === 'Proposed' && <div>Proposed</div>}
+                            {activeTab === 'Approved' && <div>Approved</div>}
+                            {activeTab === 'Rejected' && <div>Rejected</div>}
+                        </HomePageTabContent>
                     </HomePageActionContent>
                 </HomePageMain>
             </HomePageContent>
