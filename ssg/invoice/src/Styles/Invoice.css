@@ -5,6 +5,9 @@
     --secondary: #FF7C7C;
     --text: #000000;
     --sidebar: #71b4e7a9;
+    --primary-hover: #2c99ed;
+    --tab-hover: #acb1bdc2;
+    --tab-active: #fae3e3c6;
 }
 
 .GoogleSignin {
@@ -15,3 +18,4 @@
     justify-content: center;
     align-items: center;
 }
+  
