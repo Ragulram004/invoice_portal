@@ -52,8 +52,11 @@ function LandingPage() {
         // console.log("Login Success: currentUser:", res.profileObj.email);
         setEmail({ email: res.profileObj.email });
         // window.location.href = "/Home";
+        console.log(email);
+        console.log(res.profileObj.email);
+        console.log("error da saran ....");
         try {
-            const response = await axios.post('http://localhost:3001/getUsers', email);
+            const response = await axios.post('http://localhost:3002/getUsers', email);
             console.log(response);
             if (response.status === 200) {
                 console.log('Data saved successfully');
