@@ -2,6 +2,8 @@ const express = require('express');
 const mogoose = require('mongoose');
 const Users = require('./models/Users');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 
 const app = express();
@@ -15,23 +17,45 @@ mogoose.connect('mongodb://127.0.0.1:27017/invoice');
 //     res.send('Hello World!');
 // });
 
+app.get('/checkToken', authenticateToken, (req, res) => {
+    res.send({valid: true});
+});
+
+app.get('/getUsers', authenticateToken, (req, res) => {
+    res.send(req.username);
+});
+
 app.post('/getUsers', async (req, res) => {
     // const newUser = new Users({email: req.body.email});
     // await newUser.save();
 
     const user = await Users.findOne({email: req.body.email});
+    const username = { name: user};
+    const accesstoken = jwt.sign(username, process.env.ACCESS_TOKEN_SECRET)
     // console.log(newUser);
     if (user) 
     {
-        return res.status(200).send({message: "User already registered."});
+        return res.status(200).send({accesstoken: accesstoken});
     }
     else
     {
         const newUser = new Users({email: req.body.email});
         await newUser.save();
-        return res.status(200).send({message: "User registered successfully."});
+        return res.status(201).send({message: "User registered successfully."});
     }
 });
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; 
+    if (token == null) return res.sendStatus(401);
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, username) => {
+        if (err) return res.sendStatus(403);
+        req.username = username;
+        next();
+    })
+}
 
 // app.get('/user', async (req, res) => {
 //     const user = await User.findOne({email: req.body.email});
