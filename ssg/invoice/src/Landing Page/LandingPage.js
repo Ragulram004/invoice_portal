@@ -5,6 +5,7 @@ import { GoogleLogin } from "react-google-login";
 import { gapi } from 'gapi-script';
 import axios from 'axios';
 import { createTheme, ThemeProvider, Typography } from "@mui/material";
+import Cookies from 'js-cookie';
 
 //Styling
 
@@ -54,13 +55,18 @@ function LandingPage() {
         // window.location.href = "/Home";
         console.log(email);
         console.log(res.profileObj.email);
-        console.log("error da saran ....");
         try {
             const response = await axios.post('http://localhost:3002/getUsers', email);
             console.log(response);
             if (response.status === 200) {
-                console.log('Data saved successfully');
-                window.location.href = "/Home";
+                window.location.href = "/Home"
+                console.log('Data saved successfully')                
+                // (response => {
+                //     localStorage.setItem('token', response.data.token)})
+                    console.log(response.data.accesstoken);
+                    // const authToken = response.data.accesstoken;
+                    Cookies.set('token', response.data.accesstoken, { expires: 1/24 });
+                    
             } else {
                 console.log(response);
                 console.error('Failed to save data');

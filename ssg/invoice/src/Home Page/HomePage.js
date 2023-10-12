@@ -1,6 +1,7 @@
 // Dependencies
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Cookies from 'js-cookie';
 
 //Styles
 
@@ -22,7 +23,17 @@ import Logo from '../Icons/BITLogo.png';
 import { IoNotificationsOutline } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 
+
 function HomePage() {
+
+    useEffect(() => {
+            const authToken = Cookies.get('token');
+
+                if (!authToken) {
+                    window.location.href = '/';
+                    return;
+                };
+            });
 
     const [activeTab, setActiveTab] = useState('Proposed');
 

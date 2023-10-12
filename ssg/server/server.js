@@ -17,6 +17,8 @@ mogoose.connect('mongodb://127.0.0.1:27017/invoice');
 //     res.send('Hello World!');
 // });
 
+
+
 app.get('/checkToken', authenticateToken, (req, res) => {
     res.send({valid: true});
 });
