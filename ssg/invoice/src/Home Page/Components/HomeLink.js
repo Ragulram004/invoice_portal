@@ -5,15 +5,20 @@ import React from "react";
 //Styles
 
 import '../../Styles/Invoice.css';
+import { HomeLinkContent, HomeLinkTable, HomeLinkTableHeaderTitle } from "../StylesHomePage";
 
 //Components
 
 
 function HomeLink() {
     return (
-        <div>
-            <h1>Home Table </h1>
-        </div>
+        <HomeLinkContent>
+            <HomeLinkTable>
+                <HomeLinkTableHeaderTitle>ID</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle>Project Name</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
+            </HomeLinkTable>
+        </HomeLinkContent>
     );
 }
 
