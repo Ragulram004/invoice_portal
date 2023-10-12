@@ -14,10 +14,143 @@ export const HomePageNavigation = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: var(--accent);
     height: 15vh;
     width: 100%;
+`;
+
+export const HomePageNavigationLogo = styled.img`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    height: 10vh;
+    width: 10vw;
+    margin-left: 1vw;
+`;
+
+export const HomePageNavigationTitle = styled.h1`
+    display: flex;
+    flex-direction: row;
+    align-items: centre;
+    justify-content: centre;
+    font-size: 1.8em;
+    font-family: 'Arial Narrow', 'san-serif';
+    margin-left: 1vw;
+`;
+
+export const HomePageNavigationSearch = styled.div`
+    --input-text-color: #808080;
+    --input-text-hover-color: transparent;
+    --input-border-hover-color: #808080;
+    --border-radius: 10em;
+    --transition-cubic-bezier: 150ms cubic-bezier(0.4,0,0.2,1);
+`;
+
+export const HomePageNavigationSearchBox = styled.div`
+    width: 20vw;
+    height: 5vh;
+    margin-left: 10vw;
+    border: 1px solid var(--text);
+    border-radius: var(--border-radius);
+    padding: 5px 15px;
+    background: var(--accent);
+    transition: var(--transition-cubic-bezier);
+
+    &:hover {
+        border-color: var(--input-border-hover-color);
+    }
+`;
+
+export const HomePageNavigationSearchField = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: -5px;
+    border: 0;
+`;
+
+export const HomePageNavigationSearchInput = styled.input`
+    width: calc(100% - 29px);
+    height: 100%;
+    border: 0;
+    border-color: transparent;
+    font-size: 1rem;
+    padding-right: 0px;
+    color: var(--text);
+    background: var(--input-bg-color);
+    border-right: 2px solid var(--input-border-color);
+    outline: none;
+
+    &::-webkit-input-placeholder {
+        color: var(--input-text-color);
+    }
+
+    &::-moz-input-placeholder {
+        color: var(--input-text-color);
+    }
+
+    &::-ms-input-placeholder {
+        color: var(--input-text-color);
+    }
+
+    &:focus::-webkit-input-placeholder {
+        color: var(--input-text-hover-color);
+    }
+
+    &:focus::-moz-input-placeholder {
+        color: var(--input-text-hover-color);
+    }
+
+    &:focus::-ms-input-placeholder {
+        color: var(--input-text-hover-color);
+    }
+`;
+
+export const HomePageNavigationDN = styled.label`
+    background-color: var(--accent);
+    width: 4vw;
+    height: 6vh;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    line-height: 1;
+    margin-left: 20vw;
+`;
+
+export const HomePageNavigationDNInput = styled.input`
+    display: none;
+`;
+
+export const HomePageNavigationNotification = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 4vw;
+    height: 6vh;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text);
+    margin-left: 1vw;
+    cursor: pointer;
+`;
+
+export const HomePageNavigationProfile = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 4vw;
+    height: 6vh;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text);
+    margin-left: 1vw;
+    cursor: pointer;
 `;
 
 export const HomePageContent = styled.div`
