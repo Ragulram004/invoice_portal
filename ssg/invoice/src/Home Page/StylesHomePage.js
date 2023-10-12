@@ -125,7 +125,7 @@ export const HomePageNavigationDNInput = styled.input`
     display: none;
 `;
 
-export const HomePageNavigationNotification = styled.div`
+export const HomePageNavigationNotification = styled.button`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -137,9 +137,10 @@ export const HomePageNavigationNotification = styled.div`
     color: var(--text);
     margin-left: 1vw;
     cursor: pointer;
+    border: none;
 `;
 
-export const HomePageNavigationProfile = styled.div`
+export const HomePageNavigationProfile = styled.button`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -151,6 +152,7 @@ export const HomePageNavigationProfile = styled.div`
     color: var(--text);
     margin-left: 1vw;
     cursor: pointer;
+    border: none;
 `;
 
 export const HomePageContent = styled.div`
@@ -166,11 +168,59 @@ export const HomePageContent = styled.div`
 export const HomePageSideBar = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     background-color: var(--sidebar);
     height: 85vh;
-    width: 17vw;
+    width: 15vw;
+`;
+
+export const HomePageSideBarSeperation = styled.button`
+    width: 100%;
+    height: 50vh;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+`;
+
+export const HomePageSideBarSeperationBottom = styled.button`
+    width: 100%;
+    height: 50vh;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+`;
+
+export const HomePageSideBarButton = styled.button`
+    width: 100%;
+    height: 10vh;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--text);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: background-color .5s ease-in-out;
+    font-size: 1.5em;
+
+    &:focus {
+        background-color: var(--sidebar-focus);
+        width: 100%;
+        transition: background-color .5s ease-in-out;
+    }
 `;
 
 export const HomePageMain = styled.div`
@@ -180,7 +230,7 @@ export const HomePageMain = styled.div`
     justify-content: flex-start;
     background-color: transparent;
     height: 85vh;
-    width: 83vw;
+    width: 85vw;
 `;
 
 export const HomePageActionButtons = styled.button`
@@ -310,3 +360,8 @@ export const HomePageTabContent = styled.div`
     width: 100%;
     margin-top: 2vh;
 `;
+
+
+
+// For Component: HomeLink
+

@@ -15,13 +15,18 @@ import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent,
         HomePageNavigationDN,
         HomePageNavigationDNInput,
         HomePageNavigationNotification,
-        HomePageNavigationProfile} from './StylesHomePage.js';
+        HomePageNavigationProfile,
+        HomePageSideBarSeperation,
+        HomePageSideBarButton,
+        HomePageSideBarSeperationBottom} from './StylesHomePage.js';
 
 //Components
 
 import Logo from '../Icons/BITLogo.png';
 import { IoNotificationsOutline } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
+import { AiOutlineHome, AiFillSlackCircle, AiOutlineLogout } from "react-icons/ai";
+import HomeLink from "./Components/HomeLink.js";
 
 
 function HomePage() {
@@ -36,9 +41,14 @@ function HomePage() {
             });
 
     const [activeTab, setActiveTab] = useState('Proposed');
+    const [activeLink, setActiveLink] = useState('Home');
 
     const handleTabChange = (e) => {
         setActiveTab(e);
+    }
+
+    const handleLinkChange = (e) => {
+        setActiveLink(e);
     }
 
     return (
@@ -100,8 +110,50 @@ function HomePage() {
                     <RxAvatar id="ProfileAvatar" />
                 </HomePageNavigationProfile>
             </HomePageNavigation>
+
+            {/* Below the Navigation Bar is the Home Page Content. */}
+            {/* This is broken down into the Side Bar and the Main Content. */}
+
             <HomePageContent>
-                <HomePageSideBar></HomePageSideBar>
+
+                {/* Home page side bar with the navigation links. */}
+
+                <HomePageSideBar>
+
+                    {/* Home page side bar navigation links. */}
+
+                    <HomePageSideBarSeperation>
+
+                        {/* Showing the navigation links for the Home Page Side Bar. */}
+                        <HomePageSideBarButton onClick={ () => handleLinkChange('Home') }>
+                            <AiOutlineHome id="SideBarHomeIcon" />
+                            Home
+                        </HomePageSideBarButton>
+
+                        {/* Showing the Invoices related to TAC */}
+
+                        <HomePageSideBarButton onClick={ () => handleLinkChange('TAC') }>
+                            <AiFillSlackCircle id="SideBarHomeIcon" />
+                            TAC
+                        </HomePageSideBarButton>
+
+                        {/* Showing the Invoices related to Other events */}
+
+                        <HomePageSideBarButton onClick={ () => handleLinkChange('Other') }>
+                            <AiFillSlackCircle id="SideBarHomeIcon" />
+                            Other
+                        </HomePageSideBarButton>
+                    </HomePageSideBarSeperation>
+
+                    {/* Home page side bar logout button. */}
+
+                    <HomePageSideBarSeperationBottom>
+                        <HomePageSideBarButton>
+                            <AiOutlineLogout id="SideBarHomeIcon" />
+                            Logout
+                        </HomePageSideBarButton>
+                    </HomePageSideBarSeperationBottom>
+                </HomePageSideBar>
 
                 {/* Home page main content about the proposed, approved and rejected invoices. */}
 
@@ -118,11 +170,27 @@ function HomePage() {
                             <HomePageActionButtons>Apply Invoice</HomePageActionButtons>
                         </HomePageActionTabs>
                         
-                        <HomePageTabContent>
-                            {activeTab === 'Proposed' && <div>Proposed</div>}
-                            {activeTab === 'Approved' && <div>Approved</div>}
-                            {activeTab === 'Rejected' && <div>Rejected</div>}
-                        </HomePageTabContent>
+                        { activeLink === 'Home' &&
+                            <HomePageTabContent>
+                                {activeTab === 'Proposed' && <HomeLink />}
+                                {activeTab === 'Approved' && <div>Approved</div>}
+                                {activeTab === 'Rejected' && <div>Rejected</div>}
+                            </HomePageTabContent> 
+                        }
+                        { activeLink === 'TAC' &&
+                            <HomePageTabContent>
+                                {activeTab === 'Proposed' && <div>Proposed TAC</div>}
+                                {activeTab === 'Approved' && <div>Approved TAC</div>}
+                                {activeTab === 'Rejected' && <div>Rejected TAC</div>}
+                            </HomePageTabContent>
+                        }
+                        { activeLink === 'Other' &&
+                            <HomePageTabContent>
+                                {activeTab === 'Proposed' && <div>Proposed Other</div>}
+                                {activeTab === 'Approved' && <div>Approved Other</div>}
+                                {activeTab === 'Rejected' && <div>Rejected Other</div>}
+                            </HomePageTabContent>
+                        }
                     </HomePageActionContent>
                 </HomePageMain>
             </HomePageContent>
