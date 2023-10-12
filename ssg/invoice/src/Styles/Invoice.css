@@ -8,6 +8,7 @@
     --primary-hover: #2c99ed;
     --tab-hover: #acb1bdc2;
     --tab-active: #fae3e3c6;
+    --sidebar-focus: #4A94CD;
 }
 
 .GoogleSignin {
@@ -50,4 +51,8 @@
   #ProfileAvatar {
     width: 100%;
     height: 60%;
+  }
+
+  #SideBarHomeIcon {
+    margin-right: 2vw;
   }
