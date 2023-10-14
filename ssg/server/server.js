@@ -1,6 +1,7 @@
 const express = require('express');
 const mogoose = require('mongoose');
 const Users = require('./models/Users');
+const Invoice = require('./models/Invoice');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -29,9 +30,9 @@ app.get('/checkToken', authenticateToken, (req, res) => {
     res.send({valid: true});
 });
 
-app.get('/getUsers', authenticateToken, (req, res) => {
-    res.send(req.username);
-});
+// app.get('/getUsers', authenticateToken, (req, res) => {
+//     res.send(req.username);
+// });
 
 app.post("/adduser", async (req, res) => {
     try {
@@ -49,7 +50,7 @@ app.post('/getUsers', async (req, res) => {
     // await newUser.save();
 
     const user = await Users.findOne({email: req.body.email});
-    const username = { name: user.email};
+    const username = { name: user};
     const accesstoken = jwt.sign(username, process.env.ACCESS_TOKEN_SECRET)
     // console.log(newUser);
     if (user) 
