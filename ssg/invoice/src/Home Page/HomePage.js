@@ -60,8 +60,9 @@ function HomePage() {
     }
 
     const onSuccess = () => {
-        alert("Logout made successfully");
+        // alert("Logout made successfully");
         window.location.href = "/";
+        Cookies.remove('token');
     };
 
     const onFailure = () => {
