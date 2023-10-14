@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LandingPage from './Landing Page/LandingPage.js';
 import HomePage from './Home Page/HomePage.js';
-import Logout from './components/logout';
+import Apply from './ApplyInvoice/Apply.js';
 // import Home from './components/home';
 import Admin from './Admin Page/admin.js';
 
@@ -19,9 +19,8 @@ const App = () => {
       <Routes>
         <Route path="/" Component={LandingPage}/>
         <Route path='/Home' Component={HomePage} />
-          <Route path='/logout' element={<Logout />} />
+        <Route path='/Apply' Component={Apply} />
           <Route path='/admin' element={<Admin />} />
-          {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>
       

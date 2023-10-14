@@ -365,3 +365,105 @@ export const HomePageTabContent = styled.div`
 
 // For Component: HomeLink
 
+export const HomeLinkContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+`;
+
+export const HomeLinkTable = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr;
+    grid-template-rows: auto;
+    gap: .1vw;
+    width: 100%;
+    height: 10vh;
+    background-color: var(--grid-header);
+`;
+
+export const HomeLinkTableHeaderTitle = styled.h2`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-family: 'Arial Narrow', 'san-serif';
+    margin: 1vw;
+    color: var(--text);
+`;
+
+
+//For Component: TAC
+
+export const TACLinkContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+`;
+
+export const TACLinkTable = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr;
+    grid-template-rows: auto;
+    gap: .1vw;
+    width: 100%;
+    height: 10vh;
+    background-color: var(--grid-header);
+`;
+
+export const TACLinkTableHeaderTitle = styled.h2`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-family: 'Arial Narrow', 'san-serif';
+    margin: 1vw;
+    color: var(--text);
+`;
+
+
+
+//For Component: Other
+
+export const OtherLinkContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+`;
+
+export const OtherLinkTable = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr;
+    grid-template-rows: auto;
+    gap: .1vw;
+    width: 100%;
+    height: 10vh;
+    background-color: var(--grid-header);
+`;
+
+export const OtherLinkTableHeaderTitle = styled.h2`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-family: 'Arial Narrow', 'san-serif';
+    margin: 1vw;
+    color: var(--text);
+`;

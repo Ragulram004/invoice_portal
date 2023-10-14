@@ -11,6 +11,7 @@ function Logout() {
 
     const onFailure = () => {
         console.log("Handle failure cases");
+        alert("Logout failed");
     };
 
 
@@ -21,6 +22,7 @@ function Logout() {
                 buttonText="Logout"
                 onLogoutSuccess={() => onSuccess()}
                 onFailure={() => onFailure()}
+                className="GoogleSignin"
             />
         </div>
     );

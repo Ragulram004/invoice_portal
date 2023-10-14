@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
+import { GoogleLogout } from "react-google-login";
+import { useNavigate } from 'react-router-dom';
 
 //Styles
 
@@ -25,8 +27,13 @@ import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent,
 import Logo from '../Icons/BITLogo.png';
 import { IoNotificationsOutline } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
-import { AiOutlineHome, AiFillSlackCircle, AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
 import HomeLink from "./Components/HomeLink.js";
+import TACLink from "./Components/TACLink.js";
+import OtherLink from "./Components/OtherLink";
+
+
+const clientId = process.env.REACT_APP_CLIENTID;
 
 
 function HomePage() {
@@ -38,10 +45,11 @@ function HomePage() {
                     window.location.href = '/';
                     return;
                 };
-            });
+    });
 
     const [activeTab, setActiveTab] = useState('Proposed');
     const [activeLink, setActiveLink] = useState('Home');
+    const Navigate = useNavigate();
 
     const handleTabChange = (e) => {
         setActiveTab(e);
@@ -49,6 +57,20 @@ function HomePage() {
 
     const handleLinkChange = (e) => {
         setActiveLink(e);
+    }
+
+    const onSuccess = () => {
+        alert("Logout made successfully");
+        window.location.href = "/";
+    };
+
+    const onFailure = () => {
+        console.log("Handle failure cases");
+        alert("Logout failed");
+    };
+
+    const handleApplyClick = () => {
+        Navigate('/Apply');
     }
 
     return (
@@ -148,10 +170,12 @@ function HomePage() {
                     {/* Home page side bar logout button. */}
 
                     <HomePageSideBarSeperationBottom>
-                        <HomePageSideBarButton>
-                            <AiOutlineLogout id="SideBarHomeIcon" />
-                            Logout
-                        </HomePageSideBarButton>
+                        <GoogleLogout
+                            clientId={clientId}
+                            buttonText="Logout"
+                            onLogoutSuccess={() => onSuccess()}
+                            onFailure={() => onFailure()}
+                        />
                     </HomePageSideBarSeperationBottom>
                 </HomePageSideBar>
 
@@ -167,28 +191,28 @@ function HomePage() {
                             <HomePageActionTabsInput type="radio" id="rejected" name="tabs" value="Rejected" checked={activeTab === 'Rejected'} onChange={() => handleTabChange('Rejected')} />
                             <HomePageActionTabsLabel htmlFor="rejected">Rejected</HomePageActionTabsLabel>
 
-                            <HomePageActionButtons>Apply Invoice</HomePageActionButtons>
+                            <HomePageActionButtons onClick={handleApplyClick}>Apply Invoice</HomePageActionButtons>
                         </HomePageActionTabs>
                         
                         { activeLink === 'Home' &&
                             <HomePageTabContent>
                                 {activeTab === 'Proposed' && <HomeLink />}
-                                {activeTab === 'Approved' && <div>Approved</div>}
-                                {activeTab === 'Rejected' && <div>Rejected</div>}
+                                {activeTab === 'Approved' && <HomeLink />}
+                                {activeTab === 'Rejected' && <HomeLink />}
                             </HomePageTabContent> 
                         }
                         { activeLink === 'TAC' &&
                             <HomePageTabContent>
-                                {activeTab === 'Proposed' && <div>Proposed TAC</div>}
-                                {activeTab === 'Approved' && <div>Approved TAC</div>}
-                                {activeTab === 'Rejected' && <div>Rejected TAC</div>}
+                                {activeTab === 'Proposed' && <TACLink />}
+                                {activeTab === 'Approved' && <TACLink />}
+                                {activeTab === 'Rejected' && <TACLink />}
                             </HomePageTabContent>
                         }
                         { activeLink === 'Other' &&
                             <HomePageTabContent>
-                                {activeTab === 'Proposed' && <div>Proposed Other</div>}
-                                {activeTab === 'Approved' && <div>Approved Other</div>}
-                                {activeTab === 'Rejected' && <div>Rejected Other</div>}
+                                {activeTab === 'Proposed' && <OtherLink />}
+                                {activeTab === 'Approved' && <OtherLink />}
+                                {activeTab === 'Rejected' && <OtherLink />}
                             </HomePageTabContent>
                         }
                     </HomePageActionContent>

@@ -9,6 +9,7 @@
     --tab-hover: #acb1bdc2;
     --tab-active: #fae3e3c6;
     --sidebar-focus: #4A94CD;
+    --grid-header: #f7cdcdaf;
 }
 
 .GoogleSignin {
@@ -55,4 +56,21 @@
 
   #SideBarHomeIcon {
     margin-right: 2vw;
+  }
+
+  #outlined-basic {
+    width: 50vw;
+    border: none;
+    height: 100%;
+  }
+
+  #outlined-multiline-static {
+    width: 50vw;
+    border: none;
+    height: 100%;
+  }
+
+  #FormControlRadio {
+    margin-right: 10vw;
+    font-size: 2em;
   }
