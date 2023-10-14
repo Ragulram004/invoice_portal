@@ -9,7 +9,7 @@ import LandingPage from './Landing Page/LandingPage.js';
 import HomePage from './Home Page/HomePage.js';
 import Apply from './ApplyInvoice/Apply.js';
 // import Home from './components/home';
-import Admin from './components/admin';
+import Admin from './Admin Page/admin.js';
 
 const App = () => {
 

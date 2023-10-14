@@ -43,6 +43,7 @@ const theme = createTheme({
 
 
 const clientId = process.env.REACT_APP_CLIENTID;
+const API_URL = process.env.REACT_APP_API_URL;
 
 function LandingPage() {
 
@@ -56,7 +57,7 @@ function LandingPage() {
         console.log(email);
         console.log(res.profileObj.email);
         try {
-            const response = await axios.post('http://localhost:3002/getUsers', email);
+            const response = await axios.post(`${API_URL}/getUsers`, email);
             console.log(response);
             if (response.status === 200) {
                 window.location.href = "/Home"

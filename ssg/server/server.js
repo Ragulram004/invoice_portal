@@ -6,10 +6,16 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 
+
 const app = express();
 const port = 3002;
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT'],
+    credentials: false,
+}));
 
 mogoose.connect('mongodb://127.0.0.1:27017/invoice');
 
@@ -27,12 +33,23 @@ app.get('/getUsers', authenticateToken, (req, res) => {
     res.send(req.username);
 });
 
+app.post("/adduser", async (req, res) => {
+    try {
+    const newUser = new Users({email: req.body.email},{name: req.body.name},{rollnumber: req.body.rollnumber});
+    await newUser.save();
+    res.send(newUser);
+    } catch (error) {
+        // console.log(error)
+        console.log("User already exists")
+    }
+});
+
 app.post('/getUsers', async (req, res) => {
     // const newUser = new Users({email: req.body.email});
     // await newUser.save();
 
     const user = await Users.findOne({email: req.body.email});
-    const username = { name: user};
+    const username = { name: user.email};
     const accesstoken = jwt.sign(username, process.env.ACCESS_TOKEN_SECRET)
     // console.log(newUser);
     if (user) 
@@ -41,9 +58,10 @@ app.post('/getUsers', async (req, res) => {
     }
     else
     {
-        const newUser = new Users({email: req.body.email});
-        await newUser.save();
-        return res.status(201).send({message: "User registered successfully."});
+        console.log("User not found in DB");
+        // const newUser = new Users({email: req.body.email});
+        // await newUser.save();
+        // return res.status(201).send({message: "User registered successfully."});
     }
 });
 
@@ -65,6 +83,25 @@ function authenticateToken(req, res, next) {
 // }) 
 
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Example app listening at http://localhost:${port}`);
+// });
+
+// console.log("----------------------")
+// console.log(Users.findOne({email: "saran.al22@bitsathy.ac.in"}));
+// console.log("----------------------")
+if(Users.findOne({email:"saran.al22@bitsathy.ac.in"})){
+    getData = async() => {
+    try {
+    const us = await Users.findOne({email:"saran.al22@bitsathy.ac.in"})
+    console.log(us._id)
+    } catch (error) {
+        console.log(error)
+    }
+}
+    getData();
+    console.log("sucess")
+}
+else{
+    console.log("********************")
+}
