@@ -53,7 +53,7 @@ function LandingPage() {
 
         // console.log("Login Success: currentUser:", res.profileObj.email);
         setEmail({ email: res.profileObj.email });
-        // window.location.href = "/Home";
+        window.location.href = "/Home";
         console.log(email);
         console.log(res.profileObj.email);
         try {

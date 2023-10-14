@@ -83,25 +83,25 @@ function authenticateToken(req, res, next) {
 // }) 
 
 
-// app.listen(port, () => {
-//     console.log(`Example app listening at http://localhost:${port}`);
-// });
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+});
 
 // console.log("----------------------")
 // console.log(Users.findOne({email: "saran.al22@bitsathy.ac.in"}));
 // console.log("----------------------")
-if(Users.findOne({email:"saran.al22@bitsathy.ac.in"})){
-    getData = async() => {
-    try {
-    const us = await Users.findOne({email:"saran.al22@bitsathy.ac.in"})
-    console.log(us._id)
-    } catch (error) {
-        console.log(error)
-    }
-}
-    getData();
-    console.log("sucess")
-}
-else{
-    console.log("********************")
-}
+// if(Users.findOne({email:"saran.al22@bitsathy.ac.in"})){
+//     getData = async() => {
+//     try {
+//     const us = await Users.findOne({email:"saran.al22@bitsathy.ac.in"})
+//     console.log(us._id)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+//     getData();
+//     console.log("sucess")
+// }
+// else{
+//     console.log("********************")
+// }
