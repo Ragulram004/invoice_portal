@@ -21,7 +21,6 @@ const App = () => {
         <Route path='/Home' Component={HomePage} />
         <Route path='/Apply' Component={Apply} />
           <Route path='/admin' element={<Admin />} />
-          {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>
       
