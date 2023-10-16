@@ -7,16 +7,16 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 
-
+// app.use(cors);
 const app = express();
 const port = 3002;
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT'],
-    credentials: false,
-}));
+// {app.use(cors({
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT'],
+//     credentials: false,
+// }));}
 
 mogoose.connect('mongodb://127.0.0.1:27017/invoice');
 

@@ -49,6 +49,11 @@
     height: 60%;
   }
 
+  #BackToHome {
+    width: 100%;
+    height: 60%;
+  }
+
   #ProfileAvatar {
     width: 100%;
     height: 60%;
@@ -59,13 +64,21 @@
   }
 
   #outlined-basic {
-    width: 50vw;
+    width: 20vw;
     border: none;
     height: 100%;
+    margin-right: 2vw;
+  }
+
+  #outlined-basic-date {
+    width: 35vw;
+    border: none;
+    height: 100%;
+    margin-right: 2vw;
   }
 
   #outlined-multiline-static {
-    width: 50vw;
+    width: 20vw;
     border: none;
     height: 100%;
   }
@@ -74,3 +87,13 @@
     margin-right: 10vw;
     font-size: 2em;
   }
+
+  #muiTextField {
+    border-bottom: 10em;
+  }
+
+  #deleteIcon {
+    width: 3vw;
+    height: 3vh
+  }
+  
