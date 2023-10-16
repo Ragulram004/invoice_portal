@@ -19,9 +19,9 @@ const port = process.env.PORT;
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT'],
-    credentials: false,
+origin: 'http://localhost:3000',
+methods: ['GET', 'POST', 'PUT'],
+credentials: false,
 }));
 
 // mogoose.connect('mongodb://127.0.0.1:27017/invoice');
@@ -155,10 +155,10 @@ app.listen(port, () => {
 // console.log(Users.findOne({email: "saran.al22@bitsathy.ac.in"}));
 // console.log("----------------------")
 // if(Users.findOne({email:"saran.al22@bitsathy.ac.in"})){
-//     getData = async() => {
-//     try {
-//     const us = await Users.findOne({email:"saran.al22@bitsathy.ac.in"})
-//     console.log(us._id)
+// getData = async() => {
+// try {
+// const us = await Users.findOne({email:"saran.al22@bitsathy.ac.in"})
+// console.log(us._id)
 //     } catch (error) {
 //         console.log(error)
 //     }
@@ -167,5 +167,5 @@ app.listen(port, () => {
 //     console.log("sucess")
 // }
 // else{
-//     console.log("********************")
+// console.log("********************")
 // }

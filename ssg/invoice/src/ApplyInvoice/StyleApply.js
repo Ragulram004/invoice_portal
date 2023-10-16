@@ -8,6 +8,7 @@ export const ApplyScreen = styled.div`
     background-color: var(--background);
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 `;
 
 export const ApplyNavigation = styled.div`
@@ -16,7 +17,7 @@ export const ApplyNavigation = styled.div`
     align-items: center;
     justify-content: flex-start;
     background-color: var(--accent);
-    height: 15vh;
+    height: 10vh;
     width: 100%;
 `;
 
@@ -26,8 +27,8 @@ export const ApplyNavigationLogo = styled.img`
     align-items: center;
     justify-content: center;
     background-color: transparent;
-    height: 10vh;
-    width: 10vw;
+    height: 5vh;
+    width: 5vw;
     margin-left: 1vw;
 `;
 
@@ -36,93 +37,30 @@ export const ApplyNavigationTitle = styled.h1`
     flex-direction: row;
     align-items: centre;
     justify-content: centre;
-    font-size: 1.8em;
+    font-size: 1em;
     font-family: 'Arial Narrow', 'san-serif';
     margin-left: 1vw;
 `;
 
 export const ApplyNavigationSearch = styled.div`
-    --input-text-color: #808080;
-    --input-text-hover-color: transparent;
-    --input-border-hover-color: #808080;
-    --border-radius: 10em;
-    --transition-cubic-bezier: 150ms cubic-bezier(0.4,0,0.2,1);
+    width: 65vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
 `;
 
-export const ApplyNavigationSearchBox = styled.div`
-    width: 20vw;
+export const ApplyBackToHome = styled.button`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 3vw;
     height: 5vh;
-    margin-left: 10vw;
-    border: 1px solid var(--text);
-    border-radius: var(--border-radius);
-    padding: 5px 15px;
-    background: var(--accent);
-    transition: var(--transition-cubic-bezier);
-
-    &:hover {
-        border-color: var(--input-border-hover-color);
-    }
-`;
-
-export const ApplyNavigationSearchField = styled.div`
-    position: relative;
-    width: 100%;
-    height: 100%;
-    left: -5px;
-    border: 0;
-`;
-
-export const ApplyNavigationSearchInput = styled.input`
-    width: calc(100% - 29px);
-    height: 100%;
-    border: 0;
-    border-color: transparent;
-    font-size: 1rem;
-    padding-right: 0px;
-    color: var(--text);
-    background: var(--input-bg-color);
-    border-right: 2px solid var(--input-border-color);
-    outline: none;
-
-    &::-webkit-input-placeholder {
-        color: var(--input-text-color);
-    }
-
-    &::-moz-input-placeholder {
-        color: var(--input-text-color);
-    }
-
-    &::-ms-input-placeholder {
-        color: var(--input-text-color);
-    }
-
-    &:focus::-webkit-input-placeholder {
-        color: var(--input-text-hover-color);
-    }
-
-    &:focus::-moz-input-placeholder {
-        color: var(--input-text-hover-color);
-    }
-
-    &:focus::-ms-input-placeholder {
-        color: var(--input-text-hover-color);
-    }
-`;
-
-export const ApplyNavigationDN = styled.label`
-    background-color: var(--accent);
-    width: 4vw;
-    height: 6vh;
     border-radius: 50%;
-    display: grid;
-    place-items: center;
+    background: transparent;
+    color: var(--text);
+    margin-left: 1vw;
     cursor: pointer;
-    line-height: 1;
-    margin-left: 20vw;
-`;
-
-export const ApplyNavigationDNInput = styled.input`
-    display: none;
+    border: none;
 `;
 
 export const ApplyNavigationNotification = styled.button`
@@ -130,8 +68,8 @@ export const ApplyNavigationNotification = styled.button`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 4vw;
-    height: 6vh;
+    width: 3vw;
+    height: 5vh;
     border-radius: 50%;
     background: transparent;
     color: var(--text);
@@ -145,8 +83,8 @@ export const ApplyNavigationProfile = styled.button`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 4vw;
-    height: 6vh;
+    width: 3vw;
+    height: 5vh;
     border-radius: 50%;
     background: transparent;
     color: var(--text);
@@ -167,7 +105,7 @@ export const ApplyContent = styled.div`
 
 export const ApplyContentTitleDiv = styled.div`
     width: 100%;
-    height: 8vh;
+    height: 6vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -182,7 +120,7 @@ export const Title = styled.h2`
     font-family: 'Arial Narrow', 'san-serif';
     text-align: center;
     color: var(--text);
-    font-size: 2em;
+    font-size: 1.5em;
     margin-left: 3vw;
     letter-spacing: .1em
 `;
@@ -191,38 +129,70 @@ export const ApplyMain = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 `;
 
 export const ApplyFormContent = styled.form`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     background-color: var(--sidebar);
     width: 95%;
-    height: 95%;
+    height: 75vh;
     overflow-y: auto;
 `;
 
-export const ApplyFormNameContainer = styled.div`
-    width: 90%;
-    height: 90%;
-    margin-top: 2vh;
-    font-family: 'Arial Narrow', 'san-serif';
-    font-size: 1.2em;
-    color: var(--text);
+export const ApplyFormDetails = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    width: 97%;
+    height: 100%;
+    margin: 1em;
+    overflow-y: auto;
 `;
+
+export const ApplyFormDetailsName = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    margin-top: 1vh;
+`;
+
+export const ApplyFormDetailsNameContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 95%;
+    height: auto;
+    margin-top: 1vh;
+    margin-right: 1vw;
+`;
+
+export const ApplyFormDetailsNameInside = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 95%;
+    height: 10vh;
+    background: var(--accent);
+    border-radius: 1em;
+    margin-top: 1vh
+`;
+
 
 export const ApplyFormButtonContainer = styled.div`
     width: 95%;
-    margin-top: 2vh;
+    margin-top: 1vh;
     font-family: 'Arial Narrow', 'san-serif';
     font-size: 1.2em;
     color: var(--text);
@@ -290,14 +260,43 @@ export const ApplyFormSubmitButton = styled.button`
     }
 `;
 
-export const ApplyFormDetailsConstainer = styled.div`
+export const ApplyProjectFormDetails = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 97%;
+`;
+
+export const ApplyFormDetailsProject = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    margin-top: 1vh;
+`;
+
+export const ApplyFormDetailsProjectElementContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
     height: 18vh;
-    margin-top: 2vh;
+    margin-top: 1vh;
+`;
+
+export const ApplyFormDetailsProjectMultiLineContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 15vh;
+    margin-top: 5vh;
 `;
 
 export const ApplyFormDetailsLabel = styled.label`
@@ -306,4 +305,6 @@ export const ApplyFormDetailsLabel = styled.label`
     font-weight: bold;
     color: var(--text);
     letter-spacing: .1em;
+    margin-left: 1vw;
+    margin-right: 1vw;
 `;
