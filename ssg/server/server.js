@@ -79,7 +79,7 @@ app.post("/verifyToken", async (req, res) => {
     } catch (err) {
         // Handle errors here
         console.error("Error decoding token: ", err);
-        return null; // Or handle the error in a way that fits your application's logic
+        return res.status(403).send({message: "Token not verified"});
     }
 
 

@@ -169,21 +169,53 @@ const top100Films = [
 
 function HomePage() {
   
+    // useEffect(() => {
+    //     const authToken = Cookies.get('token');
+    //     console.log(authToken);
+    //     // async function decode() {
+    //     async function verifyToken() {
+    //         try {
+    //             const response = await axios.post(`${API_URL}/verifyToken`, {token: authToken});
+    //             console.log(response);
+    //             if (response.status === 200) {
+    //                 window.location.href = "/Home"
+    //                 console.log('Data saved successfully')}
+    //             else {
+    //                 window.location.href = "/";
+    //                 console.log("Unauthorised user");
+    //             }
+    //         } catch (error) {
+    //             console.error('(axios) -> An error occurred:', error);
+    //             window.location.href = '/';
+    //         }
+    //     }
+    //     verifyToken();
+    //     var load = 1;
+    // }, [load<=1]);
+
     useEffect(() => {
         const authToken = Cookies.get('token');
-        console.log(authToken);
-        // async function decode() {
-        async function verifyToken() {
+
+        const verifyToken = async () => {
             try {
-                const response = await axios.post(`${API_URL}/verifyToken`, {token: authToken});
+                const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
                 console.log(response);
+                if (response.status === 200) {
+                    console.log('Data saved successfully');
+                } else {
+                    window.location.href = "/";
+                    console.log("Unauthorized user");
+                }
             } catch (error) {
                 console.error('(axios) -> An error occurred:', error);
                 window.location.href = '/';
             }
+        };
+
+        if (authToken) {
+            verifyToken();
         }
-        verifyToken();
-    }, []);
+    },[]);
 
     const [activeTab, setActiveTab] = useState('Proposed');
     const [activeLink, setActiveLink] = useState('Home');
