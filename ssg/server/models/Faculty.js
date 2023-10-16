@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const FacultySchema = new mongoose.Schema({
-    email: String,
+    FacultyEmail: String,
 });
 
 const FacultyModel = mongoose.model('Faculties', FacultySchema);

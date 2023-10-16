@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import axios from 'axios';
 
 //Styles
 
@@ -35,6 +36,7 @@ import OtherLink from "./Components/OtherLink";
 
 
 const clientId = process.env.REACT_APP_CLIENTID;
+const API_URL = process.env.REACT_APP_API_URL;
 
 
 const top100Films = [
@@ -166,15 +168,22 @@ const top100Films = [
 
 
 function HomePage() {
-
-    // useEffect(() => {
-    //         const authToken = Cookies.get('token');
-
-    //             if (!authToken) {
-    //                 window.location.href = '/';
-    //                 return;
-    //             };
-    // });
+  
+    useEffect(() => {
+        const authToken = Cookies.get('token');
+        console.log(authToken);
+        // async function decode() {
+        async function verifyToken() {
+            try {
+                const response = await axios.post(`${API_URL}/verifyToken`, {token: authToken});
+                console.log(response);
+            } catch (error) {
+                console.error('(axios) -> An error occurred:', error);
+                window.location.href = '/';
+            }
+        }
+        verifyToken();
+    }, []);
 
     const [activeTab, setActiveTab] = useState('Proposed');
     const [activeLink, setActiveLink] = useState('Home');
@@ -190,8 +199,9 @@ function HomePage() {
 
     const onSuccess = () => {
         // alert("Logout made successfully");
-        window.location.href = "/";
         Cookies.remove('token');
+        console.log("Logged Out...");
+        window.location.href = "/";
     };
 
     const onFailure = () => {
