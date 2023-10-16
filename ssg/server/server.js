@@ -58,17 +58,65 @@ app.post("/adduser", async (req, res) => {
     }
 });
 
+app.post("/verifyToken", async (req, res) => {
+    const token = req.body.token;
+    try {
+        console.log("Verifying token....");
+        const token = req.body.token;
+        console.log(token);
+        const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        console.log(decoded);
+        return res.status(200).send({message: "Token verified"});
+    //     const user = await Users.findOne({email: req.body.email});
+    //     if (token == null) return res.sendStatus(401);
+
+    // jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, username) => {
+    //     if (err) return res.sendStatus(403);
+    //     req.username = username;
+    //     return res.status(200).send({message: "Token verified"});
+    // })
+    //     return decoded;
+    } catch (err) {
+        // Handle errors here
+        console.error("Error decoding token: ", err);
+        return null; // Or handle the error in a way that fits your application's logic
+    }
+
+
+    // const authHeader = req.headers['authorization'];
+    // const token = authHeader && authHeader.split(' ')[1]; 
+    // 
+});
+
+// function decodeToken(token) {
+//     try {
+//         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+//         return decoded;
+//     } catch (err) {
+//         // Handle errors here
+//         console.error("Error decoding token: ", err);
+//         return null; // Or handle the error in a way that fits your application's logic
+//     }
+// }
+
 app.post('/getUsers', async (req, res) => {
     // const newUser = new Users({email: req.body.email});
     // await newUser.save();
     console.log("Recieving data....");
-    const user = await Users.findOne({email: req.body.email});
-    const username = { name: user};
-    const accesstoken = await jwt.sign(username, process.env.ACCESS_TOKEN_SECRET)
-    // console.log(newUser);
+    console.log(req.body.email);
+    console.log("***********************************");
+    const user = await Users.findOne({email : req.body.email});
+    const email = req.body.email;
+    console.log(user);
+    console.log(req.body.email);
+    const accesstoken = await jwt.sign(email, process.env.ACCESS_TOKEN_SECRET);
+    console.log(accesstoken);
+    console.log(email);
     if (user) 
     {
         // Cookies.set('token', response.data.accesstoken, { expires: 1/24 });
+        console.log('Login successful');
+        console.log('-----------------------');
         return res.status(200).send({accesstoken: accesstoken});
     }
     else
