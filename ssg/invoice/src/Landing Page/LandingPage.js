@@ -53,14 +53,14 @@ function LandingPage() {
 
         // console.log("Login Success: currentUser:", res.profileObj.email);
         setEmail({ email: res.profileObj.email });
-        window.location.href = "/Home";
+        // window.location.href = "/Home";
         console.log(email);
         console.log(res.profileObj.email);
         try {
             const response = await axios.post(`${API_URL}/getUsers`, email);
             console.log(response);
             if (response.status === 200) {
-                // window.location.href = "/Home"
+                window.location.href = "/Home"
                 console.log('Data saved successfully')                
                 // (response => {
                 //     localStorage.setItem('token', response.data.token)})
@@ -119,7 +119,7 @@ function LandingPage() {
                                 onSuccess={onSuccess}
                                 onFailure={onFailure}
                                 cookiePolicy={'single_host_origin'}
-                                // isSignedIn={true}
+                                isSignedIn={true}
                                 className="GoogleSignin"
                             />
                         </LoginBoxHighlight>
