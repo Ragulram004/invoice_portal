@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const InvoiceSchema = new mongoose.Schema({
+    CreatedBy: String,
     StudentName: String,
     TacId : String,
     Title : String,

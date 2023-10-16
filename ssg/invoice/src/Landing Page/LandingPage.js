@@ -57,6 +57,7 @@ function LandingPage() {
         console.log(email);
         console.log(res.profileObj.email);
         try {
+            console.log('Sending data...');
             const response = await axios.post(`${API_URL}/getUsers`, email);
             console.log(response);
             if (response.status === 200) {
@@ -64,8 +65,9 @@ function LandingPage() {
                 console.log('Data saved successfully')                
                 // (response => {
                 //     localStorage.setItem('token', response.data.token)})
-                    console.log(response.data.accesstoken);
-                    // const authToken = response.data.accesstoken;
+                    // console.log(response.data.accesstoken);
+                    const authToken = response.data.accesstoken;
+                    console.log(authToken);
                     Cookies.set('token', response.data.accesstoken, { expires: 1/24 });
                     
             } else {

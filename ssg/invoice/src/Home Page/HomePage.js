@@ -40,7 +40,7 @@ function HomePage() {
 
     useEffect(() => {
             const authToken = Cookies.get('token');
-
+                console.log(authToken);
                 if (!authToken) {
                     window.location.href = '/';
                     return;
