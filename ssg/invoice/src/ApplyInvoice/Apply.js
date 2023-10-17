@@ -32,6 +32,10 @@ import { RxAvatar } from "react-icons/rx";
 import { MdDeleteOutline } from "react-icons/md";
 import { InvoiceContext } from '../InvoiceContext';
 
+import axios from 'axios';
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 
 const top100Films = [
@@ -258,8 +262,35 @@ function Apply() {
         };
     
         dispatch({ type: 'ADD_INVOICE', payload: invoiceData });
-    
-        navigate('/Home');
+
+        const gettingData = async () => {
+            try {
+                console.log('Sending data...');
+                const response = await axios.post(`${API_URL}/newInvoice`, {
+                    activeDetail: "student",
+                    selectedDate: "12,09,55",
+                    projectName: "Sample Project",
+                    projectDescription: "This is a sample project description",
+                    projectTac: "Sample TAC",
+                    facultyName: "John Doe",
+                    preferredTime: "10:00 AM",
+                    fields: [{ id: 1, value: "John Doe" }, { id: 2, value: "Jane Doe" }],
+                    isInputEnabled: true,
+                    status: "Proposed"
+                });
+                console.log(response);
+                if (response.status === 200) {
+                    console.log('Data saved successfully')
+                    window.location.href = "/Home";
+                } else {
+                    console.log(response);
+                    console.error('Failed to save data');
+                }
+            } catch (error) {
+                console.error('(axios) -> An error occurred:', error);
+            }
+        };
+        gettingData();
       }
 
     return(
