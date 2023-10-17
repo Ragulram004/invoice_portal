@@ -1,6 +1,6 @@
 //Dependencies
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from '@mui/material/Button';
 import Modal from 'react-modal';
 
@@ -22,6 +22,16 @@ function HomeLink() {
 
     const { invoices } = useContext(InvoiceContext);
 
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+        setModalIsOpen(true);
+    }
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    }
+
     return (
         <HomeLinkContent>
             <HomeLinkTable>
@@ -36,8 +46,18 @@ function HomeLink() {
                     <HomeLinkInvoicesTableHeader> { invoice.project } </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
                         <Button variant="outlined" color="error">Withdraw</Button>
-                        <AiOutlineEye id="EyeIcon" />
+                        <AiOutlineEye id="EyeIcon" onClick={openModal} />
                     </HomeLinkInvoicesButtonsContainer>
+
+                    <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+                        <h1>{ invoice.project }</h1>
+                        <h1>{ invoice.description }</h1>
+                        <h1>{ invoice.faculty }</h1>
+                        <h1>{ invoice.tac }</h1>
+                        <h1>{ invoice.time }</h1>
+                        <h1>{ invoice.date }</h1>
+                        <h1>{invoice.students.join(', ')}</h1>
+                    </Modal>
                 </HomeLinkInvoicesTable>
             ))}
         </HomeLinkContent>

@@ -200,6 +200,7 @@ export const ApplyFormButtonContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    z-index: 0;
 `;
 
 export const ApplyFormFirstNextButton = styled.button`
@@ -219,6 +220,7 @@ export const ApplyFormFirstNextButton = styled.button`
     width: 10vw;
     margin-bottom: 2vh;
     margin-right: 2vw;
+    z-index: 0;
 
     &:hover {
         transform: translate(-0.05em, -0.05em);
