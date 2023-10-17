@@ -433,3 +433,29 @@ export const OtherLinkTableHeaderTitle = styled.h2`
     margin: 1vw;
     color: var(--text);
 `;
+
+
+export const LogoutBoxButton = styled.div`
+    width: 100%;
+    height: 10vh;
+    margin-bottom: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const LogoutBoxHighlight = styled.div`
+    width: 60%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    transition: 0.5s;
+    &:hover {
+        background-color: var(--primary);
+        transition: 0.5s;
+    }
+`;

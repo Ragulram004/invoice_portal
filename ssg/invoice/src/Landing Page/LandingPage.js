@@ -51,36 +51,45 @@ function LandingPage() {
 
     const onSuccess = async (res) => {
 
+        // const [email, setEmail] = useState('');
+
         // console.log("Login Success: currentUser:", res.profileObj.email);
         const Email = await res.profileObj.email;
-        setEmail(Email);
+        await setEmail(Email);
+        console.log(email);
         console.log(res.profileObj.email);
         console.log(`email --- ${Email}`);
-        if (email) {
-            try {
-                console.log('Sending data...');
-                const response = await axios.post(`${API_URL}/getUsers`, {email: email});
+    };
+    
+    if (email) {
+        console.log("Loging gmail");
+        const gettingData = async () => {
+        try {
+            console.log('Sending data...');
+            const response = await axios.post(`${API_URL}/getUsers`, {email: email});
+            console.log(response);
+            if (response.status === 200) {
+                window.location.href = "/Home"
+                console.log('Data saved successfully')                
+                // (response => {
+                //     localStorage.setItem('token', response.data.token)})
+                    // console.log(response.data.accesstoken);
+                    const authToken = response.data.accesstoken;
+                    console.log(authToken);
+                    Cookies.set('token', response.data.accesstoken, { expires: 1/24 });
+                    
+            } else {
                 console.log(response);
-                if (response.status === 200) {
-                    window.location.href = "/Home"
-                    console.log('Data saved successfully')                
-                    // (response => {
-                    //     localStorage.setItem('token', response.data.token)})
-                        // console.log(response.data.accesstoken);
-                        const authToken = response.data.accesstoken;
-                        console.log(authToken);
-                        Cookies.set('token', response.data.accesstoken, { expires: 1/24 });
-                        
-                } else {
-                    console.log(response);
-                    console.error('Failed to save data');
-                }
-            } catch (error) {
-                console.error('(axios) -> An error occurred:', error);
-                }
-        }   else {
-            console.log("Login agamil");
-        }};
+                console.error('Failed to save data');
+            }
+        } catch (error) {
+            console.error('(axios) -> An error occurred:', error);
+        } };
+        gettingData();            
+    }
+    else {
+        console.log("Login again");
+    };
 
     const onFailure = (res) => {
         console.log("Login failed: res:", res);
