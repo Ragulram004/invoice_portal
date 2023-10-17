@@ -1,6 +1,6 @@
 //Dependencies
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -30,6 +30,7 @@ import Logo from '../Icons/BITLogo.png';
 import { IoNotificationsOutline, IoHome } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { MdDeleteOutline } from "react-icons/md";
+import { InvoiceContext } from '../InvoiceContext';
 
 
 
@@ -163,7 +164,17 @@ const top100Films = [
 
 function Apply() {
 
+    //Context Variable
+
+    const { dispatch } = useContext(InvoiceContext);
+
+    //Changeable variables: Form content and elements
+
     const [ activeDetail, setActiveDetail ] = useState('Student');
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [ projectName, setProjectName ] = useState('');
+
+
     const navigate = useNavigate();
     const [fields, setFields] = useState([{ id: 1, value: "" }]);
 
@@ -172,6 +183,12 @@ function Apply() {
     const handleToggleChange = () => {
         setInputEnabled(!isInputEnabled);
     };
+
+    useEffect(() => {
+        const nextDay = new Date(selectedDate);
+        nextDay.setDate(selectedDate.getDate() + 1);
+        setSelectedDate(nextDay);
+    }, []);
 
   const addField = () => {
     if( fields.length < 10 ) {
@@ -212,6 +229,20 @@ function Apply() {
     const handleBackToHome = () => {
         navigate('/Home');
     }
+
+
+    const handleFormSubmit = () => {
+        const invoiceData = {
+          students: fields.map((field) => field.value),
+          project: projectName, 
+          description: 'Project Description', 
+          faculty: 'Faculty Name', 
+        };
+    
+        dispatch({ type: 'ADD_INVOICE', payload: invoiceData });
+    
+        navigate('/Home');
+      }
 
     return(
         <ApplyScreen>
@@ -373,6 +404,7 @@ function Apply() {
                                     id="outlined-basic"
                                     label="Project Name"
                                     variant="outlined"
+                                    onChange={ (e) => setProjectName(e.target.value) }
                                     />
 
                                     <ApplyFormDetailsLabel for="Project Name">Preferred Time: </ApplyFormDetailsLabel>
@@ -405,6 +437,8 @@ function Apply() {
                                         id="outlined-basic-date"
                                         type="date"
                                         variant="outlined"
+                                        value={selectedDate.toISOString().split('T')[0]}
+                                        disabled
                                         />
                                     </ApplyFormDetailsProjectMultiLineContainer>
                                 </ApplyFormDetailsProject>
@@ -416,7 +450,7 @@ function Apply() {
                         <ApplyFormFirstNextButton onClick={ () => handleNextClick('Project') }>Next</ApplyFormFirstNextButton> :
                         <>
                             <ApplyFormFirstNextButton onClick={ () => handleNextClick('Student') }>Previous</ApplyFormFirstNextButton>
-                            <ApplyFormSubmitButton>Submit</ApplyFormSubmitButton>
+                            <ApplyFormSubmitButton onClick={handleFormSubmit}>Submit</ApplyFormSubmitButton>
                             
                         </>
                         }

@@ -334,6 +334,35 @@ export const HomeLinkTableHeaderTitle = styled.h2`
     color: var(--text);
 `;
 
+export const HomeLinkInvoicesTable = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr;
+    grid-template-rows: auto;
+    gap: .1vw;
+    width: 100%;
+    height:6vh;
+`;
+
+export const HomeLinkInvoicesTableHeader = styled.h2`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    font-family: 'Arial Narrow', 'san-serif';
+    margin: 1vw;
+    color: var(--text);
+`;
+
+export const HomeLinkInvoicesButtonsContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+`;
+
 
 //For Component: TAC
 
