@@ -169,30 +169,8 @@ const top100Films = [
 
 
 function HomePage() {
-  
-    // useEffect(() => {
-    //     const authToken = Cookies.get('token');
-    //     console.log(authToken);
-    //     // async function decode() {
-    //     async function verifyToken() {
-    //         try {
-    //             const response = await axios.post(`${API_URL}/verifyToken`, {token: authToken});
-    //             console.log(response);
-    //             if (response.status === 200) {
-    //                 window.location.href = "/Home"
-    //                 console.log('Data saved successfully')}
-    //             else {
-    //                 window.location.href = "/";
-    //                 console.log("Unauthorised user");
-    //             }
-    //         } catch (error) {
-    //             console.error('(axios) -> An error occurred:', error);
-    //             window.location.href = '/';
-    //         }
-    //     }
-    //     verifyToken();
-    //     var load = 1;
-    // }, [load<=1]);
+
+    const [email, setEmail] = useState('');
 
     useEffect(() => {
         const authToken = Cookies.get('token');
@@ -200,9 +178,10 @@ function HomePage() {
         const verifyToken = async () => {
             try {
                 const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
-                console.log(response);
                 if (response.status === 200) {
-                    console.log('Data saved successfully');
+                    console.log('User verified');
+                    setEmail(response.data.name);
+
                 } else {
                     window.location.href = "/";
                     console.log("Unauthorized user");
@@ -217,6 +196,8 @@ function HomePage() {
             verifyToken();
         }
     },[]);
+
+    console.log(email);
 
     const [activeTab, setActiveTab] = useState('Proposed');
     const [activeLink, setActiveLink] = useState('Home');

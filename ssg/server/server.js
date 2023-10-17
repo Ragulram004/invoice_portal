@@ -18,10 +18,8 @@ credentials: false,
 //Routes
 const facultyRoutes = require('./routes/faculty.js');
 const userRouter = require('./routes/Login.js');
-const verifyTokenRouter = require('./routes/verfiyToken.js');
 app.use(facultyRoutes);
 app.use(userRouter);
-app.use(verifyTokenRouter);
 
 
 // app.get('/checkToken', authenticateToken, (req, res) => {
