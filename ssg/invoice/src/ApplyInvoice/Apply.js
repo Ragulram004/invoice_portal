@@ -170,19 +170,21 @@ function Apply() {
 
     //Changeable variables: Form content and elements
 
-    const [ activeDetail, setActiveDetail ] = useState('Student');
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [ projectName, setProjectName ] = useState('');
+    const [ activeDetail, setActiveDetail ] = useState('Student');      //Form Content
+    const [selectedDate, setSelectedDate] = useState(new Date());       //Date
+    const [ projectName, setProjectName ] = useState('');               //Project Name
+    const [projectDescription, setProjectDescription] = useState('');   //Project Description
+    const [projectTac, setProjectTac] = useState('No TAC');             //Project TAC
+    const [facultyName, setFacultyName] = useState('');                 //Faculty Name
+    const [preferredTime, setPreferredTime] = useState('AM');           //Preferred Time
+    const [fields, setFields] = useState([{ id: 1, value: "" }]);       //Student Name Field
+    const [isInputEnabled, setInputEnabled] = useState(false);          //TAC Input Enable/Disable
 
 
-    const navigate = useNavigate();
-    const [fields, setFields] = useState([{ id: 1, value: "" }]);
+    const navigate = useNavigate();                                    //Navigation
 
-    const [isInputEnabled, setInputEnabled] = useState(false);
-
-    const handleToggleChange = () => {
-        setInputEnabled(!isInputEnabled);
-    };
+    //Functions
+    // Date Picker setting
 
     useEffect(() => {
         const nextDay = new Date(selectedDate);
@@ -190,53 +192,69 @@ function Apply() {
         setSelectedDate(nextDay);
     }, []);
 
-  const addField = () => {
-    if( fields.length < 10 ) {
-        setFields([...fields, { id: fields.length + 1, value: "" }]);
-    }
-    else {
-        Swal.fire({
-            position: 'center',
-            icon: 'info',
-            title: 'Maximum Limit Reached',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    }
-  };
+    //Adding, Changing and deleting student name fields
 
-  const handleInputChange = (id, value) => {
-    const updatedFields = fields.map((field) =>
-      field.id === id ? { ...field, value } : field
-    );
-    setFields(updatedFields);
-  };
+    const addField = () => {
+        if( fields.length < 10 ) {
+            setFields([...fields, { id: fields.length + 1, value: "" }]);
+        }
+        else {
+            Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: 'Maximum Limit Reached',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    };
 
-  const deleteField = (id) => {
-    const updatedFields = fields.filter((field) => field.id !== id);
-
-    for (let i = 0; i < updatedFields.length; i++) {
-        updatedFields[i].id = i + 1;
-    }
+    const deleteField = (id) => {
+        const updatedFields = fields.filter((field) => field.id !== id);
     
-    setFields(updatedFields);
-  };
+        for (let i = 0; i < updatedFields.length; i++) {
+            updatedFields[i].id = i + 1;
+        }
+        
+        setFields(updatedFields);
+    };
+
+    const handleInputChange = (id, value) => {
+        const updatedFields = fields.map((field) =>
+          field.id === id ? { ...field, value } : field
+        );
+        setFields(updatedFields);
+    };
+
+    //Switching between Student and Project Details
 
     const handleNextClick = (e) => {
         setActiveDetail(e);
-    }
+    };
+
+    //TAC Input Enable/Disable
+
+    const handleToggleChange = () => {
+        setInputEnabled(!isInputEnabled);
+    };
+
+    //Navigation for submit and back to home buttons
 
     const handleBackToHome = () => {
         navigate('/Home');
     }
 
+    //Form submittion button
 
     const handleFormSubmit = () => {
         const invoiceData = {
           students: fields.map((field) => field.value),
           project: projectName, 
-          description: 'Project Description', 
-          faculty: 'Faculty Name', 
+          description: projectDescription, 
+          tac: projectTac,
+          faculty: facultyName, 
+          time: preferredTime,
+          date: selectedDate.toISOString().split('T')[0],
         };
     
         dispatch({ type: 'ADD_INVOICE', payload: invoiceData });
@@ -304,12 +322,20 @@ function Apply() {
             {/* Apply Invoice Form Goes Here */}
 
             <ApplyContent>
+
+                {/* Apply Invoice Form Title */}
+
                 <ApplyContentTitleDiv>
                     <Title>Apply Invoice</Title>
                 </ApplyContentTitleDiv>
 
+                {/* Apply Form Content Starts Here */}
+
                 <ApplyMain>
                     <ApplyFormContent>
+
+                        {/* Student Details */}
+
                         {activeDetail === 'Student' && 
                             <ApplyFormDetails>
                                 Student Details:
@@ -321,9 +347,10 @@ function Apply() {
                                         <Stack spacing={1} sx={{ width: 700 }}>
                                             <Autocomplete
                                                 freeSolo
-                                                id="free-solo-2-demo"
+                                                id={`free-solo-2-demo-${field.id}`}
                                                 disableClearable
                                                 options={top100Films.map((option) => option.title)}
+                                                onInputChange={(e, newValue) => handleInputChange(field.id, newValue)}
                                                 key={field.id}
                                                 renderInput={(params) => (
                                                     <TextField
@@ -331,7 +358,6 @@ function Apply() {
                                                     label="Student"
                                                     variant="outlined"
                                                     value={field.value}
-                                                    onChange={(e) => handleInputChange(field.id, e.target.value)}
                                                     />
                                                 )}
                                             />
@@ -354,6 +380,8 @@ function Apply() {
                             </ApplyFormDetails>
                         }
 
+                        {/* Project Details */}
+
                         {activeDetail === 'Project' &&
                             <ApplyFormDetails>
                             Project Details:
@@ -361,10 +389,10 @@ function Apply() {
                                 <ApplyFormDetailsProjectElementContainer>
                                     <ApplyFormDetailsLabel>TAC: </ApplyFormDetailsLabel>
                                     <TextField 
-                                    id="outlined-basic" 
-                                    value="TAC - " 
+                                    id="outlined-basic"  
                                     variant="outlined"
-                                    disabled={ !isInputEnabled } />
+                                    disabled={ !isInputEnabled }
+                                    onChange={ (e) => setProjectTac(e.target.value) } />
                                     <FormControlLabel
                                         control={
                                         <Switch
@@ -382,6 +410,10 @@ function Apply() {
                                             id="free-solo-2-demo"
                                             disableClearable
                                             options={top100Films.map((option) => option.title)}
+                                            onInputChange={ (e) => {
+                                                setFacultyName(e.target.value);
+                                                console.log(facultyName);
+                                            } }
                                             renderInput={(params) => (
                                                 <TextField
                                                     {...params}
@@ -390,7 +422,7 @@ function Apply() {
                                                         ...params.InputProps,
                                                         type: 'search',
                                                     }}
-                                                    
+                                                    value={facultyName}
                                                 />
                                             )}
                                         />
@@ -414,6 +446,7 @@ function Apply() {
                                                 row
                                                 aria-labelledby="demo-row-radio-buttons-group-label"
                                                 name="row-radio-buttons-group"
+                                                onChange={ () => setPreferredTime('PM')}
                                             >
                                                 <FormControlLabel id="FormControlRadio" value="Morning" control={<Radio />} label="AM" />
                                                 <FormControlLabel id="FormControlRadio" value="Afternoon" control={<Radio />} label="PM" />
@@ -429,6 +462,7 @@ function Apply() {
                                             multiline
                                             rows={5}
                                             defaultValue="What is this invoice for?"
+                                            onChange={ (e) => setProjectDescription(e.target.value) }
                                         />
 
                                         <ApplyFormDetailsLabel>Date: </ApplyFormDetailsLabel>
@@ -445,6 +479,9 @@ function Apply() {
                             </ApplyFormDetails>
                         }
                     </ApplyFormContent>
+
+                    {/* Apply Form Buttons */}
+                    
                     <ApplyFormButtonContainer>
                         { activeDetail === 'Student' ? 
                         <ApplyFormFirstNextButton onClick={ () => handleNextClick('Project') }>Next</ApplyFormFirstNextButton> :
