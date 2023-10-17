@@ -22,7 +22,8 @@ import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent,
         HomePageNavigationProfile,
         HomePageSideBarSeperation,
         HomePageSideBarButton,
-        HomePageSideBarSeperationBottom} from './StylesHomePage.js';
+        HomePageSideBarSeperationBottom,
+        LogoutBoxButton, LogoutBoxHighlight} from './StylesHomePage.js';
 
 //Components
 
@@ -356,12 +357,16 @@ function HomePage() {
                     {/* Home page side bar logout button. */}
 
                     <HomePageSideBarSeperationBottom>
+                    <LogoutBoxButton>
+                        <LogoutBoxHighlight>
                         <GoogleLogout
                             clientId={clientId}
                             buttonText="Logout"
                             onLogoutSuccess={() => onSuccess()}
                             onFailure={() => onFailure()}
                         />
+                        </LogoutBoxHighlight>
+                        </LogoutBoxButton>
                     </HomePageSideBarSeperationBottom>
                 </HomePageSideBar>
 
