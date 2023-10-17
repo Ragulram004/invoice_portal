@@ -63,6 +63,12 @@
     margin-right: 2vw;
   }
 
+  #EyeIcon {
+    width: 5vw;
+    height: 4vh;
+    cursor: pointer;
+  }
+
   #outlined-basic {
     width: 20vw;
     border: none;

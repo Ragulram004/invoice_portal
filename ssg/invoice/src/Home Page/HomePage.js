@@ -393,9 +393,9 @@ function HomePage() {
                         { activeLink === 'Home' &&
                             <HomePageTabContent>
                                 {activeTab === 'Proposed' && <HomeLink />}
-                                {activeTab === 'Completed' && <HomeLink />}
+                                {/* {activeTab === 'Completed' && <HomeLink />}
                                 {activeTab === 'Rejected' && <HomeLink />}
-                                {activeTab === 'Withdrawn' && <HomeLink />}
+                                {activeTab === 'Withdrawn' && <HomeLink />} */}
                             </HomePageTabContent> 
                         }
                         { activeLink === 'TAC' &&

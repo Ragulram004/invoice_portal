@@ -1,6 +1,7 @@
 //Dependencies
 
 import React from 'react';
+import { InvoiceProvider } from './InvoiceContext';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Components
@@ -15,14 +16,16 @@ const App = () => {
 
   return (
     <div className="App">
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" Component={LandingPage}/>
-        <Route path='/Home' Component={HomePage} />
-        <Route path='/Apply' Component={Apply} />
-          <Route path='/admin' element={<Admin />} />
-      </Routes>
-    </BrowserRouter>
+      <InvoiceProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" Component={LandingPage}/>
+            <Route path='/Home' Component={HomePage} />
+            <Route path='/Apply' Component={Apply} />
+            <Route path='/admin' element={<Admin />} />
+          </Routes>
+        </BrowserRouter>
+      </InvoiceProvider>
       
     </div>
   );
