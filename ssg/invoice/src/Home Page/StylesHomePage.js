@@ -363,6 +363,102 @@ export const HomeLinkInvoicesButtonsContainer = styled.div`
     height: 100%;
 `;
 
+export const HomeLinkModal = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+`;
+
+export const ModalHeader = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 5vh;
+    background-color: var(--sidebar);
+`;
+
+export const ModalHeaderTitle = styled.h1`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-family: 'Arial Narrow', 'san-serif';
+    color: var(--text);
+`;
+
+export const ModalContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    background-color: var(--background);
+`;
+
+export const ModalContentSection1 = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 5vh;
+    margin-top: 2vh;
+`;
+
+export const ModalContentElementsSection1 = styled.h2`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.2em;
+    font-family: 'Arial Narrow', 'san-serif';
+    color: var(--text);
+    margin-left: 1vw;
+    letter-spacing: 1px;
+    font-weight: 100;
+`;
+
+export const ModalContentSection2 = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    margin-top: 3vh;
+`;
+
+export const ModalContentElementsSection2 = styled.h2`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.2em;
+    font-family: 'Arial Narrow', 'san-serif';
+    color: var(--text);
+    margin-left: 1vw;
+    letter-spacing: 1px;
+    font-weight: 100;
+`;
+
+export const ModalButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 10vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+`;
+
 
 //For Component: TAC
 

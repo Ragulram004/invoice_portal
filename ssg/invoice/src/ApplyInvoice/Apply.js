@@ -410,19 +410,16 @@ function Apply() {
                                             id="free-solo-2-demo"
                                             disableClearable
                                             options={top100Films.map((option) => option.title)}
-                                            onInputChange={ (e) => {
-                                                setFacultyName(e.target.value);
-                                                console.log(facultyName);
-                                            } }
+                                            value={facultyName} // Set the value of the Autocomplete to facultyName
+                                            onInputChange={(e, newValue) => setFacultyName(newValue)}
                                             renderInput={(params) => (
                                                 <TextField
                                                     {...params}
-                                                    label="Search for invoice...."
+                                                    label="Search for faculty...."
                                                     InputProps={{
                                                         ...params.InputProps,
                                                         type: 'search',
                                                     }}
-                                                    value={facultyName}
                                                 />
                                             )}
                                         />
@@ -455,13 +452,12 @@ function Apply() {
                                 </ApplyFormDetailsProjectElementContainer>
 
                                 <ApplyFormDetailsProjectMultiLineContainer>
-                                    <ApplyFormDetailsLabel>Project Description: </ApplyFormDetailsLabel>
+                                    <ApplyFormDetailsLabel>Description: </ApplyFormDetailsLabel>
                                         <TextField
                                             id="outlined-multiline-static"
-                                            label="Multiline"
                                             multiline
                                             rows={5}
-                                            defaultValue="What is this invoice for?"
+                                            label="What is this invoice for?"
                                             onChange={ (e) => setProjectDescription(e.target.value) }
                                         />
 
