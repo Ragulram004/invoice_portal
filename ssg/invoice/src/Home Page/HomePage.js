@@ -31,7 +31,7 @@ import Logo from '../Icons/BITLogo.png';
 import { IoNotificationsOutline } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
-import HomeLink from "./Components/HomeLink.js";
+import HomeLink from "./Components/HomeLink/HomeLink.js";
 import TACLink from "./Components/TACLink.js";
 import OtherLink from "./Components/OtherLink";
 
@@ -344,9 +344,9 @@ function HomePage() {
                         { activeLink === 'Home' &&
                             <HomePageTabContent>
                                 {activeTab === 'Proposed' && <HomeLink />}
-                                {/* {activeTab === 'Completed' && <HomeLink />}
+                                {activeTab === 'Completed' && <HomeLink />}
                                 {activeTab === 'Rejected' && <HomeLink />}
-                                {activeTab === 'Withdrawn' && <HomeLink />} */}
+                                {activeTab === 'Withdrawn' && <HomeLink />}
                             </HomePageTabContent> 
                         }
                         { activeLink === 'TAC' &&
