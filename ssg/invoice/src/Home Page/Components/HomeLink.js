@@ -7,16 +7,16 @@ import Modal from 'react-modal';
 
 //Styles
 
-import '../../../Styles/Invoice.css';
+import '../../Styles/Invoice.css';
 import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader, 
         HomeLinkTable, HomeLinkTableHeaderTitle, HomeLinkInvoicesButtonsContainer, 
         HomeLinkModal, ModalHeader, ModalHeaderTitle, ModalContent, ModalContentElementsSection1, 
         ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,
-         } from "../../StylesHomePage";
+         } from "../StylesHomePage";
 
 //Components
 
-import { InvoiceContext } from '../../../InvoiceContext';
+import { InvoiceContext } from '../../InvoiceContext';
 import { AiOutlineEye } from "react-icons/ai";
 
 
