@@ -13,7 +13,6 @@ import Button from "@mui/material/Button";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-import Cookies from 'js-cookie';
 
 //Styles
 
@@ -210,40 +209,6 @@ function Apply() {
     console.log(email);
     console.log(rollnumber);
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [rollnumber, setRollnumber] = useState('');
-
-    useEffect(() => {
-        const authToken = Cookies.get('token');
-
-        const verifyToken = async () => {
-            try {
-                const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
-                if (response.status === 200) {
-                    console.log('User verified');
-                    setName(response.data.name);
-                    setEmail(response.data.email);
-                    setRollnumber(response.data.rollnumber);
-
-                } else {
-                    window.location.href = "/";
-                    console.log("Unauthorized user");
-                }
-            } catch (error) {
-                console.error('(axios) -> An error occurred:', error);
-                window.location.href = '/';
-            }
-        };
-
-        if (authToken) {
-            verifyToken();
-        }
-    },[]);
-
-    console.log(name);
-    console.log(email);
-    console.log(rollnumber);
 
     //Context Variable
 
@@ -344,15 +309,6 @@ function Apply() {
             try {
                 console.log('Sending data...');
                 const response = await axios.post(`${API_URL}/newInvoice`, {
-                    activeDetail: activeDetail,
-                    selectedDate: selectedDate,
-                    projectName: projectName,
-                    projectDescription: projectDescription,
-                    projectTac: projectTac,
-                    facultyName: facultyName,
-                    preferredTime: preferredTime,
-                    fields: fields,
-                    isInputEnabled: isInputEnabled,
                     activeDetail: activeDetail,
                     selectedDate: selectedDate,
                     projectName: projectName,

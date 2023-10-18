@@ -62,7 +62,6 @@ function HomeLink() {
                 const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
                 if (response.status === 200) {
                     console.log('User verified');
-                    const email  = response.data.email;
                     await setName(response.data.name);
                     await setEmail(response.data.email);
                     await setRollnumber(response.data.rollnumber);
