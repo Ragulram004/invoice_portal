@@ -1,13 +1,13 @@
 // Dependencies
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Cookies from 'js-cookie';
 import { GoogleLogout } from "react-google-login";
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
-import axios from 'axios';
+
 
 //Styles
 
@@ -37,7 +37,6 @@ import OtherLink from "./Components/OtherLink";
 
 
 const clientId = process.env.REACT_APP_CLIENTID;
-const API_URL = process.env.REACT_APP_API_URL;
 
 
 const top100Films = [
@@ -169,41 +168,6 @@ const top100Films = [
 
 
 function HomePage() {
-
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [rollnumber, setRollnumber] = useState('');
-
-    useEffect(() => {
-        const authToken = Cookies.get('token');
-
-        const verifyToken = async () => {
-            try {
-                const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
-                if (response.status === 200) {
-                    console.log('User verified');
-                    setName(response.data.name);
-                    setName(response.data.email);
-                    setRollnumber(response.data.rollnumber);
-
-                } else {
-                    // window.location.href = "/";
-                    console.log("Unauthorized user");
-                }
-            } catch (error) {
-                console.error('(axios) -> An error occurred:', error);
-                // window.location.href = '/';
-            }
-        };
-
-        if (authToken) {
-            verifyToken();
-        }
-    },[]);
-
-    console.log(name);
-    console.log(email);
-    console.log(rollnumber);
 
     const [activeTab, setActiveTab] = useState('Proposed');
     const [activeLink, setActiveLink] = useState('Home');

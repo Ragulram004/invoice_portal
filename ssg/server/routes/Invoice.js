@@ -18,4 +18,4 @@ router.post("/newInvoice", async(req, res) => {
     return res.status(200).send({message: "Recieved Sucessfully"});
 })
 
-module.exports = router
+module.exports = router;

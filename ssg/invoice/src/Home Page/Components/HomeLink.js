@@ -1,6 +1,6 @@
 //Dependencies
 
-import React, { useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import Button from '@mui/material/Button';
 import Modal from 'react-modal';
 
@@ -18,6 +18,11 @@ import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader,
 
 import { InvoiceContext } from '../../InvoiceContext';
 import { AiOutlineEye } from "react-icons/ai";
+
+
+import axios from 'axios';
+import Cookies from 'js-cookie';
+const API_URL = process.env.REACT_APP_API_URL;
 
 
 //Modal Styles
@@ -44,6 +49,55 @@ const customStyles = {
 
 
 function HomeLink() {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [rollnumber, setRollnumber] = useState('');
+
+    useEffect(() => {
+        const authToken = Cookies.get('token');
+
+        const verifyToken = async () => {
+            try {
+                const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
+                if (response.status === 200) {
+                    console.log('User verified');
+                    const email  = response.data.email;
+                    await setName(response.data.name);
+                    await setEmail(response.data.email);
+                    await setRollnumber(response.data.rollnumber);
+                    proposal();
+                } else {
+                    window.location.href = "/";
+                    console.log("Unauthorized user");
+                }
+            } catch (error) {
+                console.error('(axios) -> An error occurred:', error);
+                window.location.href = '/';
+            }
+        };
+
+        if (authToken) {
+            verifyToken();
+        }
+
+        const proposal = async () => {
+            try {
+                console.log("sending data for proposal");
+                const proposal = await axios.post(`${API_URL}/proposal`, { email: email });
+                console.log(proposal.data);
+            } catch (error) {
+                console.error('(axios) -> An error occurred:', error);
+                window.location.href = '/';
+            }
+        };
+    },[]);
+
+    console.log(name);
+    console.log(email);
+    console.log(rollnumber);
+
+
 
     const { invoices } = useContext(InvoiceContext);
 
