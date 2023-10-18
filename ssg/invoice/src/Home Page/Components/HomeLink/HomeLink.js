@@ -61,12 +61,11 @@ function HomeLink() {
             try {
                 const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
                 if (response.status === 200) {
-                    console.log('User verified');
-                    const email  = response.data.email;
                     await setName(response.data.name);
                     await setEmail(response.data.email);
                     await setRollnumber(response.data.rollnumber);
-                    proposal();
+                    const proposal = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
+                    console.log(proposal.data);
                 } else {
                     window.location.href = "/";
                     console.log("Unauthorized user");
@@ -77,20 +76,30 @@ function HomeLink() {
             }
         };
 
-        if (authToken) {
-            verifyToken();
-        }
+        // const proposal = async () => {
+        //     if (email) {
+        //         console.log(email);
+        //     try {
+        //         console.log("sending data for proposal");
+        //         const proposal = await axios.post(`${API_URL}/proposal`, { email: email });
+        //         console.log(proposal.data);
+        //     } catch (error) {
+        //         console.error('(axios) -> An error occurred:', error);
+        //         window.location.href = '/';
+        //     }}
+        //     else {
+        //         console.log("Email not found");
+        //     }
+        // };
 
-        const proposal = async () => {
-            try {
-                console.log("sending data for proposal");
-                const proposal = await axios.post(`${API_URL}/proposal`, { email: email });
-                console.log(proposal.data);
-            } catch (error) {
-                console.error('(axios) -> An error occurred:', error);
-                window.location.href = '/';
-            }
-        };
+        if (authToken) {
+            console.log("*****************************");
+            verifyToken();
+            // proposal();
+        }
+        else {
+            window.location.href = "/";
+        }
     },[]);
 
     console.log(name);
