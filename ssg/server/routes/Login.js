@@ -1,6 +1,5 @@
 //login and user verfication in each page
 const router = require('express').Router();
-const { request } = require('express');
 const Users = require('../models/Users');
 const jwt = require('jsonwebtoken');
 
