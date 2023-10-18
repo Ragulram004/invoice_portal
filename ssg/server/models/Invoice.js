@@ -8,7 +8,8 @@ const InvoiceSchema = new mongoose.Schema({
     Description : String,
     FacultyName : String,
     Time : String,
-    Status : String
+    Status : String,
+    Date: String
 });
 
 const InvoiceModel = mongoose.model('Invoice', InvoiceSchema);

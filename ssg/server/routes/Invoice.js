@@ -13,7 +13,8 @@ router.post("/newInvoice", async(req, res) => {
         Description : req.body.projectDescription,
         FacultyName : req.body.facultyName,
         Time : req.body.preferredTime,
-        Status : req.body.status
+        Status : req.body.status,
+        Date: req.body.selectedDate
     }])
     return res.status(200).send({message: "Recieved Sucessfully"});
 })

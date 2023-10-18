@@ -10,7 +10,6 @@ router.post('/getUsers', async (req, res) => {
     const accesstoken = await jwt.sign(email, process.env.ACCESS_TOKEN_SECRET);
     if (user) 
     {
-        console.log('Login successful');
         return res.status(200).send({accesstoken: accesstoken});
     }
     else
@@ -22,7 +21,6 @@ router.post('/getUsers', async (req, res) => {
 
 router.post("/verifyToken", async (req, res) => {
     try {
-        console.log("Token verifying");
         const token = req.body.token;
         if (token) {
             const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
@@ -30,11 +28,7 @@ router.post("/verifyToken", async (req, res) => {
                 const userinfo = await Users.findOne({email : decoded});
                 const name = (userinfo.name);
                 const email = (userinfo.email);
-                const rollnumber = (userinfo.rollnumber)
-                console.log(name);
-                console.log(email);
-                console.log(rollnumber);
-            console.log("Token verified");
+                const rollnumber = (userinfo.rollnumber);
             return res.status(200).send({name: name, email: email, rollnumber: rollnumber});
             }
             else {return res.status(403).send({message: "Token decode failed"})}}

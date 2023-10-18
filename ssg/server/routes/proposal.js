@@ -4,7 +4,7 @@ const Invoice = require('../models/Invoice');
 router.post('/proposal', async(req, res) => {
     console.log("**********************");
     console.log(req.body.email);
-    const proposal = await Invoice.find({CreatedBy : "test@something.gmail.com"});
+    const proposal = await Invoice.find({CreatedBy : "test@something.gmail.com"}, {Title : 1});
     console.log(proposal);
     res.send({proposal: proposal});
 });

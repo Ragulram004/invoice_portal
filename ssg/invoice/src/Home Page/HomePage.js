@@ -175,6 +175,7 @@ function HomePage() {
 
     const handleTabChange = (e) => {
         setActiveTab(e);
+        // {"#####################"}
     }
 
     const handleLinkChange = (e) => {
