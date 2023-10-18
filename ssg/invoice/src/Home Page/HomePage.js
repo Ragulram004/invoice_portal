@@ -170,7 +170,9 @@ const top100Films = [
 
 function HomePage() {
 
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [rollnumber, setRollnumber] = useState('');
 
     useEffect(() => {
         const authToken = Cookies.get('token');
@@ -180,15 +182,17 @@ function HomePage() {
                 const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
                 if (response.status === 200) {
                     console.log('User verified');
-                    setEmail(response.data.name);
+                    setName(response.data.name);
+                    setName(response.data.email);
+                    setRollnumber(response.data.rollnumber);
 
                 } else {
-                    window.location.href = "/";
+                    // window.location.href = "/";
                     console.log("Unauthorized user");
                 }
             } catch (error) {
                 console.error('(axios) -> An error occurred:', error);
-                window.location.href = '/';
+                // window.location.href = '/';
             }
         };
 
@@ -197,7 +201,9 @@ function HomePage() {
         }
     },[]);
 
+    console.log(name);
     console.log(email);
+    console.log(rollnumber);
 
     const [activeTab, setActiveTab] = useState('Proposed');
     const [activeLink, setActiveLink] = useState('Home');
