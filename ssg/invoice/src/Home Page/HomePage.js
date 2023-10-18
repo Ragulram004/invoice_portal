@@ -1,13 +1,13 @@
 // Dependencies
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Cookies from 'js-cookie';
 import { GoogleLogout } from "react-google-login";
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
-import axios from 'axios';
+
 
 //Styles
 
@@ -31,13 +31,12 @@ import Logo from '../Icons/BITLogo.png';
 import { IoNotificationsOutline } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
-import HomeLink from "./Components/HomeLink.js";
+import HomeLink from "./Components/HomeLink/HomeLink.js";
 import TACLink from "./Components/TACLink.js";
 import OtherLink from "./Components/OtherLink";
 
 
 const clientId = process.env.REACT_APP_CLIENTID;
-const API_URL = process.env.REACT_APP_API_URL;
 
 
 const top100Films = [
@@ -169,35 +168,6 @@ const top100Films = [
 
 
 function HomePage() {
-
-    const [email, setEmail] = useState('');
-
-    useEffect(() => {
-        const authToken = Cookies.get('token');
-
-        const verifyToken = async () => {
-            try {
-                const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
-                if (response.status === 200) {
-                    console.log('User verified');
-                    setEmail(response.data.name);
-
-                } else {
-                    window.location.href = "/";
-                    console.log("Unauthorized user");
-                }
-            } catch (error) {
-                console.error('(axios) -> An error occurred:', error);
-                window.location.href = '/';
-            }
-        };
-
-        if (authToken) {
-            verifyToken();
-        }
-    },[]);
-
-    console.log(email);
 
     const [activeTab, setActiveTab] = useState('Proposed');
     const [activeLink, setActiveLink] = useState('Home');
@@ -374,9 +344,9 @@ function HomePage() {
                         { activeLink === 'Home' &&
                             <HomePageTabContent>
                                 {activeTab === 'Proposed' && <HomeLink />}
-                                {activeTab === 'Completed' && <h1>Sample</h1>}
-                                {activeTab === 'Rejected' && <h1>Sample</h1>}
-                                {activeTab === 'Withdrawn' && <h1>Sample</h1>}
+                                {activeTab === 'Completed' && <HomeLink />}
+                                {activeTab === 'Rejected' && <HomeLink />}
+                                {activeTab === 'Withdrawn' && <HomeLink />}
                             </HomePageTabContent> 
                         }
                         { activeLink === 'TAC' &&

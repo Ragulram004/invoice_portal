@@ -28,10 +28,16 @@ router.post("/verifyToken", async (req, res) => {
             const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
             if (decoded){
                 const userinfo = await Users.findOne({email : decoded});
-                const name = (userinfo.name)
+                const name = (userinfo.name);
+                const email = (userinfo.email);
+                const rollnumber = (userinfo.rollnumber)
                 console.log(name);
+                console.log(email);
+                console.log(rollnumber);
             console.log("Token verified");
-            return res.status(200).send({name: name});}}
+            return res.status(200).send({name: name, email: email, rollnumber: rollnumber});
+            }
+            else {return res.status(403).send({message: "Token decode failed"})}}
         else {
             console.log("Token Not provided -> Unauthroised User");
         }
@@ -41,4 +47,4 @@ router.post("/verifyToken", async (req, res) => {
     }
 });
 
-module.exports = router
+module.exports = router;

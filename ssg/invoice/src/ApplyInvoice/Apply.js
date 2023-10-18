@@ -12,6 +12,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Button from "@mui/material/Button";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 //Styles
 
@@ -21,7 +22,7 @@ import { ApplyBackToHome, ApplyContent, ApplyContentTitleDiv, ApplyFormButtonCon
         ApplyFormDetailsNameContainer, ApplyFormDetailsNameInside, ApplyFormDetailsProject,
         ApplyFormDetailsProjectElementContainer, ApplyFormDetailsProjectMultiLineContainer, 
         ApplyFormFirstNextButton, ApplyFormSubmitButton, ApplyMain, ApplyNavigation, 
-        ApplyNavigationLogo, ApplyNavigationNotification, ApplyNavigationProfile, ApplyNavigationSearch, 
+        ApplyNavigationLogo, ApplyNavigationNotification, ApplyNavigationProfile, ApplyNavigationProfileToggle, ApplyNavigationSearch, 
         ApplyNavigationTitle, ApplyScreen, Title, } from './StyleApply.js';
 
 //Components
@@ -165,8 +166,48 @@ const top100Films = [
     { title: 'Monty Python and the Holy Grail', year: 1975 },
   ];
 
-
 function Apply() {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [rollnumber, setRollnumber] = useState('');
+
+    const [showEmail, setShowEmail] = useState(false);
+
+    const toggleEmail = () => {
+        setShowEmail(!showEmail);
+    }
+
+    useEffect(() => {
+        const authToken = Cookies.get('token');
+
+        const verifyToken = async () => {
+            try {
+                const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
+                if (response.status === 200) {
+                    console.log('User verified');
+                    setName(response.data.name);
+                    setEmail(response.data.email);
+                    setRollnumber(response.data.rollnumber);
+
+                } else {
+                    window.location.href = "/";
+                    console.log("Unauthorized user");
+                }
+            } catch (error) {
+                console.error('(axios) -> An error occurred:', error);
+                window.location.href = '/';
+            }
+        };
+
+        if (authToken) {
+            verifyToken();
+        }
+    },[]);
+
+    console.log(name);
+    console.log(email);
+    console.log(rollnumber);
 
     //Context Variable
 
@@ -267,15 +308,15 @@ function Apply() {
             try {
                 console.log('Sending data...');
                 const response = await axios.post(`${API_URL}/newInvoice`, {
-                    activeDetail: "student",
-                    selectedDate: "12,09,55",
-                    projectName: "Sample Project",
-                    projectDescription: "This is a sample project description",
-                    projectTac: "Sample TAC",
-                    facultyName: "John Doe",
-                    preferredTime: "10:00 AM",
-                    fields: [{ id: 1, value: "John Doe" }, { id: 2, value: "Jane Doe" }],
-                    isInputEnabled: true,
+                    activeDetail: activeDetail,
+                    selectedDate: selectedDate,
+                    projectName: projectName,
+                    projectDescription: projectDescription,
+                    projectTac: projectTac,
+                    facultyName: facultyName,
+                    preferredTime: preferredTime,
+                    fields: fields,
+                    isInputEnabled: isInputEnabled,
                     status: "Proposed"
                 });
                 console.log(response);
@@ -345,8 +386,14 @@ function Apply() {
 
                 {/* Profile Avatar */}
 
-                <ApplyNavigationProfile>
+                <ApplyNavigationProfile onClick={toggleEmail}>
                     <RxAvatar id="ProfileAvatar" />
+
+                    {showEmail && (
+                        <ApplyNavigationProfileToggle>
+                            <p>Email: {email}</p>
+                        </ApplyNavigationProfileToggle>
+                    )}
                 </ApplyNavigationProfile>
             </ApplyNavigation>
 
