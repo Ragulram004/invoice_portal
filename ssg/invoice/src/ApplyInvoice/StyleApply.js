@@ -93,6 +93,23 @@ export const ApplyNavigationProfile = styled.button`
     border: none;
 `;
 
+export const ApplyNavigationProfileToggle = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: var(--accent);
+    width: 30vw;
+    height: 10vh;
+    margin-left: 1vw;
+    margin-top: 12vh;
+    border-radius: 1em;
+    position: absolute;
+    top: 0;
+    right: 1vw;
+    z-index: 1;
+`;
+
 export const ApplyContent = styled.div`
     display: flex;
     flex-direction: column;

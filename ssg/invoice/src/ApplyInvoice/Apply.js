@@ -22,7 +22,7 @@ import { ApplyBackToHome, ApplyContent, ApplyContentTitleDiv, ApplyFormButtonCon
         ApplyFormDetailsNameContainer, ApplyFormDetailsNameInside, ApplyFormDetailsProject,
         ApplyFormDetailsProjectElementContainer, ApplyFormDetailsProjectMultiLineContainer, 
         ApplyFormFirstNextButton, ApplyFormSubmitButton, ApplyMain, ApplyNavigation, 
-        ApplyNavigationLogo, ApplyNavigationNotification, ApplyNavigationProfile, ApplyNavigationSearch, 
+        ApplyNavigationLogo, ApplyNavigationNotification, ApplyNavigationProfile, ApplyNavigationProfileToggle, ApplyNavigationSearch, 
         ApplyNavigationTitle, ApplyScreen, Title, } from './StyleApply.js';
 
 //Components
@@ -172,6 +172,12 @@ function Apply() {
     const [email, setEmail] = useState('');
     const [rollnumber, setRollnumber] = useState('');
 
+    const [showEmail, setShowEmail] = useState(false);
+
+    const toggleEmail = () => {
+        setShowEmail(!showEmail);
+    }
+
     useEffect(() => {
         const authToken = Cookies.get('token');
 
@@ -202,6 +208,7 @@ function Apply() {
     console.log(name);
     console.log(email);
     console.log(rollnumber);
+
 
     //Context Variable
 
@@ -380,8 +387,14 @@ function Apply() {
 
                 {/* Profile Avatar */}
 
-                <ApplyNavigationProfile>
+                <ApplyNavigationProfile onClick={toggleEmail}>
                     <RxAvatar id="ProfileAvatar" />
+
+                    {showEmail && (
+                        <ApplyNavigationProfileToggle>
+                            <p>Email: {email}</p>
+                        </ApplyNavigationProfileToggle>
+                    )}
                 </ApplyNavigationProfile>
             </ApplyNavigation>
 
