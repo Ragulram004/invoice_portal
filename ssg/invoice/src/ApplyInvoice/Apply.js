@@ -22,7 +22,7 @@ import { ApplyBackToHome, ApplyContent, ApplyContentTitleDiv, ApplyFormButtonCon
         ApplyFormDetailsNameContainer, ApplyFormDetailsNameInside, ApplyFormDetailsProject,
         ApplyFormDetailsProjectElementContainer, ApplyFormDetailsProjectMultiLineContainer, 
         ApplyFormFirstNextButton, ApplyFormSubmitButton, ApplyMain, ApplyNavigation, 
-        ApplyNavigationLogo, ApplyNavigationNotification, ApplyNavigationProfile, ApplyNavigationProfileToggle, ApplyNavigationSearch, 
+        ApplyNavigationLogo, ApplyNavigationNotification, ApplyNavigationProfile, ApplyNavigationProfileEmail, ApplyNavigationProfileToggle, ApplyNavigationSearch, 
         ApplyNavigationTitle, ApplyScreen, Title, } from './StyleApply.js';
 
 //Components
@@ -392,7 +392,7 @@ function Apply() {
 
                     {showEmail && (
                         <ApplyNavigationProfileToggle>
-                            <p>Email: {email}</p>
+                            <ApplyNavigationProfileEmail>{ email }</ApplyNavigationProfileEmail>
                         </ApplyNavigationProfileToggle>
                     )}
                 </ApplyNavigationProfile>
