@@ -35,8 +35,10 @@ import HomeLink from "./Components/HomeLink/HomeLink.js";
 import TACLink from "./Components/TACLink.js";
 import OtherLink from "./Components/OtherLink";
 
+import axios from 'axios';
 
 const clientId = process.env.REACT_APP_CLIENTID;
+const API_URL = process.env.REACT_APP_API_URL;
 
 
 const top100Films = [
@@ -175,7 +177,12 @@ function HomePage() {
 
     const handleTabChange = (e) => {
         setActiveTab(e);
-        // {"#####################"}
+        const winthdraw = async () => {
+            const id = "616b4b3b4b3b4b3b4b3b4b3b";
+        const response = await axios.post(`${API_URL}/withdraw`, { id: id });
+        console.log(response);
+        }
+        winthdraw();
     }
 
     const handleLinkChange = (e) => {

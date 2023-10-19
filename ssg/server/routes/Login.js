@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 router.post('/getUsers', async (req, res) => {
     const user = await Users.findOne({email : req.body.email});
     const email = req.body.email;
-    const accesstoken = await jwt.sign(email, process.env.ACCESS_TOKEN_SECRET);
+    const accesstoken = await jwt.sign({email: email}, process.env.ACCESS_TOKEN_SECRET);
     if (user) 
     {
         return res.status(200).send({accesstoken: accesstoken});
@@ -25,7 +25,7 @@ router.post("/verifyToken", async (req, res) => {
         if (token) {
             const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
             if (decoded){
-                const userinfo = await Users.findOne({email : decoded});
+                const userinfo = await Users.findOne({email : decoded.email});
                 const name = (userinfo.name);
                 const email = (userinfo.email);
                 const rollnumber = (userinfo.rollnumber);
