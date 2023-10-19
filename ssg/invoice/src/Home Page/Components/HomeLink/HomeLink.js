@@ -118,6 +118,14 @@ function HomeLink() {
                 <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
+            <div>
+            {proposals.map((proposal, index) => (
+                <div key={proposal._id}>
+                <p>{`${index + 1}: ${proposal.Title}`}</p>
+                </div>
+            ))}
+            </div>
+
             {invoices.map((invoice, index) => (
                 <HomeLinkInvoicesTable key={index}>
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
