@@ -53,6 +53,7 @@ function HomeLink() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [rollnumber, setRollnumber] = useState('');
+    const [proposals, setProposals] = useState('');
 
     useEffect(() => {
         const authToken = Cookies.get('token');
@@ -61,11 +62,12 @@ function HomeLink() {
             try {
                 const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
                 if (response.status === 200) {
-                    await setName(response.data.name);
-                    await setEmail(response.data.email);
-                    await setRollnumber(response.data.rollnumber);
-                    const proposal = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
-                    console.log(proposal.data);
+                    setName(response.data.name);
+                    setEmail(response.data.email);
+                    setRollnumber(response.data.rollnumber);
+                    const proposalResponse = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
+                    console.log(proposalResponse.data);
+                    setProposals(proposalResponse.data);
                 } else {
                     window.location.href = "/";
                     console.log("Unauthorized user");
@@ -76,35 +78,23 @@ function HomeLink() {
             }
         };
 
-        // const proposal = async () => {
-        //     if (email) {
-        //         console.log(email);
-        //     try {
-        //         console.log("sending data for proposal");
-        //         const proposal = await axios.post(`${API_URL}/proposal`, { email: email });
-        //         console.log(proposal.data);
-        //     } catch (error) {
-        //         console.error('(axios) -> An error occurred:', error);
-        //         window.location.href = '/';
-        //     }}
-        //     else {
-        //         console.log("Email not found");
-        //     }
-        // };
-
         if (authToken) {
             console.log("*****************************");
             verifyToken();
-            // proposal();
         }
         else {
             window.location.href = "/";
         }
     },[]);
 
+    useEffect(() => {
+        console.log(proposals, '--- proposals data');
+    }, [proposals]);
+
     console.log(name);
     console.log(email);
     console.log(rollnumber);
+
 
 
 
