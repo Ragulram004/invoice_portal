@@ -20,10 +20,16 @@ const facultyRoutes = require('./routes/faculty.js');
 const userRouter = require('./routes/Login.js');
 const invoiceRouter = require('./routes/Invoice.js');
 const proposal = require('./routes/proposal.js');
+const withdrawn = require('./routes/Withdrawn.js');
+const Rejected = require('./routes/Rejected.js');
+const StudentStatus = require('./routes/StudentStatus.js');
 app.use(facultyRoutes);
 app.use(userRouter);
 app.use(invoiceRouter);
 app.use(proposal);
+app.use(withdrawn);
+app.use(Rejected);
+app.use(StudentStatus);
 
 
 // app.get('/checkToken', authenticateToken, (req, res) => {

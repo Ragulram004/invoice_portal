@@ -5,9 +5,11 @@ router.post("/newInvoice", async(req, res) => {
     console.log("**********************");
     console.log(req.body);
     console.log("------------------------");
+    const dataArray = req.body.dataArray;
+    const dataArrayString = JSON.stringify(dataArray);
     await Invoice.insertMany([{
         CreatedBy: "test@something.gmail.com",
-        StudentName: req.body.activeDetail,
+        StudentName: dataArrayString,
         TacId : req.body.projectTac,
         Title : req.body.projectName,
         Description : req.body.projectDescription,
