@@ -66,8 +66,8 @@ function HomeLink() {
                     setEmail(response.data.email);
                     setRollnumber(response.data.rollnumber);
                     const proposalResponse = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
-                    console.log(proposalResponse.data);
-                    setProposals(proposalResponse.data);
+                    console.log(proposalResponse.data.proposal);
+                    setProposals(proposalResponse.data.proposal);
                 } else {
                     window.location.href = "/";
                     console.log("Unauthorized user");
