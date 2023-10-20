@@ -1,6 +1,6 @@
 //Dependencies
 
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Modal from 'react-modal';
 
@@ -16,7 +16,6 @@ import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader,
 
 //Components
 
-import { InvoiceContext } from '../../../InvoiceContext';
 import { AiOutlineEye } from "react-icons/ai";
 
 
@@ -43,7 +42,7 @@ const customStyles = {
       zIndex: '1000'
     },
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, .7)'
+      backgroundColor: 'rgba(0, 0, 0, .5)'
     }
   };
 
@@ -96,10 +95,6 @@ function HomeLink() {
     console.log(rollnumber);
 
 
-
-
-    const { invoices } = useContext(InvoiceContext);
-
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = () => {
@@ -118,18 +113,11 @@ function HomeLink() {
                 <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
-            <div>
-            {proposals.map((proposal, index) => (
-                <div key={proposal._id}>
-                <p>{`${index + 1}: ${proposal.Title}`}</p>
-                </div>
-            ))}
-            </div>
-
-            {invoices.map((invoice, index) => (
-                <HomeLinkInvoicesTable key={index}>
+            {Array.isArray(proposals) ? (
+            proposals.map((proposal, index) => (
+                <HomeLinkInvoicesTable key={proposal._id}>
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
-                    <HomeLinkInvoicesTableHeader> { invoice.project } </HomeLinkInvoicesTableHeader>
+                    <HomeLinkInvoicesTableHeader> {`${proposal.Title}`} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
                         <Button variant="outlined" color="error">Withdraw</Button>
                         <AiOutlineEye id="EyeIcon" onClick={openModal} />
@@ -138,28 +126,28 @@ function HomeLink() {
                     <Modal isOpen={modalIsOpen} style={customStyles}>
                         <HomeLinkModal>
                             <ModalHeader>
-                                <ModalHeaderTitle>{ invoice.project }</ModalHeaderTitle>
+                                <ModalHeaderTitle>{ `${proposal.Title}` }</ModalHeaderTitle>
                             </ModalHeader>
                             <ModalContent>
                                 <ModalContentSection1>
-                                    <ModalContentElementsSection1><i></i>TAC ID: TAC-{ invoice.tac }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Date: { invoice.date }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Preffered Time: { invoice.time }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1><i></i>TAC ID: { proposal.tac }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Date: { proposal.date }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Preffered Time: { proposal.time }</ModalContentElementsSection1>
                                 </ModalContentSection1>
 
                                 <ModalContentSection1>
-                                    <ModalContentElementsSection1>Faculty Name: { invoice.faculty }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Faculty Name: { proposal.faculty }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1>Call Time: Pending....</ModalContentElementsSection1>
                                 </ModalContentSection1>
 
                                 <ModalContentSection2>
                                     <ModalContentElementsSection1>Students:</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ invoice.students.join(', ') }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>{ proposal.students }</ModalContentElementsSection1>
                                 </ModalContentSection2>
 
                                 <ModalContentSection2>
                                     <ModalContentElementsSection2>Invoice Description:</ModalContentElementsSection2>
-                                    <ModalContentElementsSection2>{ invoice.description }</ModalContentElementsSection2>
+                                    <ModalContentElementsSection2>{ proposal.description }</ModalContentElementsSection2>
                                 </ModalContentSection2>
                             </ModalContent>
 
@@ -169,7 +157,11 @@ function HomeLink() {
                         </HomeLinkModal>
                     </Modal>
                 </HomeLinkInvoicesTable>
-            ))}
+            ))
+            ) : (
+                <div> No invoice Is Proposed </div>
+            )
+        }
         </HomeLinkContent>
     );
 }
