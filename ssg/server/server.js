@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
+const fs = require('fs');
 
 const dbConnect = require('./dbConnect')
 dbConnect();
@@ -14,6 +15,22 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT'],
     credentials: false,
 }));
+
+const logFilePath = 'ip_logs.txt';
+
+app.use((req, res, next) => {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const currentTime = new Date().toISOString();
+    console.log(`Client IP: ${ip} at ${currentTime}`);
+    
+    // Append the IP address with the current time to a file
+    fs.appendFile(logFilePath, `${currentTime} - ${ip}\n`, (err) => {
+      if (err) throw err;
+      console.log('IP address with time appended to file');
+    });
+  
+    next();
+  });
 
 //Routes
 const facultyRoutes = require('./routes/faculty.js');
