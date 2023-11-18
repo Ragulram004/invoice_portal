@@ -8,11 +8,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
-import Autocomplete from '@mui/material/Autocomplete';
+// import Autocomplete from '@mui/material/Autocomplete';
 import Button from "@mui/material/Button";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
+import Select from 'react-select'
+
 
 //Styles
 
@@ -35,142 +37,20 @@ import { InvoiceContext } from '../InvoiceContext';
 
 import axios from 'axios';
 
+
 const API_URL = process.env.REACT_APP_API_URL;
-
-
-
-const top100Films = [
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 },
-    {
-      title: 'The Lord of the Rings: The Return of the King',
-      year: 2003,
-    },
-    { title: 'The Good, the Bad and the Ugly', year: 1966 },
-    { title: 'Fight Club', year: 1999 },
-    {
-      title: 'The Lord of the Rings: The Fellowship of the Ring',
-      year: 2001,
-    },
-    {
-      title: 'Star Wars: Episode V - The Empire Strikes Back',
-      year: 1980,
-    },
-    { title: 'Forrest Gump', year: 1994 },
-    { title: 'Inception', year: 2010 },
-    {
-      title: 'The Lord of the Rings: The Two Towers',
-      year: 2002,
-    },
-    { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-    { title: 'Goodfellas', year: 1990 },
-    { title: 'The Matrix', year: 1999 },
-    { title: 'Seven Samurai', year: 1954 },
-    {
-      title: 'Star Wars: Episode IV - A New Hope',
-      year: 1977,
-    },
-    { title: 'City of God', year: 2002 },
-    { title: 'Se7en', year: 1995 },
-    { title: 'The Silence of the Lambs', year: 1991 },
-    { title: "It's a Wonderful Life", year: 1946 },
-    { title: 'Life Is Beautiful', year: 1997 },
-    { title: 'The Usual Suspects', year: 1995 },
-    { title: 'Léon: The Professional', year: 1994 },
-    { title: 'Spirited Away', year: 2001 },
-    { title: 'Saving Private Ryan', year: 1998 },
-    { title: 'Once Upon a Time in the West', year: 1968 },
-    { title: 'American History X', year: 1998 },
-    { title: 'Interstellar', year: 2014 },
-    { title: 'Casablanca', year: 1942 },
-    { title: 'City Lights', year: 1931 },
-    { title: 'Psycho', year: 1960 },
-    { title: 'The Green Mile', year: 1999 },
-    { title: 'The Intouchables', year: 2011 },
-    { title: 'Modern Times', year: 1936 },
-    { title: 'Raiders of the Lost Ark', year: 1981 },
-    { title: 'Rear Window', year: 1954 },
-    { title: 'The Pianist', year: 2002 },
-    { title: 'The Departed', year: 2006 },
-    { title: 'Terminator 2: Judgment Day', year: 1991 },
-    { title: 'Back to the Future', year: 1985 },
-    { title: 'Whiplash', year: 2014 },
-    { title: 'Gladiator', year: 2000 },
-    { title: 'Memento', year: 2000 },
-    { title: 'The Prestige', year: 2006 },
-    { title: 'The Lion King', year: 1994 },
-    { title: 'Apocalypse Now', year: 1979 },
-    { title: 'Alien', year: 1979 },
-    { title: 'Sunset Boulevard', year: 1950 },
-    {
-      title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
-      year: 1964,
-    },
-    { title: 'The Great Dictator', year: 1940 },
-    { title: 'Cinema Paradiso', year: 1988 },
-    { title: 'The Lives of Others', year: 2006 },
-    { title: 'Grave of the Fireflies', year: 1988 },
-    { title: 'Paths of Glory', year: 1957 },
-    { title: 'Django Unchained', year: 2012 },
-    { title: 'The Shining', year: 1980 },
-    { title: 'WALL·E', year: 2008 },
-    { title: 'American Beauty', year: 1999 },
-    { title: 'The Dark Knight Rises', year: 2012 },
-    { title: 'Princess Mononoke', year: 1997 },
-    { title: 'Aliens', year: 1986 },
-    { title: 'Oldboy', year: 2003 },
-    { title: 'Once Upon a Time in America', year: 1984 },
-    { title: 'Witness for the Prosecution', year: 1957 },
-    { title: 'Das Boot', year: 1981 },
-    { title: 'Citizen Kane', year: 1941 },
-    { title: 'North by Northwest', year: 1959 },
-    { title: 'Vertigo', year: 1958 },
-    {
-      title: 'Star Wars: Episode VI - Return of the Jedi',
-      year: 1983,
-    },
-    { title: 'Reservoir Dogs', year: 1992 },
-    { title: 'Braveheart', year: 1995 },
-    { title: 'M', year: 1931 },
-    { title: 'Requiem for a Dream', year: 2000 },
-    { title: 'Amélie', year: 2001 },
-    { title: 'A Clockwork Orange', year: 1971 },
-    { title: 'Like Stars on Earth', year: 2007 },
-    { title: 'Taxi Driver', year: 1976 },
-    { title: 'Lawrence of Arabia', year: 1962 },
-    { title: 'Double Indemnity', year: 1944 },
-    {
-      title: 'Eternal Sunshine of the Spotless Mind',
-      year: 2004,
-    },
-    { title: 'Amadeus', year: 1984 },
-    { title: 'To Kill a Mockingbird', year: 1962 },
-    { title: 'Toy Story 3', year: 2010 },
-    { title: 'Logan', year: 2017 },
-    { title: 'Full Metal Jacket', year: 1987 },
-    { title: 'Dangal', year: 2016 },
-    { title: 'The Sting', year: 1973 },
-    { title: '2001: A Space Odyssey', year: 1968 },
-    { title: "Singin' in the Rain", year: 1952 },
-    { title: 'Toy Story', year: 1995 },
-    { title: 'Bicycle Thieves', year: 1948 },
-    { title: 'The Kid', year: 1921 },
-    { title: 'Inglourious Basterds', year: 2009 },
-    { title: 'Snatch', year: 2000 },
-    { title: '3 Idiots', year: 2009 },
-    { title: 'Monty Python and the Holy Grail', year: 1975 },
-  ];
+    
 
 function Apply() {
+
+    // const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [rollnumber, setRollnumber] = useState('');
+
+    const [fieldnumber, setFieldNumber] = useState(0);
 
     const [showEmail, setShowEmail] = useState(false);
 
@@ -216,6 +96,8 @@ function Apply() {
 
     //Changeable variables: Form content and elements
 
+    const [ students, setStudents ] = useState({1:{label: 'Saran S M', value: 'saran.al22@bitsathy.ac.in'}});
+
     const [ activeDetail, setActiveDetail ] = useState('Student');      //Form Content
     const [selectedDate, setSelectedDate] = useState(new Date());       //Date
     const [ projectName, setProjectName ] = useState('');               //Project Name
@@ -241,6 +123,7 @@ function Apply() {
     //Adding, Changing and deleting student name fields
 
     const addField = () => {
+        setFieldNumber(fieldnumber + 1);
         if( fields.length < 10 ) {
             setFields([...fields, { id: fields.length + 1, value: "" }]);
         }
@@ -256,26 +139,103 @@ function Apply() {
     };
 
     const deleteField = (id) => {
-        const updatedFields = fields.filter((field) => field.id !== id);
-    
-        for (let i = 0; i < updatedFields.length; i++) {
-            updatedFields[i].id = i + 1;
+        setFieldNumber(fieldnumber - 1);
+        let newFields = fields.filter((field) => field.id !== id);
+        newFields = newFields.map((field, index) => {
+            return { ...field, id: index + 1 };
+        });
+        setFields(newFields);
+    };
+
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = newVaue => {
+        setInputValue(newVaue);
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                console.log('Sending data...');
+                const response = await axios.get(`${API_URL}/user-search`, {
+                    params: {
+                        q: inputValue,
+                        },
+                        headers: {
+                        'Content-Type': 'application/json'
+                        }
+                    });
+                    let temp = [];
+                    for (let i = 0; i < response.data.length; i++) {
+                        const label = response.data[i].name;
+                        const value = response.data[i].email;
+                        temp = [...temp, { label, value }];
+                    }
+                    setSearchResults(temp);
+            }
+            catch (error) {
+                console.error('(axios) -> An error occurred:', error);
+            }
+        };
+
+        if (inputValue.length > 0){
+        fetchData();}
+    }, [inputValue]);
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
         }
-        
-        setFields(updatedFields);
-    };
+    }
 
-    const handleInputChange = (id, value) => {
-        const updatedFields = fields.map((field) =>
-          field.id === id ? { ...field, value } : field
-        );
-        setFields(updatedFields);
-    };
+    // const handleSelectChange = (selectedOption,id) => {
+    //     console.log("$$$$$$$$$$$$$$");
+    //     console.log(selectedOption,id);
+    //     console.log("$$$$$$$$$$$$$$");
+    //     // setStudents({...students},
+    //     //     {label : selectedOption,
+    //     //     value : id}
+    //     // );
 
-    //Switching between Student and Project Details
+    const handleSelectChange = (selectedOption, fieldId) => {
+        setStudents((prevStudents) => ({
+            ...prevStudents,
+            [fieldId]: {
+            label: selectedOption.label,
+            value: selectedOption.value,
+            },
+        }));
+        console.log("$$$$$$$$$$$$$$");
+        console.log(selectedOption,fieldId);
+        console.log("$$$$$$$$$$$$$$");
+        };
+
+    const handleSelectChangeFaculty = (selectedOption) => {
+        setFacultyName(() => ({
+            label: selectedOption.label,
+            value: selectedOption.value
+        }));
+        console.log("$$$$$$$$$$$$$$");
+        console.log(selectedOption);
+        console.log(facultyName)
+        console.log("$$$$$$$$$$$$$$");
+        };
 
     const handleNextClick = (e) => {
-        setActiveDetail(e);
+        // console.log(e);
+        // console.log(fields);
+        console.log(students);
+        console.log("@@@@@@@@@@@@@");
+        console.log(fieldnumber);
+        console.log(Object.keys(students).length)
+        if (fieldnumber === (Object.keys(students).length - 1) ) {
+            setActiveDetail(e);
+            
+        }
+        else{
+            alert("Please add atleast one student");
+        }
     };
 
     //TAC Input Enable/Disable
@@ -308,8 +268,9 @@ function Apply() {
         const gettingData = async () => {
             try {
                 console.log('Sending data...');
+                console.log(activeDetail);
                 const response = await axios.post(`${API_URL}/newInvoice`, {
-                    activeDetail: activeDetail,
+                    activeDetail: students,
                     selectedDate: selectedDate,
                     projectName: projectName,
                     projectDescription: projectDescription,
@@ -353,23 +314,7 @@ function Apply() {
 
                 <ApplyNavigationSearch>
                     <Stack spacing={1} sx={{ width: '100%' }}>
-                        <Autocomplete
-                            freeSolo
-                            id="free-solo-2-demo"
-                            disableClearable
-                            options={top100Films.map((option) => option.title)}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    label="Search for invoice...."
-                                    InputProps={{
-                                        ...params.InputProps,
-                                        type: 'search',
-                                    }}
-                                    
-                                />
-                            )}
-                        />
+                    <Select options={[]} onKeyDown={handleKeyDown} />
                     </Stack>
                 </ApplyNavigationSearch>
 
@@ -423,25 +368,24 @@ function Apply() {
                                     {fields.map((field) => (
                                         <ApplyFormDetailsNameInside>
                                         <h5>Student {field.id}</h5>
-                                        <Stack spacing={1} sx={{ width: 700 }}>
-                                            <Autocomplete
-                                                freeSolo
-                                                id={`free-solo-2-demo-${field.id}`}
-                                                disableClearable
-                                                options={top100Films.map((option) => option.title)}
-                                                onInputChange={(e, newValue) => handleInputChange(field.id, newValue)}
-                                                key={field.id}
-                                                renderInput={(params) => (
-                                                    <TextField
-                                                    {...params}
-                                                    label="Student"
-                                                    variant="outlined"
-                                                    value={field.value}
-                                                    />
-                                                )}
-                                            />
+                                        <Stack spacing={1} sx={{ width: 600 }}>
+                                        {(field.id === 1)? 
+                                        <Select isDisabled={true} options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />
+                                        
+                                        : 
+                                        <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} isRequired={true} required/>
+                                        }
                                         </Stack>
 
+                                        {(field.id == 1) ?
+                                        <Button
+                                            variant="contained"
+                                            color="error"
+                                            onClick={() => deleteField(field.id)}
+                                            disabled
+                                        >
+                                            <MdDeleteOutline id="deleteIcon" />
+                                        </Button> : 
                                         <Button
                                             variant="contained"
                                             color="error"
@@ -449,6 +393,7 @@ function Apply() {
                                         >
                                             <MdDeleteOutline id="deleteIcon" />
                                         </Button>
+                                        }
                                         </ApplyFormDetailsNameInside>
                                     ))}
                                     </ApplyFormDetailsNameContainer>
@@ -484,24 +429,7 @@ function Apply() {
 
                                     <ApplyFormDetailsLabel>Faculty Name: </ApplyFormDetailsLabel>
                                     <Stack spacing={1} sx={{ width: 400 }}>
-                                        <Autocomplete
-                                            freeSolo
-                                            id="free-solo-2-demo"
-                                            disableClearable
-                                            options={top100Films.map((option) => option.title)}
-                                            value={facultyName} // Set the value of the Autocomplete to facultyName
-                                            onInputChange={(e, newValue) => setFacultyName(newValue)}
-                                            renderInput={(params) => (
-                                                <TextField
-                                                    {...params}
-                                                    label="Search for faculty...."
-                                                    InputProps={{
-                                                        ...params.InputProps,
-                                                        type: 'search',
-                                                    }}
-                                                />
-                                            )}
-                                        />
+                                    <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
                                     </Stack>
                                     </ApplyFormDetailsProjectElementContainer>
 

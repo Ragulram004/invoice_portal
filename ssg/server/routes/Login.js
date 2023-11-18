@@ -41,4 +41,31 @@ router.post("/verifyToken", async (req, res) => {
     }
 });
 
+
+// Import necessary libraries and models
+
+// ... (previous code)
+
+router.get('/user-search', async (req, res) => {
+    console.log("***********")
+    console.log(req.query.q);
+    const searchTerm = req.query.q;
+
+    try {
+      const results = await Users.find({
+        $or: [
+          { name: { $regex: searchTerm, $options: 'i' } },
+          { email: { $regex: searchTerm, $options: 'i' } },
+          { rollnumber: { $regex: searchTerm, $options: 'i' } },
+        ],
+      }).limit(5);;
+      console.log(results);
+      res.json(results);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+
 module.exports = router;

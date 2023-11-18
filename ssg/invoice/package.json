@@ -16,10 +16,12 @@
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropdown-select": "^4.10.0",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.11.0",
     "react-modal": "^3.16.1",
     "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
     "styled-components": "^6.0.7",
     "sweetalert2": "^11.7.32",
     "web-vitals": "^2.1.4"

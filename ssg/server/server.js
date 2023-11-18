@@ -16,21 +16,21 @@ app.use(cors({
     credentials: false,
 }));
 
-const logFilePath = 'ip_logs.txt';
+// const logFilePath = 'ip_logs.txt';
 
-app.use((req, res, next) => {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    const currentTime = new Date().toISOString();
-    console.log(`Client IP: ${ip} at ${currentTime}`);
+// app.use((req, res, next) => {
+//     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+//     const currentTime = new Date().toISOString();
+//     console.log(`Client IP: ${ip} at ${currentTime}`);
     
-    // Append the IP address with the current time to a file
-    fs.appendFile(logFilePath, `${currentTime} - ${ip}\n`, (err) => {
-      if (err) throw err;
-      console.log('IP address with time appended to file');
-    });
+//     // Append the IP address with the current time to a file
+//     fs.appendFile(logFilePath, `${currentTime} - ${ip}\n`, (err) => {
+//       if (err) throw err;
+//       console.log('IP address with time appended to file');
+//     });
   
-    next();
-  });
+//     next();
+//   });
 
 //Routes
 const facultyRoutes = require('./routes/faculty.js');
@@ -40,6 +40,8 @@ const proposal = require('./routes/proposal.js');
 const withdrawn = require('./routes/Withdrawn.js');
 const Rejected = require('./routes/Rejected.js');
 const StudentStatus = require('./routes/StudentStatus.js');
+const Modaldata = require('./routes/modal.js');
+const Completed = require('./routes/Completed.js');
 app.use(facultyRoutes);
 app.use(userRouter);
 app.use(invoiceRouter);
@@ -47,6 +49,8 @@ app.use(proposal);
 app.use(withdrawn);
 app.use(Rejected);
 app.use(StudentStatus);
+app.use(Modaldata);
+app.use(Completed);
 
 
 // app.get('/checkToken', authenticateToken, (req, res) => {

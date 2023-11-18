@@ -47,14 +47,20 @@ const customStyles = {
   };
 
 
-function HomeLink() {
+function Completed({activeTab}) {
+
+    console.log(activeTab);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [rollnumber, setRollnumber] = useState('');
-    const [proposals, setProposals] = useState('');
+    const [proposals, setCompleted] = useState('');
+    const [modal, setModal] = useState('');
 
     useEffect(() => {
+        if(activeTab === 'Proposed') {
+            console.log("HomeLink is active");
+        }
         const authToken = Cookies.get('token');
 
         const verifyToken = async () => {
@@ -64,16 +70,18 @@ function HomeLink() {
                     setName(response.data.name);
                     setEmail(response.data.email);
                     setRollnumber(response.data.rollnumber);
-                    const proposalResponse = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
-                    console.log(proposalResponse.data.proposal);
-                    setProposals(proposalResponse.data.proposal);
+
+                    //axcessing the withdrwan proposals
+                    const withdrawResponse = await axios.post(`${API_URL}/completed`, { email: response.data.email });
+                    console.log(withdrawResponse.data.completed);
+                    setCompleted(withdrawResponse.data.completed);
                 } else {
-                    window.location.href = "/";
+                    // window.location.href = "/";
                     console.log("Unauthorized user");
                 }
             } catch (error) {
                 console.error('(axios) -> An error occurred:', error);
-                window.location.href = '/';
+                // window.location.href = '/';
             }
         };
 
@@ -97,9 +105,25 @@ function HomeLink() {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const openModal = () => {
-        setModalIsOpen(true);
+    const openModal = async(_id) => {
+        console.log("Modal Opened");
+        console.log(_id);
+        const modalResponse = await axios.post(`${API_URL}/modal`, {id:_id});
+        // console.log(modalResponse.data);
+        await setModal(modalResponse.data.modaldata);
+        await console.log(modal.StudentName);
+        await console.log(modal.StudentName['name']);
+        await setModalIsOpen(true);
     }
+
+    const Withdraw = async(Title,_id) => {
+        const response = await axios.post(`${API_URL}/withdraw`, {Status: Title, id: _id});
+        if (response.status === 200) {
+            console.log('Data saved successfully');
+            } else {
+                console.log(response);
+                console.error('Failed to save data');
+        }}
 
     const closeModal = () => {
         setModalIsOpen(false);
@@ -117,37 +141,39 @@ function HomeLink() {
             proposals.map((proposal, index) => (
                 <HomeLinkInvoicesTable key={proposal._id}>
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
-                    <HomeLinkInvoicesTableHeader> {`${proposal.Title}`} </HomeLinkInvoicesTableHeader>
+                    <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-                        <Button variant="outlined" color="error">Withdraw</Button>
-                        <AiOutlineEye id="EyeIcon" onClick={openModal} />
+                        <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Withdraw</Button>
+                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 
+                    
                     <Modal isOpen={modalIsOpen} style={customStyles}>
+                    {/* {modal.map((modal, index) => ( */}
                         <HomeLinkModal>
                             <ModalHeader>
-                                <ModalHeaderTitle>{ `${proposal.Title}` }</ModalHeaderTitle>
+                                <ModalHeaderTitle>{ modal.Title }</ModalHeaderTitle>
                             </ModalHeader>
                             <ModalContent>
                                 <ModalContentSection1>
-                                    <ModalContentElementsSection1><i></i>TAC ID: { proposal.tac }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Date: { proposal.date }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Preffered Time: { proposal.time }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1><i></i>TAC ID: { modal.TacId }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Date: { modal.Date }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Preffered Time: { modal.Time }</ModalContentElementsSection1>
                                 </ModalContentSection1>
 
                                 <ModalContentSection1>
-                                    <ModalContentElementsSection1>Faculty Name: { proposal.faculty }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Faculty Name: { modal.FacultyName }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1>Call Time: Pending....</ModalContentElementsSection1>
                                 </ModalContentSection1>
 
                                 <ModalContentSection2>
                                     <ModalContentElementsSection1>Students:</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ proposal.students }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>{ modal.StudentName }</ModalContentElementsSection1>
                                 </ModalContentSection2>
 
                                 <ModalContentSection2>
                                     <ModalContentElementsSection2>Invoice Description:</ModalContentElementsSection2>
-                                    <ModalContentElementsSection2>{ proposal.description }</ModalContentElementsSection2>
+                                    <ModalContentElementsSection2>{ modal.description }</ModalContentElementsSection2>
                                 </ModalContentSection2>
                             </ModalContent>
 
@@ -155,6 +181,7 @@ function HomeLink() {
                                 <Button variant="outlined" color="error" onClick={closeModal}>Close</Button>
                             </ModalButtonContainer>
                         </HomeLinkModal>
+                        {/* ))} */}
                     </Modal>
                 </HomeLinkInvoicesTable>
             ))
@@ -166,19 +193,4 @@ function HomeLink() {
     );
 }
 
-export default HomeLink;
-
-
-
-// {invoices.map((invoice, index) => (
-                
-//     <div key={index}>
-//     {/* Display the invoice information here */}
-//     {/* For example: */}
-//     {/* <div>Students: {invoice.students.join(', ')}</div> */}
-//     <div>Project: {invoice.project}</div>
-//     {/* <div>Description: {invoice.description}</div>
-//     <div>Faculty: {invoice.faculty}</div> */}
-//     {/* ... (Other fields) */}
-//     </div>
-// ))}
+export default Completed;
