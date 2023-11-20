@@ -1,0 +1,55 @@
+.flex1{
+  display: flex;
+  gap: 155px;
+}
+.innerflex{
+  display: flex;
+  flex-direction: column;
+}
+.flex3{
+  display: flex;
+  gap: 180px;
+}
+.details_container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  padding: 10px;
+}
+@media only screen and (max-width: 1000px) {
+  .details_container{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-45%, -60%);
+    overflow-y: scroll;
+    height: 62%;
+  }
+  .flex1{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .flex3{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .form-details{
+    
+  }
+}
+
+.add-student{
+  position:absolute;
+  right: 0;
+  margin-right: 10vh;
+}
+@media only screen and (max-width: 600px){
+  .add-student{
+    position:absolute;
+    right: 0;
+    margin-right: 5vh;
+  }
+}
