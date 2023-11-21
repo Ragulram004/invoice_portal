@@ -147,7 +147,7 @@ export const Title = styled.h2`
     font-family: 'Arial Narrow', 'san-serif';
     text-align: center;
     color: var(--text);
-    font-size: 1.5em;
+    font-size: 3.2vh;
     margin-left: 3vw;
     letter-spacing: .1em
 `;
@@ -164,12 +164,13 @@ export const ApplyMain = styled.div`
 export const ApplyFormContent = styled.form`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     background-color: var(--sidebar);
     width: 95%;
     height: 75vh;
     overflow-y: auto;
+    border-radius: 7px;
 `;
 
 export const ApplyFormDetails = styled.div`
@@ -181,6 +182,8 @@ export const ApplyFormDetails = styled.div`
     height: 100%;
     margin: 1em;
     overflow-y: auto;
+    text-decoration:underline;
+    font-weight:500;
 `;
 
 export const ApplyFormDetailsName = styled.div`
@@ -200,20 +203,22 @@ export const ApplyFormDetailsNameContainer = styled.div`
     justify-content: flex-start;
     width: 95%;
     height: auto;
-    margin-top: 1vh;
-    margin-right: 1vw;
+    margin-top: 5vh;
 `;
 
 export const ApplyFormDetailsNameInside = styled.div`
     display: flex;
     flex-direction: row;
+    gap:15px;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     width: 95%;
-    height: 10vh;
+    height: 7vh;
     background: var(--accent);
-    border-radius: 1em;
-    margin-top: 1vh
+    border-radius: 6px;
+    margin-top: 1.5vh;
+    margin-left:2vh;
+    padding:1.5vh;
 `;
 
 
@@ -221,7 +226,7 @@ export const ApplyFormButtonContainer = styled.div`
     width: 95%;
     margin-top: 1vh;
     font-family: 'Arial Narrow', 'san-serif';
-    font-size: 1.2em;
+    font-size: 1em;
     color: var(--text);
     display: flex;
     flex-direction: row;
@@ -234,29 +239,30 @@ export const ApplyFormFirstNextButton = styled.button`
     background: var(--primary);
     color: white;
     font-family: inherit;
-    font-size: 1.1em;
+    font-size: 2.5vh;
     font-weight: 500;
-    border-radius: 0.9em;
+    border-radius: 6px;
     border: none;
     letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    height: 7vh;
-    width: 10vw;
+    height: 6vh;
+    width: 12vh;
     margin-bottom: 2vh;
     margin-right: 2vw;
     z-index: 0;
+    transition:0.2s all;
 
     &:hover {
         transform: translate(-0.05em, -0.05em);
-        box-shadow: 0.15em 0.15em #5566c2;
+        box-shadow: 0.15em 0.15em 0.25em #5566c2;
     }
 
     &:active {
         transform: translate(0.05em, 0.05em);
-        box-shadow: 0.05em 0.05em #5566c2;
+        box-shadow: 0.05em 0.05em  #5566c2;
     }
 `;
 
@@ -264,23 +270,25 @@ export const ApplyFormSubmitButton = styled.button`
     background: var(--accent);
     color: var(--text);
     font-family: inherit;
-    font-size: 1.1em;
+    font-size: 2.5vh;
     font-weight: 500;
-    border-radius: 0.9em;
+    border-radius: 6px;
     border: none;
     letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    height: 7vh;
-    width: 10vw;
+    height: 6vh;
+    width: 12vh;
     margin-bottom: 2vh;
     margin-left: 2vw;
+    transition: 0.2s all;
 
     &:hover {
         transform: translate(-0.05em, -0.05em);
-        box-shadow: 0.15em 0.15em var(--accent);
+        box-shadow:0.15em 0.15em 0.25em gray;
+
     }
 
     &:active {
@@ -309,31 +317,32 @@ export const ApplyFormDetailsProject = styled.div`
 `;
 
 export const ApplyFormDetailsProjectElementContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 18vh;
-    margin-top: 1vh;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+    // justify-content: space-evenly;
+    width: 89%;
+    // height: 18vh;
+    margin-top: 10px;
 `;
 
 export const ApplyFormDetailsProjectMultiLineContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 15vh;
-    margin-top: 5vh;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: flex-start;
+    // justify-content: space-evenly;
+    width:89%;
+    height: 10vh;
+    margin-top: 10px;
 `;
 
 export const ApplyFormDetailsLabel = styled.label`
     font-family: inherit;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: bold;
     color: var(--text);
     letter-spacing: .1em;
     margin-left: 1vw;
     margin-right: 1vw;
+    margin-bottom:1vw;
 `;
