@@ -60,7 +60,7 @@ function LandingPage() {
         console.log(res.profileObj.email);
         console.log(`email --- ${Email}`);
     };
-    
+    console.log(email);
     if (email) {
         console.log("Loging gmail");
         const gettingData = async () => {
@@ -71,8 +71,17 @@ function LandingPage() {
             if (response.status === 200) {
                 console.log('Data saved successfully');
                 Cookies.set('token', response.data.accesstoken);
-                window.location.href = "/Home"
-                    
+                if(response.data.role === "student"){
+                    console.log(response.data.role);
+                    window.location.href = "/Home"}
+                // window.location.href = "/Home"}
+                else if (response.data.role === "faculty"){
+                    console.log(response.data.role);
+                    window.location.href = "/Home-Faculty"
+                }
+                else {
+                    console.log("User not found in DB Login Error");
+                }   
             } else {
                 console.log(response);
                 console.error('Failed to save data');

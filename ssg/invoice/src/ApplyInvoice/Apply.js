@@ -452,7 +452,7 @@ function Apply() {
                                             <ApplyFormDetailsLabel>Project Name: </ApplyFormDetailsLabel>
                                             <TextField
                                             autoComplete="off"
-                                            required
+                                            required={true}
                                             id="outlined-basic"
                                             label="Project Name"
                                             variant="outlined"
@@ -504,6 +504,25 @@ function Apply() {
                                             </div>
                                         </div>
 
+                                    <ApplyFormDetailsLabel>Description: </ApplyFormDetailsLabel>
+                                        <TextField
+                                            id="outlined-multiline-static"
+                                            multiline
+                                            rows={5}
+                                            label="What is this invoice for?"
+                                            onChange={ (e) => setProjectDescription(e.target.value) }
+                                        />
+
+                                        <ApplyFormDetailsLabel>Date: </ApplyFormDetailsLabel>
+                                        <TextField
+                                        required
+                                        id="outlined-basic-date"
+                                        type="date"
+                                        variant="outlined"
+                                        value={selectedDate.toISOString().split('T')[0]}
+                                        // value={selectedDate.toISOString().split('')}
+                                        disabled
+                                        />
                                     </ApplyFormDetailsProjectMultiLineContainer>
                                 </ApplyFormDetailsProject>
                                 </div>

@@ -38,17 +38,16 @@ const customStyles = {
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
       borderRadius: '5px',
       width: '50vw',
-      height: '62vh',
+      height: '80vh',
       zIndex: '1000'
     },
     overlay: {
-      backgroundColor:'rgba (0, 0, 0, .5);',  
-      backgroundColor: 'rgba(0, 0, 0, 0.9)'
+      backgroundColor: 'rgba(0, 0, 0, .5)'
     }
   };
 
 
-function Withdrawn({activeTab}) {
+function Rejected({activeTab}) {
 
     console.log(activeTab);
 
@@ -73,9 +72,9 @@ function Withdrawn({activeTab}) {
                     setRollnumber(response.data.rollnumber);
 
                     //axcessing the withdrwan proposals
-                    const withdrawResponse = await axios.post(`${API_URL}/withdrawn`, { email: response.data.email });
-                    console.log(withdrawResponse.data.withdrawn);
-                    setWithdrawn(withdrawResponse.data.withdrawn);
+                    const withdrawResponse = await axios.post(`${API_URL}/faculty-rejected`, { email: response.data.email });
+                    console.log(withdrawResponse.data.rejected);
+                    setWithdrawn(withdrawResponse.data.rejected);
 
                     // axcessing the active proposals
                     // const proposalResponse = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
@@ -138,9 +137,9 @@ function Withdrawn({activeTab}) {
     return (
         <HomeLinkContent>
             <HomeLinkTable>
-                <HomeLinkTableHeaderTitle className="grid-id">ID</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle className="grid-proname">Project Name</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle className="with-grid-prog">View</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle>ID</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle>Project Name</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
             {Array.isArray(proposals) ? (
@@ -149,14 +148,11 @@ function Withdrawn({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-    <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
-                    </HomeLinkInvoicesButtonsContainer>
-                    <Modal isOpen={modalIsOpen} style={customStyles}>
-                       <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
+                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 
                     
-                    {modalIsOpen && <Modal isOpen={modalIsOpen} style={customStyles}>
+                    <Modal isOpen={modalIsOpen} style={customStyles}>
                     {/* {modal.map((modal, index) => ( */}
                         <HomeLinkModal>
                             <ModalHeader>
@@ -190,7 +186,7 @@ function Withdrawn({activeTab}) {
                             </ModalButtonContainer>
                         </HomeLinkModal>
                         {/* ))} */}
-                    </Modal>}
+                    </Modal>
                 </HomeLinkInvoicesTable>
             ))
             ) : (
@@ -201,4 +197,4 @@ function Withdrawn({activeTab}) {
     );
 }
 
-export default Withdrawn;
+export default Rejected;

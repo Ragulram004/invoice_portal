@@ -42,6 +42,10 @@ const Rejected = require('./routes/Rejected.js');
 const StudentStatus = require('./routes/StudentStatus.js');
 const Modaldata = require('./routes/modal.js');
 const Completed = require('./routes/Completed.js');
+const faculty_proposal = require('./routes/faculty routes/faculty_proposal.js');
+const faculty_approved = require('./routes/faculty routes/faculty_approved.js');
+const faculty_completed = require('./routes/faculty routes/faculty_completed.js');
+const faculty_rejected = require('./routes/faculty routes/faculty_rejected.js');
 app.use(facultyRoutes);
 app.use(userRouter);
 app.use(invoiceRouter);
@@ -51,6 +55,10 @@ app.use(Rejected);
 app.use(StudentStatus);
 app.use(Modaldata);
 app.use(Completed);
+app.use(faculty_proposal);
+app.use(faculty_approved);
+app.use(faculty_completed);
+app.use(faculty_rejected);
 
 
 // app.get('/checkToken', authenticateToken, (req, res) => {
