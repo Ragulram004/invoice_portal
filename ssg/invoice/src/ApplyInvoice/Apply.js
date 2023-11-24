@@ -9,12 +9,13 @@ import FormControl from '@mui/material/FormControl';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 // import Autocomplete from '@mui/material/Autocomplete';
+
 import Button from "@mui/material/Button";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Select from 'react-select'
-
+import './Apply.css'
 
 //Styles
 
@@ -363,86 +364,100 @@ function Apply() {
                         {activeDetail === 'Student' && 
                             <ApplyFormDetails>
                                 Student Details:
-                                <ApplyFormDetailsName>
-                                    <ApplyFormDetailsNameContainer>
-                                    {fields.map((field) => (
-                                        <ApplyFormDetailsNameInside>
-                                        <h5>Student {field.id}</h5>
-                                        <Stack spacing={1} sx={{ width: 600 }}>
-                                        {(field.id === 1)? 
-                                        <Select isDisabled={true} options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />
-                                        
-                                        : 
-                                        <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} isRequired={true} required/>
-                                        }
-                                        </Stack>
+                                    <ApplyFormDetailsName className="student-team">
+                                        <ApplyFormDetailsNameContainer >
+                                        {fields.map((field) => (
+                                        <ApplyFormDetailsNameInside className="list-student">
+                                            <h5>Student {field.id}</h5>
+                                            <Stack spacing={1} sx={{ width: 600 }}>
+                                            {(field.id === 1)? 
+                                            <Select isDisabled={true} options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />
+                                            
+                                            : 
+                                            <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} isRequired={true} required/>
+                                            }
+                                            </Stack>
 
-                                        {(field.id == 1) ?
-                                        <Button
-                                            variant="contained"
-                                            color="error"
-                                            onClick={() => deleteField(field.id)}
-                                            disabled
-                                        >
-                                            <MdDeleteOutline id="deleteIcon" />
-                                        </Button> : 
-                                        <Button
-                                            variant="contained"
-                                            color="error"
-                                            onClick={() => deleteField(field.id)}
-                                        >
-                                            <MdDeleteOutline id="deleteIcon" />
-                                        </Button>
-                                        }
+                                            {(field.id == 1) ?
+                                            <Button
+                                                variant="contained"
+                                                color="error"
+                                                onClick={() => deleteField(field.id)}
+                                                disabled
+                                            >
+                                                <MdDeleteOutline id="deleteIcon" />
+                                            </Button> : 
+                                            <Button
+                                                variant="contained"
+                                                color="error"
+                                                onClick={() => deleteField(field.id)}
+                                            >
+                                                <MdDeleteOutline id="deleteIcon" />
+                                            </Button>
+                                            }
                                         </ApplyFormDetailsNameInside>
-                                    ))}
-                                    </ApplyFormDetailsNameContainer>
-                                    <Button variant="contained" onClick={addField}>
-                                        +
-                                    </Button>
-                                </ApplyFormDetailsName>
+                                        ))}
+                                        </ApplyFormDetailsNameContainer>
+                                        <div className="add-student">
+                                            <Button variant="contained" onClick={addField} >
+                                                +
+                                            </Button>
+                                        </div>
+                                    </ApplyFormDetailsName>
                             </ApplyFormDetails>
                         }
 
                         {/* Project Details */}
 
                         {activeDetail === 'Project' &&
-                            <ApplyFormDetails>
-                            Project Details:
-                            <ApplyFormDetailsProject>
+                            <ApplyFormDetails className="form-details">
+                                Project Details:
+                                <div className="details_container">
+                                <ApplyFormDetailsProject>
+                                    <ApplyFormDetailsProjectElementContainer>
+                                        <div className="flex1">
+                                            <div className="innerflex">
+                                                <ApplyFormDetailsLabel>TAC: </ApplyFormDetailsLabel>
+                                                <TextField 
+                                                autoComplete="off"
+                                                id="outlined-basic"  
+                                                variant="outlined"
+                                                disabled={ !isInputEnabled }
+                                                onChange={ (e) => setProjectTac(e.target.value) } />
+                                                <FormControlLabel
+                                                    control={
+                                                    <Switch
+                                                        checked={isInputEnabled}
+                                                        onChange={handleToggleChange}
+                                                        color="primary"
+                                                    />
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="innerflex">
+                                        <ApplyFormDetailsLabel>Faculty Name: </ApplyFormDetailsLabel>
+                                        <Stack spacing={1} sx={{ width: 400 }}>
+                                        <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
+                                        </Stack>
+                                            </div>
+                                        </div>
+                                        </ApplyFormDetailsProjectElementContainer>
+
+
                                 <ApplyFormDetailsProjectElementContainer>
-                                    <ApplyFormDetailsLabel>TAC: </ApplyFormDetailsLabel>
-                                    <TextField 
-                                    id="outlined-basic"  
-                                    variant="outlined"
-                                    disabled={ !isInputEnabled }
-                                    onChange={ (e) => setProjectTac(e.target.value) } />
-                                    <FormControlLabel
-                                        control={
-                                        <Switch
-                                            checked={isInputEnabled}
-                                            onChange={handleToggleChange}
-                                            color="primary"
-                                        />
-                                        }
-                                    />
-
-                                    <ApplyFormDetailsLabel>Faculty Name: </ApplyFormDetailsLabel>
-                                    <Stack spacing={1} sx={{ width: 400 }}>
-                                    <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
-                                    </Stack>
-                                    </ApplyFormDetailsProjectElementContainer>
-
-                                <ApplyFormDetailsProjectElementContainer>
-                                    <ApplyFormDetailsLabel>Project Name: </ApplyFormDetailsLabel>
-                                    <TextField
-                                    required={true}
-                                    id="outlined-basic"
-                                    label="Project Name"
-                                    variant="outlined"
-                                    onChange={ (e) => setProjectName(e.target.value) }
-                                    />
-
+                                    <div className="flex1 flex2">
+                                        <div className="innerflex">
+                                            <ApplyFormDetailsLabel>Project Name: </ApplyFormDetailsLabel>
+                                            <TextField
+                                            autoComplete="off"
+                                            required={true}
+                                            id="outlined-basic"
+                                            label="Project Name"
+                                            variant="outlined"
+                                            onChange={ (e) => setProjectName(e.target.value) }
+                                            />
+                                        </div>
+                                        <div className="innerflex">
                                     <ApplyFormDetailsLabel for="Project Name">Preferred Time: </ApplyFormDetailsLabel>
                                         <FormControl>
                                             <RadioGroup
@@ -456,9 +471,37 @@ function Apply() {
                                                 <FormControlLabel id="FormControlRadio" value="Afternoon" control={<Radio />} label="PM" />
                                             </RadioGroup>
                                         </FormControl>
+                                        </div>
+                                    </div>
                                 </ApplyFormDetailsProjectElementContainer>
 
                                 <ApplyFormDetailsProjectMultiLineContainer>
+                                        <div className=" flex3">
+                                            <div className="innerflex third-row">
+                                                <ApplyFormDetailsLabel>Description: </ApplyFormDetailsLabel>
+                                                <TextField
+                                                autoComplete="off"
+                                                    id="outlined-multiline-static"
+                                                    multiline
+                                                    rows={5}
+                                                    label="What is this invoice for?"
+                                                    onChange={ (e) => setProjectDescription(e.target.value) }
+                                                />
+                                            </div>
+                                            <div className="innerflex third-two2">
+                                                <ApplyFormDetailsLabel>Date: </ApplyFormDetailsLabel>
+                                                <TextField
+                                                autoComplete="off"
+                                                required
+                                                id="outlined-basic-date"
+                                                type="date"
+                                                variant="outlined"
+                                                value={selectedDate.toISOString().split('T')[0]}
+                                                disabled
+                                            />
+                                            </div>
+                                        </div>
+
                                     <ApplyFormDetailsLabel>Description: </ApplyFormDetailsLabel>
                                         <TextField
                                             id="outlined-multiline-static"
@@ -480,6 +523,7 @@ function Apply() {
                                         />
                                     </ApplyFormDetailsProjectMultiLineContainer>
                                 </ApplyFormDetailsProject>
+                                </div>
                             </ApplyFormDetails>
                         }
                     </ApplyFormContent>
