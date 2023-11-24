@@ -148,7 +148,6 @@ function Rejected({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-                        <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Withdraw</Button>
                         <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 

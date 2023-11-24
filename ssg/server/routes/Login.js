@@ -6,11 +6,13 @@ const jwt = require('jsonwebtoken');
 
 router.post('/getUsers', async (req, res) => {
     const user = await Users.findOne({email : req.body.email});
+    console.log(user.role);
+    // const role = user.role;
     const email = req.body.email;
     const accesstoken = await jwt.sign({email: email}, process.env.ACCESS_TOKEN_SECRET);
     if (user) 
     {
-        return res.status(200).send({accesstoken: accesstoken});
+        return res.status(200).send({accesstoken: accesstoken, role: user.role});
     }
     else
     {

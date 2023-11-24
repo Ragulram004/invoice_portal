@@ -71,10 +71,6 @@ function Proposals({activeTab}) {
                     setEmail(response.data.email);
                     setRollnumber(response.data.rollnumber);
 
-                    //axcessing the withdrwan proposals
-                    const withdrawResponse = await axios.post(`${API_URL}/withdrawn`, { email: response.data.email });
-                    console.log(withdrawResponse.data.withdrawn);
-
                     // axcessing the active proposals
                     const proposalResponse = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
                     console.log(proposalResponse.data.proposal);
@@ -129,7 +125,8 @@ function Proposals({activeTab}) {
         const response = await axios.post(`${API_URL}/withdraw`, {Status: Title, id: _id});
         if (response.status === 200) {
             console.log('Data saved successfully');
-            } else {
+            window.location.href = '/home'
+        } else {
                 console.log(response);
                 console.error('Failed to save data');
         }}
@@ -152,6 +149,8 @@ function Proposals({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
+                        {proposal.Status === "Approved" &&
+                        <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="success">Accept</Button>}
                         <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Withdraw</Button>
                         <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
@@ -172,7 +171,7 @@ function Proposals({activeTab}) {
 
                                 <ModalContentSection1>
                                     <ModalContentElementsSection1>Faculty Name: { modal.FacultyName.label }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Call Time: Pending....</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Call Time: { modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
                                 </ModalContentSection1>
 
                                 <ModalContentSection2> 

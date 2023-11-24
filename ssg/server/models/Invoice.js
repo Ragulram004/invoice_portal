@@ -9,7 +9,9 @@ const InvoiceSchema = new mongoose.Schema({
     FacultyName : mongoose.Schema.Types.Mixed,
     Time : String,
     Status : String,
-    Date: String
+    Date: Date,
+    CallTime: Date,
+    StatusDescription: String
 });
 
 const InvoiceModel = mongoose.model('Invoice', InvoiceSchema);

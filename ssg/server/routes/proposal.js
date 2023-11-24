@@ -3,7 +3,11 @@ const Invoice = require('../models/Invoice');
 
 router.post('/proposal', async(req, res) => {
     console.log(req.body.email);
-    const proposal = await Invoice.find({CreatedBy : "test@something.gmail.com", Status: {$eq: "Proposed"}});
+    const proposal = await Invoice.find({CreatedBy : "test@something.gmail.com", 
+    $or: [
+        { Status: "Proposed" },
+        { Status: "Approved" }
+      ]});
     console.log(proposal);
     res.send({proposal: proposal});
 });

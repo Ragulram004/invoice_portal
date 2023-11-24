@@ -47,7 +47,7 @@ const customStyles = {
   };
 
 
-function Withdrawn({activeTab}) {
+function Approved({activeTab}) {
 
     console.log(activeTab);
 
@@ -72,9 +72,9 @@ function Withdrawn({activeTab}) {
                     setRollnumber(response.data.rollnumber);
 
                     //axcessing the withdrwan proposals
-                    const withdrawResponse = await axios.post(`${API_URL}/withdrawn`, { email: response.data.email });
-                    console.log(withdrawResponse.data.withdrawn);
-                    setWithdrawn(withdrawResponse.data.withdrawn);
+                    const withdrawResponse = await axios.post(`${API_URL}/faculty-approved`, { email: response.data.email });
+                    console.log(withdrawResponse.data.approved);
+                    setWithdrawn(withdrawResponse.data.approved);
 
                     // axcessing the active proposals
                     // const proposalResponse = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
@@ -148,6 +148,7 @@ function Withdrawn({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
+                    <Button variant="outlined" onClick={() => openModal(proposal._id)} color="success">Worklog</Button>
                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 
@@ -177,7 +178,7 @@ function Withdrawn({activeTab}) {
 
                                 <ModalContentSection2>
                                     <ModalContentElementsSection2>Invoice Description:</ModalContentElementsSection2>
-                                    <ModalContentElementsSection2>{ modal.description }</ModalContentElementsSection2>
+                                    <ModalContentElementsSection2>{ modal.Description }</ModalContentElementsSection2>
                                 </ModalContentSection2>
                             </ModalContent>
 
@@ -197,4 +198,4 @@ function Withdrawn({activeTab}) {
     );
 }
 
-export default Withdrawn;
+export default Approved;

@@ -47,14 +47,14 @@ const customStyles = {
   };
 
 
-function Withdrawn({activeTab}) {
+function Completed({activeTab}) {
 
     console.log(activeTab);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [rollnumber, setRollnumber] = useState('');
-    const [proposals, setWithdrawn] = useState('');
+    const [proposals, setCompleted] = useState('');
     const [modal, setModal] = useState('');
 
     useEffect(() => {
@@ -72,21 +72,16 @@ function Withdrawn({activeTab}) {
                     setRollnumber(response.data.rollnumber);
 
                     //axcessing the withdrwan proposals
-                    const withdrawResponse = await axios.post(`${API_URL}/withdrawn`, { email: response.data.email });
-                    console.log(withdrawResponse.data.withdrawn);
-                    setWithdrawn(withdrawResponse.data.withdrawn);
-
-                    // axcessing the active proposals
-                    // const proposalResponse = await axios.post(`${API_URL}/proposal`, { email: response.data.email });
-                    // console.log(proposalResponse.data.proposal);
-                    // setProposals(proposalResponse.data.proposal);
+                    const withdrawResponse = await axios.post(`${API_URL}/faculty-completed`, { email: response.data.email });
+                    console.log(withdrawResponse.data.completed);
+                    setCompleted(withdrawResponse.data.completed);
                 } else {
-                    window.location.href = "/";
+                    // window.location.href = "/";
                     console.log("Unauthorized user");
                 }
             } catch (error) {
                 console.error('(axios) -> An error occurred:', error);
-                window.location.href = '/';
+                // window.location.href = '/';
             }
         };
 
@@ -148,11 +143,11 @@ function Withdrawn({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-                       <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
+                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 
                     
-                    {modalIsOpen && <Modal isOpen={modalIsOpen} style={customStyles}>
+                    <Modal isOpen={modalIsOpen} style={customStyles}>
                     {/* {modal.map((modal, index) => ( */}
                         <HomeLinkModal>
                             <ModalHeader>
@@ -186,7 +181,7 @@ function Withdrawn({activeTab}) {
                             </ModalButtonContainer>
                         </HomeLinkModal>
                         {/* ))} */}
-                    </Modal>}
+                    </Modal>
                 </HomeLinkInvoicesTable>
             ))
             ) : (
@@ -197,4 +192,4 @@ function Withdrawn({activeTab}) {
     );
 }
 
-export default Withdrawn;
+export default Completed;

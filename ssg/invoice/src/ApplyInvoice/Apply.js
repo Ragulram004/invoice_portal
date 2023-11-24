@@ -436,7 +436,7 @@ function Apply() {
                                 <ApplyFormDetailsProjectElementContainer>
                                     <ApplyFormDetailsLabel>Project Name: </ApplyFormDetailsLabel>
                                     <TextField
-                                    required
+                                    required={true}
                                     id="outlined-basic"
                                     label="Project Name"
                                     variant="outlined"
@@ -475,6 +475,7 @@ function Apply() {
                                         type="date"
                                         variant="outlined"
                                         value={selectedDate.toISOString().split('T')[0]}
+                                        // value={selectedDate.toISOString().split('')}
                                         disabled
                                         />
                                     </ApplyFormDetailsProjectMultiLineContainer>
