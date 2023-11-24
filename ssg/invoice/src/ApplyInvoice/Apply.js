@@ -24,7 +24,7 @@ import { ApplyBackToHome, ApplyContent, ApplyContentTitleDiv, ApplyFormButtonCon
         ApplyFormContent, ApplyFormDetails, ApplyFormDetailsLabel, ApplyFormDetailsName, 
         ApplyFormDetailsNameContainer, ApplyFormDetailsNameInside, ApplyFormDetailsProject,
         ApplyFormDetailsProjectElementContainer, ApplyFormDetailsProjectMultiLineContainer, 
-        ApplyFormFirstNextButton, ApplyFormSubmitButton, ApplyMain, ApplyNavigation, 
+        ApplyFormFirstNextButton, ApplyFormSubmitButton, ApplyMain, ApplyNavigation,
         ApplyNavigationLogo, ApplyNavigationNotification, ApplyNavigationProfile, ApplyNavigationProfileEmail, ApplyNavigationProfileToggle, ApplyNavigationSearch, 
         ApplyNavigationTitle, ApplyScreen, Title, } from './StyleApply.js';
 
@@ -302,6 +302,8 @@ function Apply() {
             {/* Navigation Bar */}
 
             <ApplyNavigation>
+                {/* Navigation threedash */}
+                
 
                 {/* Navigation Bar Logo */}
 
@@ -309,7 +311,7 @@ function Apply() {
 
                 {/* Navigation Bar Title */}
 
-                <ApplyNavigationTitle>BIT INVOICE PORTAL</ApplyNavigationTitle>
+                <ApplyNavigationTitle>Invoice Portal</ApplyNavigationTitle>
 
                 {/* Navigation Bar Search functionality box */}
 
@@ -351,7 +353,7 @@ function Apply() {
                 {/* Apply Invoice Form Title */}
 
                 <ApplyContentTitleDiv>
-                    <Title>Apply Invoice</Title>
+                    <Title className="title">Apply Invoice</Title>
                 </ApplyContentTitleDiv>
 
                 {/* Apply Form Content Starts Here */}

@@ -1,15 +1,16 @@
+/* (#31374a)----> for dark mode */
 :root {
-    --background: #d1d1d1;
+    --background: #f5f7fa ;  /*#f5f7fa*/
     --accent: #ffffff;
-    --primary: #4A94CD;
+    --primary: #007FFF;
     --secondary: #FF7C7C;
     --text: #333333;
-    --sidebar: #71b4e7a9;
-    --primary-hover: #2c99ed;
+    --sidebar: #ffffff;
+    --primary-hover: #0F52BA;
     --tab-hover: #acb1bdc2;
-    --tab-active: #fae3e3c6;
-    --sidebar-focus: #4A94CD;
-    --grid-header: #f7cdcdaf;
+    --tab-active: #ffffff;
+    --sidebar-focus: #b8d2f5;
+    --grid-header: #f5f7fa;
 }
 
 .GoogleSignin {
@@ -101,4 +102,55 @@
     width: 3vw;
     height: 3vh
   }
-  
+  .sidebar-text{
+    position: fixed;
+    margin-left:35px;
+    z-index: 0;
+  }
+  .withdraw-button{
+    margin-right:320px;
+    height: 5vh;
+    width: 9vw;
+    border: none;
+  }
+  @media only screen and (min-width: 1030px){
+    .with-text{
+      font-size: 1vw;
+    }
+  }
+  @media only screen and (max-width: 1023px){
+    .with-text{
+      font-size:1.2vw;
+    }
+  }
+  @media only screen and (max-width: 600px){
+    .with-text{
+      font-size:1.7vw;
+    }
+  }
+  @media only screen and (max-width: 431px){
+    .with-text{
+      font-size:2.4vw;
+    }
+  }
+  /* .invoice-button{
+    width: 9em;
+    height: 6.5vh;
+    line-height: 1.5em;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--primary);
+    margin-top: 1.7vh;
+    transition: color .5s;
+    z-index: 0;
+    font-size: 2.1vh;
+    border-radius: 4px;
+    font-weight:500;
+    color: var(--accent);
+    background: var(--primary);
+    cursor: pointer;
+    margin-left: auto;
+    margin-right:1vw;
+  } */
+
+
