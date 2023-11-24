@@ -36,9 +36,6 @@
     flex-direction: column;
     gap: 10px;
   }
-  .form-details{
-    
-  }
 }
 
 .add-student{
@@ -52,4 +49,8 @@
     right: 0;
     margin-right: 5vh;
   }
+}
+.title{
+  font-family: inherit;
+  font-weight: 600;
 }

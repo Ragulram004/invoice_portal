@@ -38,11 +38,12 @@ const customStyles = {
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
       borderRadius: '5px',
       width: '50vw',
-      height: '80vh',
+      height: '62vh',
       zIndex: '1000'
     },
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, .5)'
+      backgroundColor:'rgba (0, 0, 0, .5);',  
+      backgroundColor: 'rgba(0, 0, 0, 0.9)'
     }
   };
 
@@ -138,23 +139,23 @@ function Proposals({activeTab}) {
     return (
         <HomeLinkContent>
             <HomeLinkTable>
-                <HomeLinkTableHeaderTitle>ID</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle>Project Name</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-id">ID</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-proname">Project Name</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-prog">Progress</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-view">View</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
-
             {Array.isArray(proposals) ? (
             proposals.map((proposal, index) => (
                 <HomeLinkInvoicesTable key={proposal._id}>
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-                        {proposal.Status === "Approved" &&
+
+ {proposal.Status === "Approved" &&
                         <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="success">Accept</Button>}
                         <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Withdraw</Button>
                         <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
-
                     
                     {modalIsOpen && <Modal isOpen={modalIsOpen} style={customStyles}>
                     {/* {modal.map((modal, index) => ( */}

@@ -38,11 +38,12 @@ const customStyles = {
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
       borderRadius: '5px',
       width: '50vw',
-      height: '80vh',
+      height: '62vh',
       zIndex: '1000'
     },
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, .5)'
+      backgroundColor:'rgba (0, 0, 0, .5);',  
+      backgroundColor: 'rgba(0, 0, 0, 0.9)'
     }
   };
 
@@ -137,9 +138,9 @@ function Withdrawn({activeTab}) {
     return (
         <HomeLinkContent>
             <HomeLinkTable>
-                <HomeLinkTableHeaderTitle>ID</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle>Project Name</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-id">ID</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-proname">Project Name</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="with-grid-prog">View</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
             {Array.isArray(proposals) ? (
@@ -148,6 +149,9 @@ function Withdrawn({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
+    <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
+                    </HomeLinkInvoicesButtonsContainer>
+                    <Modal isOpen={modalIsOpen} style={customStyles}>
                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 

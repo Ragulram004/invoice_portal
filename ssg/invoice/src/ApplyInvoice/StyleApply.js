@@ -28,8 +28,10 @@ export const ApplyNavigationLogo = styled.img`
     justify-content: center;
     background-color: transparent;
     height: 5vh;
-    width: 5vw;
+    width: 45px;
+    position:fixed;
     margin-left: 1vw;
+    
 `;
 
 export const ApplyNavigationTitle = styled.h1`
@@ -37,15 +39,19 @@ export const ApplyNavigationTitle = styled.h1`
     flex-direction: row;
     align-items: centre;
     justify-content: centre;
-    font-size: 1em;
-    font-family: 'Arial Narrow', 'san-serif';
+    font-size: 3.5vh;
+    font-family: inherit, 'san-serif';
     margin-left: 1vw;
+    color:#4C5866;
+    position:fixed;
+    margin-left:70px
 `;
 
 export const ApplyNavigationSearch = styled.div`
-    width: 65vw;
+    width: 100%;
     margin-left: 2vw;
     margin-right: 2vw;
+    margin-left:260px;
 `;
 
 export const ApplyBackToHome = styled.button`
@@ -91,6 +97,7 @@ export const ApplyNavigationProfile = styled.button`
     margin-left: 1vw;
     cursor: pointer;
     border: none;
+    margin-right:2vw;
 `;
 
 export const ApplyNavigationProfileToggle = styled.div`
@@ -115,7 +122,7 @@ export const ApplyNavigationProfileEmail = styled.p`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-family: 'Arial Narrow', 'san-serif';
+    font-family: inherit, 'san-serif';
     font-size: 2em;
     color: var(--text);
 `;
@@ -137,6 +144,7 @@ export const ApplyContentTitleDiv = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    
 `;
 
 export const Title = styled.h2`
@@ -144,7 +152,7 @@ export const Title = styled.h2`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-family: 'Arial Narrow', 'san-serif';
+    font-family: inherit, 'san-serif';
     text-align: center;
     color: var(--text);
     font-size: 3.2vh;
@@ -225,7 +233,7 @@ export const ApplyFormDetailsNameInside = styled.div`
 export const ApplyFormButtonContainer = styled.div`
     width: 95%;
     margin-top: 1vh;
-    font-family: 'Arial Narrow', 'san-serif';
+    font-family: inherit, 'san-serif';
     font-size: 1em;
     color: var(--text);
     display: flex;

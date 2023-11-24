@@ -6,14 +6,16 @@ import { GoogleLogout } from "react-google-login";
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Select from "react-select";
-
+import UseMediaQuery from "./UseMediaQuery.js";
+import MinMediaQuery from "./MinMediaQuery.js";
+import { createGlobalStyle } from 'styled-components'
 
 //Styles
 
 import '../Styles/Invoice.css';
 import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent, 
         HomePageMain, HomePageActionButtons, HomePageActionTabs, 
-        HomePageActionContent, HomePageActionTabsInput, HomePageActionTabsLabel, HomePageTabContent,
+        HomePageActionContent, HomePageActionTabsInput, HomePageActionTabsLabel,HomeDashBoard, HomePageTabContent,HomePageThreeDash,
         HomePageNavigationLogo, HomePageNavigationTitle, HomePageNavigationSearch,
         HomePageNavigationDN,
         HomePageNavigationDNInput,
@@ -27,8 +29,8 @@ import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent,
 //Components
 
 import Logo from '../Icons/BITLogo.png';
-import { IoNotificationsOutline } from "react-icons/io5";
-import { RxAvatar } from "react-icons/rx";
+import { IoNotifications } from "react-icons/io5";
+import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
 
 import Proposals from "./Components/HomeLink/Proposals.js";
@@ -87,6 +89,8 @@ function HomePage() {
             event.stopPropagation();
         }
     };
+    const matches = UseMediaQuery("(max-width:1024px)");
+    const minmatches = MinMediaQuery("(min-width:1024px)");
     
     return (
         <HomePageScreen>
@@ -94,14 +98,22 @@ function HomePage() {
             {/* Navigation Bar */}
 
             <HomePageNavigation>
+                {/* Navebar Three Dash */}
+                <HomePageThreeDash>{matches?(
+                      <label for="openSidebarMenu" class="sidebarIconToggle">
+                      <div class="spinner diagonal part-1"></div>
+                      <div class="spinner horizontal"></div>
+                      <div class="spinner diagonal part-2"></div>
+                    </label>
+                ):null}</HomePageThreeDash>
 
                 {/* Navigation Bar Logo */}
 
-                <HomePageNavigationLogo src={Logo} alt="BIT Logo" />
+                <HomePageNavigationLogo src={Logo} alt='BIT Logo'/>
 
                 {/* Navigation Bar Title */}
 
-                <HomePageNavigationTitle>BIT INVOICE PORTAL</HomePageNavigationTitle>
+                <HomePageNavigationTitle>Invoice Portal</HomePageNavigationTitle>
 
                 {/* Navigation Bar Search functionality box */}
 
@@ -136,24 +148,24 @@ function HomePage() {
                 {/* Natification bell constainer */}
 
                 <HomePageNavigationNotification>
-                    <IoNotificationsOutline id="NotificationBell" />
+                    <IoNotifications/>                
                 </HomePageNavigationNotification>
 
                 {/* Profile Avatar */}
 
                 <HomePageNavigationProfile>
-                    <RxAvatar id="ProfileAvatar" />
+                    <FaUserCircle  id="ProfileAvatar" />
                 </HomePageNavigationProfile>
             </HomePageNavigation>
 
             {/* Below the Navigation Bar is the Home Page Content. */}
             {/* This is broken down into the Side Bar and the Main Content. */}
 
-            <HomePageContent>
+            <HomePageContent >
 
                 {/* Home page side bar with the navigation links. */}
-
-                <HomePageSideBar>
+                {(minmatches)?(
+                    <HomePageSideBar>
 
                     {/* Home page side bar navigation links. */}
 
@@ -162,21 +174,21 @@ function HomePage() {
                         {/* Showing the navigation links for the Home Page Side Bar. */}
                         <HomePageSideBarButton onClick={ () => handleLinkChange('Home') }>
                             <AiOutlineHome id="SideBarHomeIcon" />
-                            Home
+                            <div className="sidebar-text">Home</div>
                         </HomePageSideBarButton>
 
                         {/* Showing the Invoices related to TAC */}
 
                         <HomePageSideBarButton onClick={ () => handleLinkChange('TAC') }>
                             <AiFillSlackCircle id="SideBarHomeIcon" />
-                            TAC
+                            <div className="sidebar-text">TAC</div>
                         </HomePageSideBarButton>
 
                         {/* Showing the Invoices related to Other events */}
 
                         <HomePageSideBarButton onClick={ () => handleLinkChange('Other') }>
                             <AiFillSlackCircle id="SideBarHomeIcon" />
-                            Other
+                            <div className="sidebar-text">Other</div>
                         </HomePageSideBarButton>
                     </HomePageSideBarSeperation>
 
@@ -190,15 +202,19 @@ function HomePage() {
                             buttonText="Logout"
                             onLogoutSuccess={() => onSuccess()}
                             onFailure={() => onFailure()}
+                            className="logout-button"
                         />
                         </LogoutBoxHighlight>
                         </LogoutBoxButton>
                     </HomePageSideBarSeperationBottom>
                 </HomePageSideBar>
-
+                ):
+                null
+                }
                 {/* Home page main content about the proposed, approved and rejected invoices. */}
 
                 <HomePageMain>
+                <HomeDashBoard>Student Dashboard</HomeDashBoard>
                     <HomePageActionContent>
                         <HomePageActionTabs>
                             <HomePageActionTabsInput type="radio" id="proposed" name="tabs" value="Proposed" checked={activeTab === 'Proposed'} onChange={() => handleTabChange('Proposed')} />
@@ -211,9 +227,12 @@ function HomePage() {
                             <HomePageActionTabsLabel htmlFor="rejected">Rejected</HomePageActionTabsLabel>
 
                             <HomePageActionTabsInput type="radio" id="withdrawn" name="tabs" value="Withdrawn" checked={activeTab === 'Withdrawn'} onChange={() => handleTabChange('Withdrawn')} />
-                            <HomePageActionTabsLabel htmlFor="withdrawn">Withdrawn</HomePageActionTabsLabel>
+                            <HomePageActionTabsLabel className="with-home" htmlFor="withdrawn">Withdrawn</HomePageActionTabsLabel>
 
-                            <HomePageActionButtons onClick={handleApplyClick}>Apply Invoice</HomePageActionButtons>
+                            {(minmatches)?(
+                                <HomePageActionButtons onClick={handleApplyClick}>Apply Invoice</HomePageActionButtons>
+                            ):(null)
+                        }
                             {/* <HomePageActionButtons onClick={testaxios}>test</HomePageActionButtons> */}
                         </HomePageActionTabs>
                         
@@ -242,6 +261,10 @@ function HomePage() {
                             </HomePageTabContent>
                         }
                     </HomePageActionContent>
+                    {(matches)?(
+                                <HomePageActionButtons onClick={handleApplyClick}>Apply Invoice</HomePageActionButtons>
+                            ):(null)
+                        }
                 </HomePageMain>
             </HomePageContent>
         </HomePageScreen>

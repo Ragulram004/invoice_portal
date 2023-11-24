@@ -38,7 +38,7 @@ const customStyles = {
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
       borderRadius: '5px',
       width: '50vw',
-      height: '80vh',
+      height: '62vh',
       zIndex: '1000'
     },
     overlay: {
