@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomePageScreen = styled.div`
+export const DashBoardScreen = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -10,26 +10,27 @@ export const HomePageScreen = styled.div`
     width: 100vw;
 `;
 
-export const HomePageNavigation = styled.div`
+export const DashBoardNavigation = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     background-color: var(--accent);
     height: 10vh;
+    z-index:1;
     width: 100%;
     border-bottom:1px solid #91A3B0;
     position:fixed;
     
     .logo1{
-        margin-left:95vw;
-        width:25px;
-        height:25px;
+        margin-left:94vw;
+        width:30px;
+        height:30px;
     }
     .logo2{
-        margin-left:91vw;
-        width:25px;
-        height:25px;
+        margin-left:90.5vw;
+        width:30px;
+        height:30px;
     }
     @media(max-width:1024px){
         .logo1{
@@ -37,7 +38,7 @@ export const HomePageNavigation = styled.div`
         }
     }
 `;
-export const HomePageThreeDash = styled.div`
+export const DashBoardThreeDash = styled.div`
     @media (max-width: 1024px){
         .sidebarIconToggle {
             transition: all 0.3s;
@@ -86,7 +87,7 @@ export const HomePageThreeDash = styled.div`
     }
 `;
 
-export const HomePageNavigationLogo = styled.img`
+export const DashBoardNavigationLogo = styled.img`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -98,7 +99,7 @@ export const HomePageNavigationLogo = styled.img`
     margin-left: 12px;
 `;
 
-export const HomePageNavigationTitle = styled.h1`
+export const DashBoardNavigationTitle = styled.h1`
     display: flex;
     flex-direction: row;
     align-items: centre;
@@ -120,7 +121,7 @@ export const HomePageNavigationTitle = styled.h1`
 
 `;
 
-export const HomePageNavigationSearch = styled.div`
+export const DashBoardNavigationSearch = styled.div`
     width: 100%;
     margin-left: 2vw;
     margin-right: 2vw;
@@ -137,7 +138,7 @@ export const Logoseparation = styled.div`
 `;
 
 
-export const HomePageNavigationDN = styled.label`
+export const DashBoardNavigationDN = styled.label`
     background-color: var(--accent);
     height: 5vh;
     border-radius: 50%;
@@ -150,11 +151,11 @@ export const HomePageNavigationDN = styled.label`
     
 `;
 
-export const HomePageNavigationDNInput = styled.input`
+export const DashBoardNavigationDNInput = styled.input`
     display: none;
 `;
 
-export const HomePageNavigationNotification = styled.button`
+export const DashBoardNavigationNotification = styled.button`
     width: 45px;
     height: 80px;       
     border-radius: 50%;
@@ -165,7 +166,7 @@ export const HomePageNavigationNotification = styled.button`
     border: none;
 `;
 
-export const HomePageNavigationProfile = styled.button`
+export const DashBoardNavigationProfile = styled.button`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -177,7 +178,7 @@ export const HomePageNavigationProfile = styled.button`
     margin-left: 100px;
 `;
 
-export const HomePageContent = styled.div`
+export const DashBoardContent = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -186,10 +187,11 @@ export const HomePageContent = styled.div`
     height:100vh;
     width: 100%;
     margin-top:10.1vh;
-    position:fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
 `;
 
-export const HomePageSideBar = styled.div`
+export const DashBoardSideBar = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -198,9 +200,10 @@ export const HomePageSideBar = styled.div`
     height: 90vh;
     min-width: 250px;
     border-right:1px solid #91A3B0;
+    position:fixed;
 `;
 
-export const HomePageSideBarSeperation = styled.button`
+export const DashBoardSideBarSeperation = styled.button`
     width: 100%;
     height: 100%;
     border: none;
@@ -212,7 +215,7 @@ export const HomePageSideBarSeperation = styled.button`
     justify-content: flex-start;
 `;
 
-export const HomePageSideBarSeperationBottom = styled.button`
+export const DashBoardSideBarSeperationBottom = styled.button`
     width: 100%;
     height: 50vh;
     border: none;
@@ -225,7 +228,7 @@ export const HomePageSideBarSeperationBottom = styled.button`
     justify-content: flex-end;
 `;
 
-export const HomePageSideBarButton = styled.button`
+export const DashBoardSideBarButton = styled.button`
     width: 100%;
     height: 8vh;
     border-radius:6px;
@@ -256,62 +259,116 @@ export const HomePageSideBarButton = styled.button`
     }
 `;
 
-export const HomePageMain = styled.div`
+export const DashBoardMain = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    background-color: transparent;
-    height: 90vh;
-    width: 100%;
-`;
-
-export const HomePageActionButtons = styled.button`
-    font-family: 'Nunito Sans', sans-serif;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 140px;
-    height: 6vh;
-    line-height: 1.5em;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid var(--primary);
-    margin-top: 1vh;
-    transition: color .5s;
-    z-index: 0;
-    font-size: 15px;
-    border-radius: 4px;
-    font-weight:700;
-    color: var(--accent);
-    background: var(--primary);
-    cursor: pointer;
-    margin-left: auto;
-    margin-right:1vw;
-
-    @media (max-width: 1024px){
-        font-size: 15px;
-        margin-bottom:1.7vh;
-        width: 140px;
-        margin-right:2.5vw;
+    justify-content:center;
+    background-color:var(--background);
+    height: auto;
+    width: 100vw;
+    margin-left:250px;
+    overflow:hidden;
+    .Multi-box{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      column-gap:2vw;
     }
-    @media (max-width:450px){
-        width: 25vw;
-        font-size:2.7vw;
-        margin-right:2.5vw;
+    @media(max-width:1024px){
+      margin-left:0px;
     }
 `;
 
-export const HomePageActionContent = styled.div`
+export const DashBoardMultibox = styled.div`
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap:6.3vw;
+`;
+export const DashBoardBox1 =  styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+background-color: var(--accent);
+height: 13vw;
+width: 17vw;
+border-radius:6px  ;
+// margin-bottom:2.5vh;
+margin-top:3vh;
+border:1px solid #91A3B0;
+`;
+export const DashBoardBox2 =  styled.div`
+background-color: var(--accent);
+height: 13vw;
+width: 17vw;
+border-radius:6px  ;
+// margin-bottom:2.5vh;
+margin-top:3vh;
+border:1px solid #91A3B0;
+`;
+export const DashBoardBox3 =  styled.div`
+background-color: var(--accent);
+height: 13vw;
+width: 17vw;
+border-radius:6px  ;
+// margin-bottom:2.5vh;
+margin-top:3vh;
+border:1px solid #91A3B0;
+`;
+export const DashBoardBox4 =  styled.div`
+background-color: var(--accent);
+height: 13vw;
+width: 17vw;
+border-radius:6px  ;
+// margin-bottom:2.5vh;
+margin-top:3vh;
+border:1px solid #91A3B0;
+`;
+export const DashBoardBox5 =  styled.div`
+background-color: var(--accent);
+height: 13vw;
+width: 17vw;
+border-radius:6px;
+// margin-bottom:2.5vh;
+margin-top:3vh;
+border:1px solid #91A3B0;
+`;
+export const DashBoardBox6 =  styled.div`
+background-color: var(--accent);
+height: 13vw;
+width: 17vw;
+border-radius:6px  ;
+// margin-bottom:2.5vh;
+margin-top:3vh;
+border:1px solid #91A3B0;
+`;
+export const DashBoardBox7 =  styled.div`
+background-color: var(--accent);
+height: 13vw;
+width: 17vw;
+border-radius:6px  ;
+// margin-bottom:2.5vh;
+margin-top:3vh;
+border:1px solid #91A3B0;
+`;
+export const DashBoardBox8 =  styled.div`
+background-color: var(--accent);
+height: 13vw;
+width: 17vw;
+border-radius:6px  ;
+// margin-bottom:2.5vh;
+margin-top:3vh;
+border:1px solid #91A3B0;
+`;
+
+export const DashBoardGraphContant = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     background-color: var(--accent);
-    height: auto;
-    width: 95%;
-    overflow-y: hidden;
+    height:30vh;
+    width: 90%;
     border-radius:6px  ;
     margin-bottom:2.5vh;
     margin-top:3vh;
@@ -330,7 +387,7 @@ export const HomeDashBoard = styled.div`
     }
 `;
 
-export const HomePageActionTabs = styled.div`
+export const DashBoardActionTabs = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -339,14 +396,14 @@ export const HomePageActionTabs = styled.div`
     height: 8vh;
     width: 100%;
     @media (max-width: 1024px){
-        height: 6vh;
+        height: 8vh;
     }
     .with-home{
         margin-bottom:3.5vh;
     }
 `;
 
-export const HomePageActionTabsInput = styled.input`
+export const DashBoardActionTabsInput = styled.input`
     width: 5vw;
     height: auto;
     border: none;
@@ -363,15 +420,14 @@ export const HomePageActionTabsInput = styled.input`
     align-items: center;
     justify-content: center;
     transition: background-color .5s ease-in-out;
-
     &:checked + label {
         background-color: var(--tab-active);
         transition: background-color .5s ease-in-out;
         border-bottom: 2px solid var(--primary);
-    }
+}
 `;
 
-export const HomePageActionTabsLabel = styled.label`
+export const DashBoardActionTabsLabel = styled.label`
     width: 110px;
     padding:12px;
     border: none;
@@ -394,7 +450,7 @@ export const HomePageActionTabsLabel = styled.label`
     }
 `;
 
-export const HomePageTabContent = styled.div`
+export const DashBoardTabContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -402,7 +458,6 @@ export const HomePageTabContent = styled.div`
     background-color: transparent;
     height: 72vh;
     width: 100%;
-    margin-top: 1vh;
     overflow:scroll;
 `;
 
@@ -425,7 +480,7 @@ export const HomeLinkContent = styled.div`
 
 export const HomeLinkTable = styled.div`
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 2fr;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
     grid-template-rows: auto;
     gap: .5vw;
     width: 100%;
@@ -466,7 +521,7 @@ export const HomeLinkTableHeaderTitle = styled.h2`
 
 export const HomeLinkInvoicesTable = styled.div`
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 2fr;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
     grid-template-rows: auto;
     gap: .5vw;
     width: 100%;
@@ -497,17 +552,17 @@ export const HomeLinkInvoicesButtonsContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap:2px;
+    gap:px;
     width: 100%;
     height: auto;
     @media(max-width:450px){
         button{
             font-size:2.5vw;
         }
+    
     }
-    @media(max-width:600px){
-        flex-direction:column;
-    }
+    
+    
 `;
 
 export const HomeLinkModal = styled.div`
@@ -516,7 +571,7 @@ export const HomeLinkModal = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    height:100%;
+    height:10vh;
 `;
 
 export const ModalHeader = styled.div`
@@ -525,9 +580,10 @@ export const ModalHeader = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 5vh;
-    background-color: var(--sidebar);
+    height: 6vh;
+    background-color:var(--background);
     border-radius:6px 6px 0px 0px;
+    border-bottom:1px solid #91A3B0;
 `;
 
 export const ModalHeaderTitle = styled.h1`
@@ -551,39 +607,67 @@ export const ModalContent = styled.div`
     font-family: 'Nunito Sans', sans-serif;
     font-weight:700;
     border-radius:0px 0px 6px 6px;
+    background-color:var(--background);
 
 `;
 
 export const ModalContentSection1 = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+    // place-items: center;
     width: 100%;
     height: 5vh;
     margin-top: 2vh;
+    // margin-left: 2vh;
+    .grid1{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .stu-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        place-items:center;
+        // background-color:black;
+    }
+    .grid2{
+        display:grid;
+        grid-template-columns: 10vw 1fr;
+    }
+    
 `;
 
 export const ModalContentElementsSection1 = styled.h2`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+    // justify-content: flex-start;
     font-size: 1em;
     font-family: 'Nunito Sans', sans-serif;
     margin-left: 1vw;
-    letter-spacing: 1px;
-    font-weight: 700;
+    // letter-spacing: 1px;
+    span{
+        font-weight: 800;
+    }
 `;
 
 export const ModalContentSection2 = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    width: 100%;
+    height: 5vh;
     width: 100%;
     height: auto;
-    margin-top: 3vh;
+    margin-top: 130px;
+    span{
+        font-weight: 800;
+    }
+    
+    .stu-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+        place-items:center;
+        // background-color:black;
+        }
+    .student{
+        border:1px solid black;
+        padding
+    }
 `;
 
 export const ModalContentElementsSection2 = styled.h2`
@@ -653,53 +737,9 @@ export const TACLinkTableHeaderTitle = styled.h2`
 `;
 
 
-
-//For Component: Other
-
-export const OtherLinkContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background-color: transparent;
-    height: 100%;
-    width: 100%;
-    overflow-y: auto;
-`;
-
-export const OtherLinkTable = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 3fr 4fr;
-    grid-template-rows: auto;
-    gap: .1vw;
-    width: 100%;
-    height: 6vh;
-    background-color: var(--grid-header);
-    border-top: 1px solid #91A3B0;
-    border-bottom:1px solid #91A3B0;
-    padding-bottom:1.2vh;
-`;
-
-export const OtherLinkTableHeaderTitle = styled.h2`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1em;
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight:800;
-    margin: 1vw;
-    white-space: nowrap;
-    color: var(--text);
-    @media(max-width:364px){
-        font-size:0.8em;
-    }
-`;
-
-
 export const LogoutBoxButton = styled.div`
     width: 100%;
-    // height: 10vh;
+    height: 6vh;
     margin-bottom: 3vh;
     display: flex;
     flex-direction: column;
@@ -715,22 +755,13 @@ export const LogoutBoxHighlight = styled.div`
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    transition: 0.5s;
+    transition: 0.5s;;
     border-radius:3px;
 
     &:hover{
-        background-color:gray;
+        background-color:var(--primary);
     }
-`;
-
-export const AlignItemContainer = styled.div`
-    height: 20%;`
-    
-export const FacultyRejectContainer = styled.div`
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+    &:active{cd 
+            background-color:var(--primary);
+    }
 `;

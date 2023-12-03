@@ -17,6 +17,7 @@ import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent,
         HomePageMain, HomePageActionButtons, HomePageActionTabs, 
         HomePageActionContent, HomePageActionTabsInput, HomePageActionTabsLabel,HomeDashBoard, HomePageTabContent,HomePageThreeDash,
         HomePageNavigationLogo, HomePageNavigationTitle, HomePageNavigationSearch,
+        Logoseparation,
         HomePageNavigationDN,
         HomePageNavigationDNInput,
         HomePageNavigationNotification,
@@ -26,11 +27,16 @@ import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent,
         HomePageSideBarSeperationBottom,
         LogoutBoxButton, LogoutBoxHighlight} from './StylesHomePage.js';
 
+import {ApplyNavigationProfileEmail, ApplyNavigationLogo, ApplyNavigationProfileToggle, ApplyNavigationProfile }from '../ApplyInvoice/StyleApply.js'
+
 //Components
 
 import Logo from '../Icons/BITLogo.png';
+import Bell from '../Icons/bell.png';
+import User from '../Icons/profile.png';
 import { IoNotifications } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
+import { RxAvatar } from "react-icons/rx";
 import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
 
 import Proposals from "./Components/HomeLink/Proposals.js";
@@ -89,8 +95,14 @@ function HomePage() {
             event.stopPropagation();
         }
     };
-    const matches = UseMediaQuery("(max-width:1024px)");
-    const minmatches = MinMediaQuery("(min-width:1024px)");
+    const matches = UseMediaQuery("(max-width:1025px)");
+    const minmatches = MinMediaQuery("(min-width:1025px)");
+    const [email, setEmail] = useState('');
+    const [showEmail, setShowEmail] = useState(false);
+
+    const toggleEmail = () => {
+        setShowEmail(!showEmail);
+    }
     
     return (
         <HomePageScreen>
@@ -99,7 +111,7 @@ function HomePage() {
 
             <HomePageNavigation>
                 {/* Navebar Three Dash */}
-                <HomePageThreeDash>{matches?(
+                <HomePageThreeDash >{matches?(
                       <label for="openSidebarMenu" class="sidebarIconToggle">
                       <div class="spinner diagonal part-1"></div>
                       <div class="spinner horizontal"></div>
@@ -108,24 +120,14 @@ function HomePage() {
                 ):null}</HomePageThreeDash>
 
                 {/* Navigation Bar Logo */}
-
-                <HomePageNavigationLogo src={Logo} alt='BIT Logo'/>
-
-                {/* Navigation Bar Title */}
-
-                <HomePageNavigationTitle>Invoice Portal</HomePageNavigationTitle>
-
-                {/* Navigation Bar Search functionality box */}
-
-                <HomePageNavigationSearch>
-                    <Stack spacing={1} sx={{ width: '100%' }}>
-                    <Select options={[]} onKeyDown={handleKeyDown} />
-                    </Stack>
-                </HomePageNavigationSearch>
-
-                {/* Theme toogle functionality switch */}
-
-                <HomePageNavigationDN for="switch">
+                {
+                    minmatches?(
+                        <HomePageNavigationLogo src={Logo} alt='BIT Logo'/>
+                        
+                    ):null
+                }
+                {minmatches?(
+                    <HomePageNavigationDN for="switch">
                     <HomePageNavigationDNInput id="switch" type="checkbox" />
 
                     {/* Named as moon but this is for sun */}
@@ -144,18 +146,46 @@ function HomePage() {
                         </svg>
                     </div>
                 </HomePageNavigationDN>
+                ):null
+                }
+                {minmatches?(
+                    <HomePageNavigationLogo className="logo2" src={Bell} alt='BIT Logo'/>
+                ):null}
+                {/* Navigation Bar Title */}
 
-                {/* Natification bell constainer */}
+                <HomePageNavigationTitle>Invoice Portal</HomePageNavigationTitle>
+                <ApplyNavigationLogo className="logo1" src={User} alt='BIT Logo'/>
 
-                <HomePageNavigationNotification>
-                    <IoNotifications/>                
-                </HomePageNavigationNotification>
+                {/* Navigation Bar Search functionality box */}
 
-                {/* Profile Avatar */}
+                {/* <HomePageNavigationSearch>
+                    <Stack spacing={1} sx={{ width: '100%' }}>
+                    <Select options={[]} onKeyDown={handleKeyDown} />
+                    </Stack>
+                </HomePageNavigationSearch> */}
 
-                <HomePageNavigationProfile>
-                    <FaUserCircle  id="ProfileAvatar" />
-                </HomePageNavigationProfile>
+                {/* Theme toogle functionality switch */}
+                    
+
+                    
+                <ApplyNavigationProfile className="logo2" onClick={toggleEmail} >
+                    <RxAvatar id="ProfileAvatar" />
+
+                    {showEmail && (
+                        <ApplyNavigationProfileToggle>
+                            <ApplyNavigationProfileEmail>{ email }</ApplyNavigationProfileEmail>
+                        </ApplyNavigationProfileToggle>
+                    )}
+                </ApplyNavigationProfile>   
+                
+                        
+                   
+
+                    {/* Profile Avatar */}
+
+                   
+                
+                
             </HomePageNavigation>
 
             {/* Below the Navigation Bar is the Home Page Content. */}
@@ -165,7 +195,7 @@ function HomePage() {
 
                 {/* Home page side bar with the navigation links. */}
                 {(minmatches)?(
-                    <HomePageSideBar>
+                <HomePageSideBar>
 
                     {/* Home page side bar navigation links. */}
 

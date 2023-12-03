@@ -90,7 +90,7 @@ const rejectmodalcustomStyles = {
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
         borderRadius: '5px',
         width: '50vw',
-        height: '80vh',
+        height: '65vh',
         zIndex: '1000'
     },
     overlay: {
@@ -280,6 +280,7 @@ function Proposals({activeTab}) {
             <HomeLinkTable>
                 <HomeLinkTableHeaderTitle>ID</HomeLinkTableHeaderTitle>
                 <HomeLinkTableHeaderTitle>Project Name</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-prog">View</HomeLinkTableHeaderTitle>
                 <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
@@ -289,11 +290,16 @@ function Proposals({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
+                    <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
+                    </HomeLinkInvoicesButtonsContainer>
+                    <HomeLinkInvoicesButtonsContainer>
                         {/* <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="success">approve</Button>
                         <Button variant="outlined" onClick={() => Reject(proposal.Title,proposal._id)} color="error">reject</Button> */}
                         <Button variant="outlined" onClick={() => openapproveModal(proposal._id,proposal.Title)} color="success">approve</Button>
                         <Button variant="outlined" onClick={() => openrejectModal(proposal._id,proposal.Title)} color="error">reject</Button>
                         <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
+                        <Button  onClick={() => openapproveModal(proposal._id)} color="success">approve</Button>
+                        <Button  onClick={() => openrejectModal(proposal._id)} color="error">reject</Button>
                     </HomeLinkInvoicesButtonsContainer>
 
                     

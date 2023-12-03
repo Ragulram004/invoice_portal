@@ -40,7 +40,7 @@ const customStyles = {
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
       borderRadius: '5px',
       width: '50vw',
-      height: '80vh',
+      height: '65vh',
       zIndex: '1000'
     },
     overlay: {
@@ -238,6 +238,8 @@ function Approved({activeTab}) {
                 <HomeLinkTableHeaderTitle>ID</HomeLinkTableHeaderTitle>
                 <HomeLinkTableHeaderTitle>Project Name</HomeLinkTableHeaderTitle>
                 <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle>View</HomeLinkTableHeaderTitle>
+
             </HomeLinkTable>
 
             {Array.isArray(proposals) && (proposals.length !== 0) ? (
@@ -248,6 +250,10 @@ function Approved({activeTab}) {
                     <HomeLinkInvoicesButtonsContainer>
                     <Button variant="outlined" onClick={() => openWorklogModal(proposal._id,proposal.Title)} color="success">Worklog</Button>
                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
+                    <Button  onClick={() => openModal(proposal._id)} color="success">Worklog</Button>
+                    </HomeLinkInvoicesButtonsContainer>
+                    <HomeLinkInvoicesButtonsContainer>
+                    <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 
                     

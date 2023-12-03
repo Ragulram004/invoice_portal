@@ -20,6 +20,22 @@ export const HomePageNavigation = styled.div`
     width: 100%;
     border-bottom:1px solid #91A3B0;
     position:fixed;
+    
+    .logo1{
+        margin-left:94vw;
+        width:30px;
+        height:30px;
+    }
+    .logo2{
+        margin-left:90.5vw;
+        width:30px;
+        height:30px;
+    }
+    @media(max-width:1024px){
+        .logo1{
+            margin-left:90vw;
+        }
+    }
 `;
 export const HomePageThreeDash = styled.div`
     @media (max-width: 1024px){
@@ -71,10 +87,6 @@ export const HomePageThreeDash = styled.div`
 `;
 
 export const HomePageNavigationLogo = styled.img`
-    @media(max-width:1024px){
-        max-width:0px;
-    }
-    @media(min-width:1024px){
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -84,10 +96,6 @@ export const HomePageNavigationLogo = styled.img`
     width: 45px;
     position:fixed;
     margin-left: 12px;
-    }
-    // @media(max-width:450px){
-    //     margin-right:-10px;
-    // }
 `;
 
 export const HomePageNavigationTitle = styled.h1`
@@ -124,6 +132,10 @@ export const HomePageNavigationSearch = styled.div`
     //     margin-left:37vw;
     // }
 `;
+export const Logoseparation = styled.div`
+    
+`;
+
 
 export const HomePageNavigationDN = styled.label`
     background-color: var(--accent);
@@ -134,6 +146,8 @@ export const HomePageNavigationDN = styled.label`
     cursor: pointer;
     line-height: 1;
     position:sticky;
+    margin-left:87vw;
+    
 `;
 
 export const HomePageNavigationDNInput = styled.input`
@@ -156,15 +170,11 @@ export const HomePageNavigationProfile = styled.button`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    background-color: transparent;
+    height: 5vh;
     width: 45px;
-    height: 80px;   
-    border-radius: 50%;
-    background: transparent;
-    color: var(--text);
-    margin-left: 10px;
-    cursor: pointer;
-    border: none;
-    margin-right:2vw;
+    position:fixed;
+    margin-left: 100px;
 `;
 
 export const HomePageContent = styled.div`
@@ -187,8 +197,8 @@ export const HomePageSideBar = styled.div`
     background-color: var(--sidebar);
     height: 90vh;
     min-width: 250px;
-    
     border-right:1px solid #91A3B0;
+
 `;
 
 export const HomePageSideBarSeperation = styled.button`
@@ -218,21 +228,28 @@ export const HomePageSideBarSeperationBottom = styled.button`
 
 export const HomePageSideBarButton = styled.button`
     width: 100%;
-    height: 10vh;
-    border: none;
+    height: 8vh;
+    border-radius:6px;
+    border:none;
     outline: none;
-    background-color: transparent;
+    margin-top:3px;
+    margin-bottom:3px;
+    background-color:transparent;
     color: #4C5866;
     font-family: 'Nunito Sans', sans-serif;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: start-flex;
-    padding-left:60px;
+    padding-left:70px;
     cursor: pointer;
     transition: background-color .5s ease-in-out;
     font-size: 2.1vh;
     font-weight:700;
+    &:hover{
+        background-color: var(--sidebar-focus);
+        width: 100%;
+    }
     &:focus {
         background-color: var(--sidebar-focus);
         width: 100%;
@@ -262,7 +279,7 @@ export const HomePageActionButtons = styled.button`
     position: relative;
     overflow: hidden;
     border: 2px solid var(--primary);
-    margin-top: 1.7vh;
+    margin-top: 1vh;
     transition: color .5s;
     z-index: 0;
     font-size: 15px;
@@ -274,36 +291,6 @@ export const HomePageActionButtons = styled.button`
     margin-left: auto;
     margin-right:1vw;
 
-    // &:before {
-    //     content: "";
-    //     position: absolute;
-    //     z-index: -1;
-    //     background: var(--primary);
-    //     height: 150px;
-    //     width: 200px;
-    //     border-radius: 50%;
-    // }
-
-    // &:hover {
-    //     color: var(--text);
-    // }
-
-    // &:before {
-    //     top: 100%;
-    //     left: 100%;
-    //     transition: all .7s;
-    // }
-
-    // &:hover:before {
-    //     top: -30px;
-    //     left: -30px;
-    //     background-color:var(--primary);
-    // }
-    
-    // &:active:before {
-    //     background: var(--background);
-    //     transition: background 0s;
-    // }
     @media (max-width: 1024px){
         font-size: 15px;
         margin-bottom:1.7vh;
@@ -329,7 +316,7 @@ export const HomePageActionContent = styled.div`
     border-radius:6px  ;
     margin-bottom:2.5vh;
     margin-top:3vh;
-
+    border:1px solid #91A3B0;
 `;
 export const HomeDashBoard = styled.div`
     position:relative;
@@ -353,7 +340,7 @@ export const HomePageActionTabs = styled.div`
     height: 8vh;
     width: 100%;
     @media (max-width: 1024px){
-        height: 6vh;
+        height: 8vh;
     }
     .with-home{
         margin-bottom:3.5vh;
@@ -377,18 +364,19 @@ export const HomePageActionTabsInput = styled.input`
     align-items: center;
     justify-content: center;
     transition: background-color .5s ease-in-out;
-
     &:checked + label {
         background-color: var(--tab-active);
         transition: background-color .5s ease-in-out;
         border-bottom: 2px solid var(--primary);
-    }
+}
 `;
 
 export const HomePageActionTabsLabel = styled.label`
     width: 110px;
-    height: 100%;
+    padding:12px;
     border: none;
+    margin-top:0.9vh;
+    margin-bottom:0.9vh;
     outline: none;
     background-color: var(--accent);
     color: var(--text);
@@ -401,7 +389,6 @@ export const HomePageActionTabsLabel = styled.label`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left:1vh;
     @media(max-width:450px){
         font-size:3.2vw;
     }
@@ -415,7 +402,7 @@ export const HomePageTabContent = styled.div`
     background-color: transparent;
     height: 72vh;
     width: 100%;
-    margin-top: 1vh;
+    overflow:scroll;
 `;
 
 
@@ -437,27 +424,27 @@ export const HomeLinkContent = styled.div`
 
 export const HomeLinkTable = styled.div`
     display: grid;
-    grid-template-columns: 3fr 10fr 10fr 2fr;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
     grid-template-rows: auto;
     gap: .5vw;
     width: 100%;
     background-color: var(--grid-header);
     border-top: 1px solid #91A3B0;
     border-bottom:1px solid #91A3B0;
-    @media(min-width:1024px){
-        .grid-prog{
-            margin-left:30px;
-    }
-    @media(min-width:1024px){
-        .with-grid-prog{
-            margin-left:19vw;
-        }
-    }
-    @media(max-width:1024px){
-        .with-grid-prog{
-            margin-left:40vw;
-        }
-    }
+    // @media(min-width:1024px){
+    //     .grid-prog{
+    //         margin-left:30px;
+    // }
+    // @media(min-width:1024px){
+    //     .with-grid-prog{
+    //         margin-left:19vw;
+    //     }
+    // }
+    // @media(max-width:1024px){
+    //     .with-grid-prog{
+    //         margin-left:40vw;
+    //     }
+    // }
 `;
 
 export const HomeLinkTableHeaderTitle = styled.h2`
@@ -478,9 +465,9 @@ export const HomeLinkTableHeaderTitle = styled.h2`
 
 export const HomeLinkInvoicesTable = styled.div`
     display: grid;
-    grid-template-columns: 1fr 3fr 4fr;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
     grid-template-rows: auto;
-    gap: .2vw;
+    gap: .5vw;
     width: 100%;
     height:auto;
     padding: .1vh 0vh .1vh 0vh;
@@ -508,18 +495,18 @@ export const HomeLinkInvoicesButtonsContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    gap:2px;
-    width: 122%;
+    justify-content: center;
+    gap:px;
+    width: 100%;
     height: auto;
-    @media (max-width: 450px){
-        width:110%;
-        justify-content:none;
-        gap:7vw;
-        height:auto;
+    @media(max-width:450px){
+        button{
+            font-size:2.5vw;
+        }
+    
     }
-    margin-left:2vw;
-
+    
+    
 `;
 
 export const HomeLinkModal = styled.div`
@@ -528,7 +515,7 @@ export const HomeLinkModal = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    height:100%;
+    height:10vh;
 `;
 
 export const ModalHeader = styled.div`
@@ -537,9 +524,10 @@ export const ModalHeader = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 5vh;
-    background-color: var(--sidebar);
+    height: 6vh;
+    background-color:var(--background);
     border-radius:6px 6px 0px 0px;
+    border-bottom:1px solid #91A3B0;
 `;
 
 export const ModalHeaderTitle = styled.h1`
@@ -563,39 +551,67 @@ export const ModalContent = styled.div`
     font-family: 'Nunito Sans', sans-serif;
     font-weight:700;
     border-radius:0px 0px 6px 6px;
+    background-color:var(--background);
 
 `;
 
 export const ModalContentSection1 = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+    // place-items: center;
     width: 100%;
     height: 5vh;
     margin-top: 2vh;
+    // margin-left: 2vh;
+    .grid1{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .stu-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        place-items:center;
+        // background-color:black;
+    }
+    .grid2{
+        display:grid;
+        grid-template-columns: 10vw 1fr;
+    }
+    
 `;
 
 export const ModalContentElementsSection1 = styled.h2`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+    // justify-content: flex-start;
     font-size: 1em;
     font-family: 'Nunito Sans', sans-serif;
     margin-left: 1vw;
-    letter-spacing: 1px;
-    font-weight: 700;
+    // letter-spacing: 1px;
+    span{
+        font-weight: 800;
+    }
 `;
 
 export const ModalContentSection2 = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    width: 100%;
+    height: 5vh;
     width: 100%;
     height: auto;
-    margin-top: 3vh;
+    margin-top: 130px;
+    span{
+        font-weight: 800;
+    }
+    
+    .stu-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+        place-items:center;
+        // background-color:black;
+        }
+    .student{
+        border:1px solid black;
+        padding
+    }
 `;
 
 export const ModalContentElementsSection2 = styled.h2`
@@ -646,7 +662,6 @@ export const TACLinkTable = styled.div`
     background-color: var(--grid-header);
     border-top: 1px solid #91A3B0;
     border-bottom:1px solid #91A3B0;
-    padding-bottom:1.2vh;
 `;
 
 export const TACLinkTableHeaderTitle = styled.h2`
@@ -656,13 +671,13 @@ export const TACLinkTableHeaderTitle = styled.h2`
     justify-content: center;
     font-size: 1.1em;
     font-family: 'Nunito Sans', sans-serif;
-    font-weight:800;
     margin: 1vw;
+    font-weight:800;
     white-space: nowrap;
     color: var(--text);
     @media(max-width:364px){
         font-size:0.8em;
-}
+    }
 `;
 
 
@@ -712,7 +727,7 @@ export const OtherLinkTableHeaderTitle = styled.h2`
 
 export const LogoutBoxButton = styled.div`
     width: 100%;
-    // height: 10vh;
+    height: 6vh;
     margin-bottom: 3vh;
     display: flex;
     flex-direction: column;
@@ -728,11 +743,14 @@ export const LogoutBoxHighlight = styled.div`
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    transition: 0.5s;
+    transition: 0.5s;;
     border-radius:3px;
 
     &:hover{
-        background-color:gray;
+        background-color:var(--primary);
+    }
+    &:active{cd 
+            background-color:var(--primary);
     }
 `;
 

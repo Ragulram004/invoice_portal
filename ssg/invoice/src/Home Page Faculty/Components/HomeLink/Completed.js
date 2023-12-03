@@ -38,7 +38,7 @@ const customStyles = {
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
       borderRadius: '5px',
       width: '50vw',
-      height: '80vh',
+      height: '65vh',
       zIndex: '1000'
     },
     overlay: {
@@ -134,7 +134,7 @@ function Completed({activeTab}) {
             <HomeLinkTable>
                 <HomeLinkTableHeaderTitle>ID</HomeLinkTableHeaderTitle>
                 <HomeLinkTableHeaderTitle>Project Name</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle>View</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
             {Array.isArray(proposals) && (proposals.length !== 0) ? (

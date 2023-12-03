@@ -12,6 +12,7 @@ import HomePageFaculty from './Home Page Faculty/HomePageFaculty.js';
 import Apply from './ApplyInvoice/Apply.js';
 // import Home from './components/home';
 import Admin from './Admin Page/admin.js';
+import DashBoard from './DashBoard/Dashboard.js'
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" Component={LandingPage}/>
+            <Route path='/DashBoard'  Component={DashBoard} />
             <Route path='/Home' Component={HomePage} />
             <Route path='/Home-Faculty' Component={HomePageFaculty} />
             <Route path='/Apply' Component={Apply} />
