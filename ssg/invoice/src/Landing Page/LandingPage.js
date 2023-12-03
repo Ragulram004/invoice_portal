@@ -22,21 +22,24 @@ import BITLogo from '../Icons/BITLogo.png';
 const theme = createTheme({
     typography: {
         fontFamily: [
-            'Arial Narrow',
-            'sans-serif',
+             'Nunito Sans', 
+             'sans-serif',
         ].join(','),
         Welcome: {
-            fontSize: 25,
+            fontSize: 20,
             color: 'var(--text)',
+            fontWeight:700,
         },
         Title: {
-            fontSize: 30,
+            fontSize:20,
             color: 'var(--text)',
-            letterSpacing: 5,
+            letterSpacing: 1,
+            fontWeight:600,
         },
         Footer: {
             fontSize: 20,
             color: 'var(--text)',
+            fontWeight:700,
         },
     },
 });
@@ -111,7 +114,6 @@ function LandingPage() {
     return (
             <LandingPageContainer>
                 <LoginBox>
-
                     <LoginBoxHeader>
                         <ThemeProvider theme={theme}>
                             <Typography variant="Welcome">

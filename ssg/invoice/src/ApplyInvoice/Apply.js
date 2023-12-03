@@ -1,13 +1,15 @@
 //Dependencies
 
 import React, { useState, useEffect, useContext } from "react";
-import TextField from '@mui/material/TextField';
+// import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
+import { GoogleLogout } from "react-google-login";
+// import { useNavigate } from 'react-router-dom';
 // import Autocomplete from '@mui/material/Autocomplete';
 
 import Button from "@mui/material/Button";
@@ -16,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Select from 'react-select'
 import './Apply.css'
+import UseMediaQuery from "../Home Page/UseMediaQuery.js";
+import MinMediaQuery from "../Home Page/MinMediaQuery.js";
 
 //Styles
 
@@ -27,18 +31,23 @@ import { ApplyBackToHome, ApplyContent, ApplyContentTitleDiv, ApplyFormButtonCon
         ApplyFormFirstNextButton, ApplyFormSubmitButton, ApplyMain, ApplyNavigation,
         ApplyNavigationLogo, ApplyNavigationNotification, ApplyNavigationProfile, ApplyNavigationProfileEmail, ApplyNavigationProfileToggle, ApplyNavigationSearch, 
         ApplyNavigationTitle, ApplyScreen, Title, } from './StyleApply.js';
+import {HomePageThreeDash,LogoutBoxHighlight,LogoutBoxButton,HomePageSideBarSeperationBottom,HomePageSideBarButton,HomePageSideBarSeperation,
+    HomePageSideBar}from '../Home Page/StylesHomePage.js';
 
 //Components
 
 import Logo from '../Icons/BITLogo.png';
+import Bell from '../Icons/bell.png';
+import User from '../Icons/profile.png';
 import { IoNotificationsOutline, IoHome } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { MdDeleteOutline } from "react-icons/md";
 import { InvoiceContext } from '../InvoiceContext';
+import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
 
 import axios from 'axios';
 
-
+const clientId = process.env.REACT_APP_CLIENTID;
 const API_URL = process.env.REACT_APP_API_URL;
     
 
@@ -296,46 +305,76 @@ function Apply() {
         };
         gettingData();
       }
+      const handleLinkChange = (e) => {
+        navigate('/Home');
+    }
 
+    const onSuccess = () => {
+        // alert("Logout made successfully");
+        Cookies.remove('token');
+        console.log("Logged Out...");
+        window.location.href = "/";
+    };
+    const onFailure = () => {
+        console.log("Handle failure cases");
+        alert("Logout failed");
+    };
+    // const handleApplyClick = () => {
+    //     navigate('/Apply');
+    // };
+    const matches = UseMediaQuery("(max-width:1025px)");
+    const minmatches = MinMediaQuery("(min-width:1025px)");
     return(
         <ApplyScreen>
             {/* Navigation Bar */}
 
             <ApplyNavigation>
+
                 {/* Navigation threedash */}
-                
+                <HomePageThreeDash >{matches?(
+                      <label for="openSidebarMenu" class="sidebarIconToggle">
+                      <div class="spinner diagonal part-1"></div>
+                      <div class="spinner horizontal"></div>
+                      <div class="spinner diagonal part-2"></div>
+                    </label>
+                ):null}</HomePageThreeDash>
 
                 {/* Navigation Bar Logo */}
 
-                <ApplyNavigationLogo src={Logo} alt="BIT Logo" />
+                {
+                    minmatches?(
+                        <ApplyNavigationLogo src={Logo} alt="BIT Logo" />
+                        
+                    ):null
+                }
 
                 {/* Navigation Bar Title */}
 
                 <ApplyNavigationTitle>Invoice Portal</ApplyNavigationTitle>
+                <ApplyNavigationLogo className="logo1" src={User} alt='BIT Logo'/>
 
                 {/* Navigation Bar Search functionality box */}
 
-                <ApplyNavigationSearch>
+                {/* <ApplyNavigationSearch>
                     <Stack spacing={1} sx={{ width: '100%' }}>
                     <Select options={[]} onKeyDown={handleKeyDown} />
                     </Stack>
-                </ApplyNavigationSearch>
+                </ApplyNavigationSearch> */}
 
                 {/* Navigation Bar Home Button */}
 
-                <ApplyBackToHome onClick={ handleBackToHome }>
+                {/* <ApplyBackToHome onClick={ handleBackToHome }>
                     <IoHome id="BackToHome" />
-                </ApplyBackToHome>
+                </ApplyBackToHome> */}
 
                 {/* Natification bell constainer */}
 
-                <ApplyNavigationNotification>
-                    <IoNotificationsOutline id="NotificationBell" />
-                </ApplyNavigationNotification>
+                {/* <ApplyNavigationNotification src={Bell}>
+                </ApplyNavigationNotification> */}
 
                 {/* Profile Avatar */}
 
-                <ApplyNavigationProfile onClick={toggleEmail}>
+                <ApplyNavigationProfile className="logo2" onClick={toggleEmail} >
                     <RxAvatar id="ProfileAvatar" />
 
                     {showEmail && (
@@ -349,23 +388,58 @@ function Apply() {
             {/* Apply Invoice Form Goes Here */}
 
             <ApplyContent>
+                {/* sidebar */}
+                `{(minmatches)?(
+                    <HomePageSideBar>
 
-                {/* Apply Invoice Form Title */}
+                        {/* Home page side bar navigation links. */}
 
-                <ApplyContentTitleDiv>
-                    <Title className="title">Apply Invoice</Title>
-                </ApplyContentTitleDiv>
+                        <HomePageSideBarSeperation>
+
+                            {/* Showing the navigation links for the Home Page Side Bar. */}
+                            <HomePageSideBarButton onClick={ () => handleLinkChange('Home') }>
+                                <AiOutlineHome id="SideBarHomeIcon" />
+                                <div className="sidebar-text">Home</div>
+                            </HomePageSideBarButton>
+                        </HomePageSideBarSeperation>
+
+                        {/* Home page side bar logout button. */}
+
+                        <HomePageSideBarSeperationBottom>
+                        <LogoutBoxButton>
+                            <LogoutBoxHighlight>
+                            <GoogleLogout
+                                clientId={clientId}
+                                buttonText="Logout"
+                                onLogoutSuccess={() => onSuccess()}
+                                onFailure={() => onFailure()}
+                                className="logout-button"
+                            />
+                            </LogoutBoxHighlight>
+                            </LogoutBoxButton>
+                        </HomePageSideBarSeperationBottom>
+                    </HomePageSideBar>
+                    ):
+                    null
+                    }
+
+                
 
                 {/* Apply Form Content Starts Here */}
 
                 <ApplyMain>
+                    {/* Apply Invoice Form Title */}
+
+                    <ApplyContentTitleDiv>
+                        <Title className="title">Apply Invoice</Title>
+                    </ApplyContentTitleDiv>
                     <ApplyFormContent>
 
                         {/* Student Details */}
 
                         {activeDetail === 'Student' && 
                             <ApplyFormDetails>
-                                Student Details:
+                                Student Entry:
                                     <ApplyFormDetailsName className="student-team">
                                         <ApplyFormDetailsNameContainer >
                                         {fields.map((field) => (
@@ -412,21 +486,19 @@ function Apply() {
                         {/* Project Details */}
 
                         {activeDetail === 'Project' &&
-                            <ApplyFormDetails className="form-details">
+                            <ApplyFormDetails>
                                 Project Details:
-                                <div className="details_container">
                                 <ApplyFormDetailsProject>
                                     <ApplyFormDetailsProjectElementContainer>
-                                        <div className="flex1">
-                                            <div className="innerflex">
                                                 <ApplyFormDetailsLabel>TAC: </ApplyFormDetailsLabel>
-                                                <TextField 
-                                                autoComplete="off"
-                                                id="outlined-basic"  
+                                                <input 
+                                                className="input-text"
+                                                placeholder="TAC ID"
+                                                autoComplete="off"  
                                                 variant="outlined"
-                                                disabled={ !isInputEnabled }
+                                                // disabled={ !isInputEnabled }
                                                 onChange={ (e) => setProjectTac(e.target.value) } />
-                                                <FormControlLabel
+                                                {/* <FormControlLabel
                                                     control={
                                                     <Switch
                                                         checked={isInputEnabled}
@@ -434,34 +506,27 @@ function Apply() {
                                                         color="primary"
                                                     />
                                                     }
-                                                />
-                                            </div>
-                                            <div className="innerflex">
+                                                /> */}
                                         <ApplyFormDetailsLabel>Faculty Name: </ApplyFormDetailsLabel>
-                                        <Stack spacing={1} sx={{ width: 400 }}>
+                                        <Stack spacing={1} >
                                         <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
                                         </Stack>
+                                    </ApplyFormDetailsProjectElementContainer>
+                                    <ApplyFormDetailsProjectElementContainer className="flex-row">
+                                            <div className="inner-flex"> 
+                                                <ApplyFormDetailsLabel>Project Name:</ApplyFormDetailsLabel>
+                                                <input
+                                                autoComplete="off"
+                                                placeholder="Project Name"
+                                                required={true}
+                                                label="Project Name"
+                                                variant="outlined"
+                                                onChange={ (e) => setProjectName(e.target.value) }
+                                                />
                                             </div>
-                                        </div>
-                                        </ApplyFormDetailsProjectElementContainer>
-
-
-                                <ApplyFormDetailsProjectElementContainer>
-                                    <div className="flex1 flex2">
-                                        <div className="innerflex">
-                                            <ApplyFormDetailsLabel>Project Name: </ApplyFormDetailsLabel>
-                                            <TextField
-                                            autoComplete="off"
-                                            required={true}
-                                            id="outlined-basic"
-                                            label="Project Name"
-                                            variant="outlined"
-                                            onChange={ (e) => setProjectName(e.target.value) }
-                                            />
-                                        </div>
-                                        <div className="innerflex">
-                                    <ApplyFormDetailsLabel for="Project Name">Preferred Time: </ApplyFormDetailsLabel>
-                                        <FormControl>
+                                            <div className="inner-flex">
+                                            <ApplyFormDetailsLabel for="Project Name">Preferred Time:</ApplyFormDetailsLabel>
+                                            <FormControl>
                                             <RadioGroup
                                                 required
                                                 row
@@ -472,60 +537,31 @@ function Apply() {
                                                 <FormControlLabel id="FormControlRadio" value="Morning" control={<Radio />} label="AM" />
                                                 <FormControlLabel id="FormControlRadio" value="Afternoon" control={<Radio />} label="PM" />
                                             </RadioGroup>
-                                        </FormControl>
-                                        </div>
-                                    </div>
-                                </ApplyFormDetailsProjectElementContainer>
-
-                                <ApplyFormDetailsProjectMultiLineContainer>
-                                        <div className=" flex3">
-                                            <div className="innerflex third-row">
-                                                <ApplyFormDetailsLabel>Description: </ApplyFormDetailsLabel>
-                                                <TextField
-                                                autoComplete="off"
-                                                    id="outlined-multiline-static"
-                                                    multiline
-                                                    rows={5}
-                                                    label="What is this invoice for?"
-                                                    onChange={ (e) => setProjectDescription(e.target.value) }
-                                                />
+                                            </FormControl>
                                             </div>
-                                            <div className="innerflex third-two2">
-                                                <ApplyFormDetailsLabel>Date: </ApplyFormDetailsLabel>
-                                                <TextField
+                                    </ApplyFormDetailsProjectElementContainer>
+
+                                    <ApplyFormDetailsProjectMultiLineContainer>
+                                        <ApplyFormDetailsLabel>Date: </ApplyFormDetailsLabel>
+                                                <input
                                                 autoComplete="off"
                                                 required
-                                                id="outlined-basic-date"
                                                 type="date"
                                                 variant="outlined"
                                                 value={selectedDate.toISOString().split('T')[0]}
                                                 disabled
                                             />
-                                            </div>
-                                        </div>
-
-                                    <ApplyFormDetailsLabel>Description: </ApplyFormDetailsLabel>
-                                        <TextField
-                                            id="outlined-multiline-static"
-                                            multiline
-                                            rows={5}
-                                            label="What is this invoice for?"
-                                            onChange={ (e) => setProjectDescription(e.target.value) }
-                                        />
-
-                                        <ApplyFormDetailsLabel>Date: </ApplyFormDetailsLabel>
-                                        <TextField
-                                        required
-                                        id="outlined-basic-date"
-                                        type="date"
-                                        variant="outlined"
-                                        value={selectedDate.toISOString().split('T')[0]}
-                                        // value={selectedDate.toISOString().split('')}
-                                        disabled
-                                        />
+                                                <ApplyFormDetailsLabel>Description: </ApplyFormDetailsLabel>
+                                                <input
+                                                autoComplete="off"
+                                    
+                                                    multiline
+                                                    rows={5}
+                                                    label="What is this invoice for?"
+                                                    onChange={ (e) => setProjectDescription(e.target.value) }
+                                                />                                           
                                     </ApplyFormDetailsProjectMultiLineContainer>
                                 </ApplyFormDetailsProject>
-                                </div>
                             </ApplyFormDetails>
                         }
                     </ApplyFormContent>
