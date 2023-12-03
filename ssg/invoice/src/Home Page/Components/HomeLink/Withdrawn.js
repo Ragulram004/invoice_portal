@@ -38,7 +38,7 @@ const customStyles = {
       boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
       borderRadius: '5px',
       width: '50vw',
-      height: '62vh',
+      height: '65vh',
       zIndex: '1000'
     },
     overlay: {
@@ -149,9 +149,9 @@ function Withdrawn({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-    <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
+    {/* <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
-                    <Modal isOpen={modalIsOpen} style={customStyles}>
+                    <Modal isOpen={modalIsOpen} style={customStyles}> */}
                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 

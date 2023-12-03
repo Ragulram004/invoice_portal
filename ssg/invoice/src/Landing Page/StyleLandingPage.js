@@ -11,14 +11,18 @@ export const LandingPageContainer = styled.div`
 `;
 
 export const LoginBox = styled.div`
-    width: 32vw;
-    height: 80vh;
+    width:420px;
+    height: 70vh;
     background-color: var(--accent);
-    border-radius: 1em;
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    @media only screen and (min-width: 360px) and (max-width: 600px){
+        width:300px;
+        height:60vh;
+    }
 `;
 
 export const LoginBoxHeader = styled.div`
@@ -33,8 +37,8 @@ export const LoginBoxHeader = styled.div`
 `;
 
 export const LoginBoxBody = styled.img`
-    width: 22vw;
-    height: 30vh;
+    width: 200px;
+    height: 200px;
     margin-top: 3vh;
 `;
 
@@ -56,10 +60,20 @@ export const LoginBoxButton = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    button{
+        background-color:var(--primary);
+        border:none;
+        padding:10px;
+        color:var(--accent);
+        border-radius:4px;
+        font-size:1em;
+        font-family: 'Nunito Sans', sans-serif;
+    }
 `;
 
+
 export const LoginBoxHighlight = styled.div`
-    width: 90%;
+    width: 87%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -71,6 +85,7 @@ export const LoginBoxHighlight = styled.div`
     &:hover {
         background-color: var(--primary);
         transition: 0.5s;
+        border-radius:3px;
     }
 `;
 
@@ -83,4 +98,5 @@ export const LoginBoxFooter = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2vh;
 `;

@@ -1,16 +1,16 @@
 /* (#31374a)----> for dark mode */
 :root {
-    --background: #f5f7fa ;  /*#f5f7fa*/
+    --background: #eef2f6 ;  /*#f5f7fa*/
     --accent: #ffffff;
-    --primary: #007FFF;
+    --primary: #1C77FF;
     --secondary: #FF7C7C;
-    --text: #333333;
+    --text: #4f4e4e;
     --sidebar: #ffffff;
-    --primary-hover: #0F52BA;
+    --primary-hover: #1563d7;
     --tab-hover: #acb1bdc2;
     --tab-active: #ffffff;
-    --sidebar-focus: #b8d2f5;
-    --grid-header: #f5f7fa;
+    --sidebar-focus: #0080ff97;
+    --grid-header: #f1f5f9;
 }
 
 .GoogleSignin {

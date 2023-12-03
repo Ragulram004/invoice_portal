@@ -28,23 +28,22 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: 'var(--accent)',
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-      borderRadius: '5px',
-      width: '50vw',
-      height: '62vh',
-      zIndex: '1000'
-    },
-    overlay: {
-      backgroundColor:'rgba (0, 0, 0, .5);',  
-      backgroundColor: 'rgba(0, 0, 0, 0.9)'
-    }
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'var(--accent)',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+        borderRadius: '5px',
+        width: '50vw',
+        height: '65vh',
+        zIndex: '1000'
+      },
+      overlay: {
+        backgroundColor: 'rgba(0, 0, 0, .5)'
+      }
   };
 
 
@@ -141,8 +140,8 @@ function Proposals({activeTab}) {
             <HomeLinkTable>
                 <HomeLinkTableHeaderTitle className="grid-id">ID</HomeLinkTableHeaderTitle>
                 <HomeLinkTableHeaderTitle className="grid-proname">Project Name</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle className="grid-prog">Progress</HomeLinkTableHeaderTitle>
-                <HomeLinkTableHeaderTitle className="grid-view">View</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-prog">View</HomeLinkTableHeaderTitle>
+                <HomeLinkTableHeaderTitle className="grid-view">Progress</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
             {Array.isArray(proposals) ? (
             proposals.map((proposal, index) => (
@@ -150,11 +149,10 @@ function Proposals({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-
- {proposal.Status === "Approved" &&
-                        <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="success">Accept</Button>}
-                        <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Withdraw</Button>
                         <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
+                    </HomeLinkInvoicesButtonsContainer>
+                    <HomeLinkInvoicesButtonsContainer>
+                         <Button  onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Delete</Button>
                     </HomeLinkInvoicesButtonsContainer>
                     
                     {modalIsOpen && <Modal isOpen={modalIsOpen} style={customStyles}>
@@ -165,29 +163,30 @@ function Proposals({activeTab}) {
                             </ModalHeader>
                             <ModalContent>
                                 <ModalContentSection1>
-                                    <ModalContentElementsSection1><i></i>TAC ID: { modal.TacId }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Date: { modal.Date }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Preffered Time: { modal.Time }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>TAC ID: </span> { modal.TacId }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Date: </span>
+                                    { modal.Date }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Preffered Time: </span>{ modal.Time }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Faculty Name: </span>{ modal.FacultyName.label }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Call Time: </span>{ modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
                                 </ModalContentSection1>
 
-                                <ModalContentSection1>
-                                    <ModalContentElementsSection1>Faculty Name: { modal.FacultyName.label }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Call Time: { modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
-                                </ModalContentSection1>
-
-                                <ModalContentSection2> 
-                                    <ModalContentElementsSection1>Students:</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ 
+                                <ModalContentSection2>
+                                    <ModalContentElementsSection1 ><span>Students:</span>
+                                    <ModalContentElementsSection1 className="stu-grid">
+                                    { 
                                     Object.keys(modal.StudentName).map((key, index) => (
                                         <div key={index}>
-                                            <ModalContentElementsSection1>{modal.StudentName[key].label}</ModalContentElementsSection1>
+                                            <ModalContentElementsSection1 className="student">{modal.StudentName[key].label}</ModalContentElementsSection1>
                                         </div>
                                     ))
-                                    }</ModalContentElementsSection1>
+                                    }
+                                    </ModalContentElementsSection1>
+                                    </ModalContentElementsSection1>
                                 </ModalContentSection2>
 
                                 <ModalContentSection2>
-                                    <ModalContentElementsSection2>Invoice Description:</ModalContentElementsSection2>
+                                    <ModalContentElementsSection2><span>Invoice Description:</span><br /></ModalContentElementsSection2>
                                     <ModalContentElementsSection2>{ modal.Description }</ModalContentElementsSection2>
                                 </ModalContentSection2>
                             </ModalContent>
