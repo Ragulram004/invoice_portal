@@ -735,3 +735,12 @@ export const LogoutBoxHighlight = styled.div`
         background-color:gray;
     }
 `;
+
+export const AlignItemContainer = styled.div`
+    height: 50%;
+    display: flex;
+    // flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+`;

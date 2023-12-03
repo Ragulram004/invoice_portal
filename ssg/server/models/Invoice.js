@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 
 const InvoiceSchema = new mongoose.Schema({
     CreatedBy: String,
-    StudentName: mongoose.Schema.Types.Mixed,
+    TotalStudents: Number,
+    StudentsName: [String],
+    StudentsEmail: [String],
+    AccetedStudents: [String],
+    StudentData: mongoose.Schema.Types.Mixed,
     TacId : String,
     Title : String,
     Description : String,
@@ -11,7 +15,9 @@ const InvoiceSchema = new mongoose.Schema({
     Status : String,
     Date: Date,
     CallTime: Date,
-    StatusDescription: String
+    StatusDescription: String,
+    Worklog: String,
+    SystemNumber: String
 });
 
 const InvoiceModel = mongoose.model('Invoice', InvoiceSchema);

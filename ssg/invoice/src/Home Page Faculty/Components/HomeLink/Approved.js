@@ -11,12 +11,14 @@ import '../../../Styles/Invoice.css';
 import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader, 
         HomeLinkTable, HomeLinkTableHeaderTitle, HomeLinkInvoicesButtonsContainer, 
         HomeLinkModal, ModalHeader, ModalHeaderTitle, ModalContent, ModalContentElementsSection1, 
-        ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,
+        ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,AlignItemContainer
          } from "../../StylesHomePage";
 
 //Components
 
 import { AiOutlineEye } from "react-icons/ai";
+import TextField from '@mui/material/TextField';
+import Select from 'react-select';
 
 
 import axios from 'axios';
@@ -45,6 +47,26 @@ const customStyles = {
       backgroundColor: 'rgba(0, 0, 0, .5)'
     }
   };
+
+const worklogmodalcustomStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'var(--accent)',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+        borderRadius: '5px',
+        width: '50vw',
+        height: '80vh',
+        zIndex: '1000'
+    },
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, .5)'
+    }
+};
 
 
 function Approved({activeTab}) {
@@ -109,29 +131,105 @@ function Approved({activeTab}) {
 
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [worklogmodalIsOpen, setWorklogModalIsOpen] = useState(false);
+    const [worklogdescription, setWorklogDescription] = useState('');
+    const [modaltitle, setModalTitle] = useState('');
+    const [modalid, setModalId] = useState(false);
+    const [systemInput, setSystemInput] = useState('');
+    const [searchResultSystems, setSearchResultSystems] = useState([]);
+    const [systemnumber, setSystemNumber] = useState('');
+
+    useEffect(() => {
+        console.log(systemInput);
+        const fetchDataSystems = async () => {
+            console.log("hello");
+            // setSearchResultSystems([['abcd'], ['efgh'], ['ijkl']]);
+            try {
+                console.log('Sending data...');
+                const response = await axios.post(`${API_URL}/faculty-system-number`, {systemnumber: systemnumber});
+                console.log(response.data);
+                    let tempfaculty = [];
+                    for (let i = 0; i < response.data.length; i++) {
+                        const label = response.data[i].systemnumber;
+                        const value = response.data[i]._id;
+                        tempfaculty = [...tempfaculty, { label, value }];
+                    }
+                    setSearchResultSystems(tempfaculty);
+            }
+            catch (error) {
+                console.error('(axios) -> An error occurred:', error);
+            }
+        };
+
+        if (systemInput.length > 0){
+        fetchDataSystems();}
+    }, [systemInput]);  
 
     const openModal = async(_id) => {
         console.log("Modal Opened");
         console.log(_id);
         const modalResponse = await axios.post(`${API_URL}/modal`, {id:_id});
         // console.log(modalResponse.data);
-        await setModal(modalResponse.data.modaldata);
-        await console.log(modal.StudentName);
-        await console.log(modal.StudentName['name']);
+            let model = await setModal(modalResponse.data.modaldata);
+        // await console.log(modal.StudentName);
+        // await console.log(modal.StudentName['name']);
         await setModalIsOpen(true);
     }
 
-    const Withdraw = async(Title,_id) => {
-        const response = await axios.post(`${API_URL}/withdraw`, {Status: Title, id: _id});
-        if (response.status === 200) {
-            console.log('Data saved successfully');
-            } else {
-                console.log(response);
-                console.error('Failed to save data');
-        }}
-
     const closeModal = () => {
         setModalIsOpen(false);
+        setModalTitle('');
+    }
+
+    const openWorklogModal = (id,Title) => {
+        setModalId(id);
+        setModalTitle(Title);
+        setWorklogModalIsOpen(true);
+    }
+
+    const handlemodalsubmit = async() => {
+        console.log(systemnumber);
+        if(systemnumber !== '' && worklogdescription !== ''){
+        const wWorklogResponse = await axios.post(`${API_URL}/faculty-worklog`, { email: email , worklog: worklogdescription, modalid: modalid, systemnumber: systemnumber});
+        console.log(wWorklogResponse.data.message);
+        if (wWorklogResponse.status === 200) {
+            console.log('Data saved successfully');
+            window.location.reload();
+        } else {
+            console.log(wWorklogResponse);
+            console.log(wWorklogResponse.status);
+            console.error('Failed to save data');
+        }}
+        else{
+            console.log("Please Select a system number and worklog description");
+            window.alert("Please Select a system number and worklog description");
+        }
+    }
+
+    const closworklogtModal = () => {
+        setWorklogModalIsOpen(false);
+        setModalId('');
+        setModalTitle('');
+    } 
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }
+
+    const handleInputChange = newValue => {
+        console.log(newValue);
+        setSystemInput(newValue)
+        // setSearchResultSystems(newValue);
+    }
+
+    const handleSelectChange = (selectedOption) => {
+        console.log(selectedOption.label);
+        
+        setSystemNumber(selectedOption.label);
+        console.log(selectedOption.label);
     }
 
     return (
@@ -142,13 +240,13 @@ function Approved({activeTab}) {
                 <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
-            {Array.isArray(proposals) ? (
+            {Array.isArray(proposals) && (proposals.length !== 0) ? (
             proposals.map((proposal, index) => (
                 <HomeLinkInvoicesTable key={proposal._id}>
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-                    <Button variant="outlined" onClick={() => openModal(proposal._id)} color="success">Worklog</Button>
+                    <Button variant="outlined" onClick={() => openWorklogModal(proposal._id,proposal.Title)} color="success">Worklog</Button>
                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 
@@ -168,12 +266,18 @@ function Approved({activeTab}) {
 
                                 <ModalContentSection1>
                                     <ModalContentElementsSection1>Faculty Name: { modal.FacultyName }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Call Time: Pending....</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Call Time: { modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
                                 </ModalContentSection1>
 
-                                <ModalContentSection2>
+                                <ModalContentSection2> 
                                     <ModalContentElementsSection1>Students:</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ modal.StudentName }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>{ 
+                                    Object.keys(modal.StudentData).map((key, index) => (
+                                        <div key={index}>
+                                            <ModalContentElementsSection1>{modal.StudentData[key].label}</ModalContentElementsSection1>
+                                        </div>
+                                    ))
+                                    }</ModalContentElementsSection1>
                                 </ModalContentSection2>
 
                                 <ModalContentSection2>
@@ -187,6 +291,26 @@ function Approved({activeTab}) {
                             </ModalButtonContainer>
                         </HomeLinkModal>
                         {/* ))} */}
+                    </Modal>}
+                    {worklogmodalIsOpen &&
+                    <Modal isOpen={worklogmodalIsOpen} style={worklogmodalcustomStyles}>
+                        <ModalHeader>
+                                <ModalHeaderTitle>{ modaltitle }</ModalHeaderTitle>
+                            </ModalHeader>
+                            <AlignItemContainer>
+                            <TextField
+                                    required={true}
+                                    label="Worklog Description"
+                                    onChange={ (e) => setWorklogDescription(e.target.value) }
+                            />
+                            {/* <Select isDisabled={true} options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />   */}
+                            </AlignItemContainer><AlignItemContainer>
+                            <Select  options={searchResultSystems} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption)} isRequired={true} required/> 
+                            </AlignItemContainer>
+                        <ModalButtonContainer>
+                                <Button variant="outlined" color="success" onClick={handlemodalsubmit}>Submit</Button>
+                                <Button variant="outlined" color="error" onClick={closworklogtModal}>Close</Button>
+                        </ModalButtonContainer>
                     </Modal>}
                 </HomeLinkInvoicesTable>
             ))

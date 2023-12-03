@@ -1,14 +1,16 @@
 const router = require('express').Router();
 const Invoice = require('../../models/Invoice');
 
+const { Faculty_ApprovedCountMiddleware, Faculty_RejectedCountMiddleware } = require('../../accessCounter');
+
 router.post('/faculty-proposal', async(req, res) => {
     console.log(req.body.email);
-    const proposal = await Invoice.find({FacultyName : "faculty@bitsathy.ac.in", Status: {$eq: "Proposed"}});
+    const proposal = await Invoice.find({"FacultyName.value"   : req.body.email, Status: {$eq: "Proposed"}});
     console.log(proposal);
     res.send({proposal: proposal});
 });
 
-router.post('/faculty-calltime', async(req, res) => {
+router.post('/faculty-calltime',Faculty_ApprovedCountMiddleware, async(req, res) => {
     console.log(req.body.time);
     console.log(req.body.id);
     // console.log(Date(req.body.time))
@@ -20,7 +22,7 @@ router.post('/faculty-calltime', async(req, res) => {
     return res.status(200).send({message: "Recieved Sucessfully"});
 });
 
-router.post('/faculty-rejecteddescription', async(req,res) => {
+router.post('/faculty-rejecteddescription',Faculty_RejectedCountMiddleware, async(req,res) => {
     console.log(req.body.id, req.body.description);
     await Invoice.updateOne({_id: req.body.id}, {$set: {StatusDescription: req.body.description, Status: "Rejected"}})
     return res.status(200).send({message: "Recieved Sucessfully"});

@@ -23,7 +23,7 @@ import '../../../Styles/Invoice.css';
 import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader, 
         HomeLinkTable, HomeLinkTableHeaderTitle, HomeLinkInvoicesButtonsContainer, 
         HomeLinkModal, ModalHeader, ModalHeaderTitle, ModalContent, ModalContentElementsSection1, 
-        ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,FacultyRejectContainer
+        ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,AlignItemContainer
          } from "../../StylesHomePage";
 
 //Components
@@ -160,10 +160,11 @@ function Proposals({activeTab}) {
 
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modaltitle, setModalTitle] = useState('');
     const [approvemodalIsOpen, setApproveModalIsOpen] = useState(false);
     const [rejectmodalIsOpen, setRejectModalIsOpen] = useState(false);
     const [modalid, setModalId] = useState(false);
-    const [rejectdescription, setRejectDescription] = useState(false);
+    const [rejectdescription, setRejectDescription] = useState('');
     // const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = async(_id) => {
@@ -182,15 +183,17 @@ function Proposals({activeTab}) {
         await setModalIsOpen(true);
     }
 
-    const openapproveModal = async(_id) => {
+    const openapproveModal = async(_id,Title) => {
         setApproveModalIsOpen(true);
+        setModalTitle(Title);
         setModalId(_id);
         console.log("Modal Opened");
         console.log(_id);
     }
 
-    const openrejectModal = async(_id) => {
+    const openrejectModal = async(_id,Title) => {
         setRejectModalIsOpen(true);
+        setModalTitle(Title);
         setModalId(_id);
         console.log("Modal Opened");
         console.log(_id);
@@ -216,21 +219,29 @@ function Proposals({activeTab}) {
 
     const closeModal = () => {
         setModalIsOpen(false);
+        setModalTitle('');
     }
 
     const closeapproveModal = () => {
         console.log("Close Approve Modal");
         setApproveModalIsOpen(false);
         setModalId('');
+        setModalTitle('');
     }
 
     const closerejectModal = () => {
         console.log("Close Reject Modal");
         setRejectModalIsOpen(false);
         setModalId('');
+        setModalTitle('');
     }
 
     const handlereject = async() => {
+        if (rejectdescription === '') {
+            window.alert("Please enter the reject description");
+            console.log("Please enter the reject description");
+        } else {
+            console.log(rejectdescription);
         const response = await axios.post(`${API_URL}/faculty-rejecteddescription`, {id: modalid, description: rejectdescription});
         if (response.status === 200) {
             console.log('Data Updated successfully');
@@ -242,6 +253,9 @@ function Proposals({activeTab}) {
                 console.log(response);
                 console.error('Failed to update the data, CallTime Updation error');
         }
+        }
+        
+
     }
 
     const handleAccept = async(time) => {
@@ -269,7 +283,7 @@ function Proposals({activeTab}) {
                 <HomeLinkTableHeaderTitle>Progress</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
-            {Array.isArray(proposals) ? (
+            {Array.isArray(proposals) && (proposals.length !== 0) ? (
             proposals.map((proposal, index) => (
                 <HomeLinkInvoicesTable key={proposal._id}>
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
@@ -277,8 +291,8 @@ function Proposals({activeTab}) {
                     <HomeLinkInvoicesButtonsContainer>
                         {/* <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="success">approve</Button>
                         <Button variant="outlined" onClick={() => Reject(proposal.Title,proposal._id)} color="error">reject</Button> */}
-                        <Button variant="outlined" onClick={() => openapproveModal(proposal._id)} color="success">approve</Button>
-                        <Button variant="outlined" onClick={() => openrejectModal(proposal._id)} color="error">reject</Button>
+                        <Button variant="outlined" onClick={() => openapproveModal(proposal._id,proposal.Title)} color="success">approve</Button>
+                        <Button variant="outlined" onClick={() => openrejectModal(proposal._id,proposal.Title)} color="error">reject</Button>
                         <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 
@@ -304,9 +318,9 @@ function Proposals({activeTab}) {
                                 <ModalContentSection2> 
                                     <ModalContentElementsSection1>Students:</ModalContentElementsSection1>
                                     <ModalContentElementsSection1>{ 
-                                    Object.keys(modal.StudentName).map((key, index) => (
+                                    Object.keys(modal.StudentData).map((key, index) => (
                                         <div key={index}>
-                                            <ModalContentElementsSection1>{modal.StudentName[key].label}</ModalContentElementsSection1>
+                                            <ModalContentElementsSection1>{modal.StudentData[key].label}</ModalContentElementsSection1>
                                         </div>
                                     ))
                                     }</ModalContentElementsSection1>
@@ -328,7 +342,7 @@ function Proposals({activeTab}) {
                 {approvemodalIsOpen && 
                     <Modal isOpen={approvemodalIsOpen} style={approvemodalcustomStyles}>
                         <ModalHeader>
-                                <ModalHeaderTitle>{ modalid }</ModalHeaderTitle>
+                                <ModalHeaderTitle>{ modaltitle }</ModalHeaderTitle>
                             </ModalHeader>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <StaticTimePicker defaultValue={dayjs('2022-04-17T15:30')} onAccept={handleAccept}/>
@@ -340,18 +354,16 @@ function Proposals({activeTab}) {
                     </Modal>}
                 {rejectmodalIsOpen &&
                     <Modal isOpen={rejectmodalIsOpen} style={rejectmodalcustomStyles}>
-                {/* {approvemodalIsOpen && 
-                    <Modal isOpen={approvemodalIsOpen} style={approvemodalcustomStyles}> */}
                         <ModalHeader>
-                                <ModalHeaderTitle>{ modalid }</ModalHeaderTitle>
+                                <ModalHeaderTitle>{ modaltitle }</ModalHeaderTitle>
                             </ModalHeader>
-                            <FacultyRejectContainer>
+                            <AlignItemContainer>
                             <TextField
                                     required={true}
                                     label="Reject Description"
                                     onChange={ (e) => setRejectDescription(e.target.value) }
                             />
-                            </FacultyRejectContainer>
+                            </AlignItemContainer>
                         <ModalButtonContainer>
                                 <Button variant="outlined" color="success" onClick={handlereject}>Submit</Button>
                                 <Button variant="outlined" color="error" onClick={closerejectModal}>Close</Button>

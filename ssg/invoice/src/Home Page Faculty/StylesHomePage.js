@@ -556,10 +556,10 @@ export const LogoutBoxHighlight = styled.div`
     }
 `;
 
-export const FacultyRejectContainer = styled.div`
-    height: 50%;
+export const AlignItemContainer = styled.div`
+    height: 20%;
     display: flex;
-    // flex-direction: column;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 

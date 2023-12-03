@@ -3,8 +3,18 @@ const router = require('express').Router();
 const Users = require('../models/Users');
 const jwt = require('jsonwebtoken');
 
+const { LoginCountMiddleware } = require('../accessCounter');
+// app.use(countAccessMiddleware);
+// let accessCount = 0;
 
-router.post('/getUsers', async (req, res) => {
+// const countAccessMiddleware = (req, res, next) => {
+//   accessCount++;
+//   console.log("Access Count: ", accessCount);
+//   next();
+// };
+
+router.post('/getUsers',LoginCountMiddleware, async (req, res) => {
+  // console.log("Access Count: ", accessCount);
     const user = await Users.findOne({email : req.body.email});
     console.log(user.role);
     // const role = user.role;
@@ -55,12 +65,36 @@ router.get('/user-search', async (req, res) => {
 
     try {
       const results = await Users.find({
+        $and: [ {role: "student"},{
         $or: [
           { name: { $regex: searchTerm, $options: 'i' } },
           { email: { $regex: searchTerm, $options: 'i' } },
           { rollnumber: { $regex: searchTerm, $options: 'i' } },
-        ],
-      }).limit(5);;
+        ]}]
+      }).limit(5);
+      console.log(results);
+      res.json(results);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+
+router.get('/faculty-search', async (req, res) => {
+    console.log("***********")
+    console.log(req.query.q);
+    const searchTerm = req.query.q;
+
+    try {
+      const results = await Users.find({
+        $and: [ {role: "faculty"},{
+        $or: [
+          { name: { $regex: searchTerm, $options: 'i' } },
+          { email: { $regex: searchTerm, $options: 'i' } },
+          { rollnumber: { $regex: searchTerm, $options: 'i' } },
+        ]}]
+      }).limit(5);
       console.log(results);
       res.json(results);
     } catch (error) {

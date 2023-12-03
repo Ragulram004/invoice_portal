@@ -117,8 +117,8 @@ function Withdrawn({activeTab}) {
         const modalResponse = await axios.post(`${API_URL}/modal`, {id:_id});
         // console.log(modalResponse.data);
         await setModal(modalResponse.data.modaldata);
-        await console.log(modal.StudentName);
-        await console.log(modal.StudentName['name']);
+        // await console.log(modal.StudentName);
+        // await console.log(modal.StudentName['name']);
         await setModalIsOpen(true);
     }
 
@@ -143,15 +143,12 @@ function Withdrawn({activeTab}) {
                 <HomeLinkTableHeaderTitle className="with-grid-prog">View</HomeLinkTableHeaderTitle>
             </HomeLinkTable>
 
-            {Array.isArray(proposals) ? (
+            {Array.isArray(proposals) && (proposals.length !== 0) ? (
             proposals.map((proposal, index) => (
                 <HomeLinkInvoicesTable key={proposal._id}>
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-    <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
-                    </HomeLinkInvoicesButtonsContainer>
-                    <Modal isOpen={modalIsOpen} style={customStyles}>
                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
 
@@ -170,18 +167,29 @@ function Withdrawn({activeTab}) {
                                 </ModalContentSection1>
 
                                 <ModalContentSection1>
-                                    <ModalContentElementsSection1>Faculty Name: { modal.FacultyName }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>Faculty Name: { modal.FacultyName.label }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1>Call Time: Pending....</ModalContentElementsSection1>
                                 </ModalContentSection1>
 
-                                <ModalContentSection2>
+                                <ModalContentSection2> 
                                     <ModalContentElementsSection1>Students:</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ modal.StudentName }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>{ 
+                                    Object.keys(modal.StudentData).map((key, index) => (
+                                        <div key={index}>
+                                            <ModalContentElementsSection1>{modal.StudentData[key].label}</ModalContentElementsSection1>
+                                        </div>
+                                    ))
+                                    }</ModalContentElementsSection1>
                                 </ModalContentSection2>
 
                                 <ModalContentSection2>
                                     <ModalContentElementsSection2>Invoice Description:</ModalContentElementsSection2>
-                                    <ModalContentElementsSection2>{ modal.description }</ModalContentElementsSection2>
+                                    <ModalContentElementsSection2>{ modal.Description }</ModalContentElementsSection2>
+                                </ModalContentSection2>
+
+                                <ModalContentSection2>
+                                    <ModalContentElementsSection2>Withdraw Description:</ModalContentElementsSection2>
+                                    <ModalContentElementsSection2>{ modal.StatusDescription }</ModalContentElementsSection2>
                                 </ModalContentSection2>
                             </ModalContent>
 

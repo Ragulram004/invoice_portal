@@ -45,11 +45,12 @@ const API_URL = process.env.REACT_APP_API_URL;
 function Apply() {
 
     // const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResultsStudent, setSearchResultsStudent] = useState([]);
+    const [searchResultsFaculty, setSearchResultsFaculty] = useState([]);
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [rollnumber, setRollnumber] = useState('');
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [rollnumber, setRollnumber] = useState();
 
     const [fieldnumber, setFieldNumber] = useState(0);
 
@@ -70,6 +71,8 @@ function Apply() {
                     setName(response.data.name);
                     setEmail(response.data.email);
                     setRollnumber(response.data.rollnumber);
+
+                    handleSelectChange({label: response.data.name, value: response.data.email},1)
 
                 } else {
                     window.location.href = "/";
@@ -97,7 +100,7 @@ function Apply() {
 
     //Changeable variables: Form content and elements
 
-    const [ students, setStudents ] = useState({1:{label: 'Saran S M', value: 'saran.al22@bitsathy.ac.in'}});
+    const [ students, setStudents ] = useState({});
 
     const [ activeDetail, setActiveDetail ] = useState('Student');      //Form Content
     const [selectedDate, setSelectedDate] = useState(new Date());       //Date
@@ -118,14 +121,17 @@ function Apply() {
     useEffect(() => {
         const nextDay = new Date(selectedDate);
         nextDay.setDate(selectedDate.getDate() + 1);
+        console.log(`--> ${nextDay}, --> ${selectedDate}`);
         setSelectedDate(nextDay);
-    }, []);
+    }, [name]);
 
     //Adding, Changing and deleting student name fields
 
     const addField = () => {
-        setFieldNumber(fieldnumber + 1);
         if( fields.length < 10 ) {
+            console.log(fieldnumber);
+            setFieldNumber(fieldnumber + 1);
+            console.log(fieldnumber);
             setFields([...fields, { id: fields.length + 1, value: "" }]);
         }
         else {
@@ -140,18 +146,33 @@ function Apply() {
     };
 
     const deleteField = (id) => {
-        setFieldNumber(fieldnumber - 1);
+        console.log(`fieldnumber ->>> ${fieldnumber}`);
+        let newfieldnumber = fieldnumber - 1 
+        console.log(newfieldnumber); 
+        setFieldNumber(newfieldnumber);
         let newFields = fields.filter((field) => field.id !== id);
         newFields = newFields.map((field, index) => {
             return { ...field, id: index + 1 };
         });
         setFields(newFields);
+        // setStudents(
+            setStudents((prevDictionary) => {
+                //Deleting the last element in the Dictionary
+                const newDictionary = { ...prevDictionary };
+                delete newDictionary[fieldnumber+1]
+                return newDictionary;
+              });
     };
 
-    const [inputValue, setInputValue] = useState('');
+    const [inputValueStudent, setInputValueStudent] = useState('');
+    const [inputValueFaculty, setInputValueFaculty] = useState('');
 
     const handleInputChange = newVaue => {
-        setInputValue(newVaue);
+        setInputValueStudent(newVaue);
+    }
+
+    const handleInputChangeFaculty = newVaue => {
+        setInputValueFaculty(newVaue);
     }
 
     useEffect(() => {
@@ -160,7 +181,7 @@ function Apply() {
                 console.log('Sending data...');
                 const response = await axios.get(`${API_URL}/user-search`, {
                     params: {
-                        q: inputValue,
+                        q: inputValueStudent,
                         },
                         headers: {
                         'Content-Type': 'application/json'
@@ -172,16 +193,45 @@ function Apply() {
                         const value = response.data[i].email;
                         temp = [...temp, { label, value }];
                     }
-                    setSearchResults(temp);
+                    setSearchResultsStudent(temp);
             }
             catch (error) {
                 console.error('(axios) -> An error occurred:', error);
             }
         };
 
-        if (inputValue.length > 0){
+        if (inputValueStudent.length > 0){
         fetchData();}
-    }, [inputValue]);
+    }, [inputValueStudent]);
+
+    useEffect(() => {
+        const fetchDataFaculty = async () => {
+            try {
+                console.log('Sending data...');
+                const response = await axios.get(`${API_URL}/faculty-search`, {
+                    params: {
+                        q: inputValueFaculty,
+                        },
+                        headers: {
+                        'Content-Type': 'application/json'
+                        }
+                    });
+                    let tempfaculty = [];
+                    for (let i = 0; i < response.data.length; i++) {
+                        const label = response.data[i].name;
+                        const value = response.data[i].email;
+                        tempfaculty = [...tempfaculty, { label, value }];
+                    }
+                    setSearchResultsFaculty(tempfaculty);
+            }
+            catch (error) {
+                console.error('(axios) -> An error occurred:', error);
+            }
+        };
+
+        if (inputValueFaculty.length > 0){
+        fetchDataFaculty();}
+    }, [inputValueFaculty]);    
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
@@ -200,14 +250,18 @@ function Apply() {
     //     // );
 
     const handleSelectChange = (selectedOption, fieldId) => {
+        // console.log("''''''''''''''''''''''''''''");
+        // console.log(selectedOption,fieldId);
         setStudents((prevStudents) => ({
             ...prevStudents,
             [fieldId]: {
             label: selectedOption.label,
             value: selectedOption.value,
+            accepted: false
             },
         }));
         console.log("$$$$$$$$$$$$$$");
+        console.log(students);
         console.log(selectedOption,fieldId);
         console.log("$$$$$$$$$$$$$$");
         };
@@ -254,6 +308,9 @@ function Apply() {
     //Form submittion button
 
     const handleFormSubmit = () => {
+        if(activeDetail && selectedDate && projectName && projectDescription && projectTac && facultyName && preferredTime && fields && ((isInputEnabled === true && ( projectTac != 'No TAC')) || (isInputEnabled === false && ( projectTac === 'No TAC')))) {
+            // console.log(fields);
+
         const invoiceData = {
           students: fields.map((field) => field.value),
           project: projectName, 
@@ -267,10 +324,22 @@ function Apply() {
         dispatch({ type: 'ADD_INVOICE', payload: invoiceData });
 
         const gettingData = async () => {
+            // for (let i = 0; i < fields.length; i++) {}
+            let TotalStudents = Object.keys(students).length;
+            let StudentsName = [];
+            let StudentsEmail = [];
+
+            for (let i = 0; i < TotalStudents; i++) {
+                StudentsName.push(students[`${Object.keys(students)[i]}`]["label"]);
+                StudentsEmail.push(students[`${Object.keys(students)[i]}`]["value"]);
+            }
             try {
                 console.log('Sending data...');
                 console.log(activeDetail);
                 const response = await axios.post(`${API_URL}/newInvoice`, {
+                    TotalStudents: TotalStudents,
+                    StudentsName: StudentsName,
+                    StudentsEmail: StudentsEmail,
                     activeDetail: students,
                     selectedDate: selectedDate,
                     projectName: projectName,
@@ -295,7 +364,17 @@ function Apply() {
             }
         };
         gettingData();
-      }
+    }
+    else {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Please fill all the fields',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+}
 
     return(
         <ApplyScreen>
@@ -373,14 +452,14 @@ function Apply() {
                                             <h5>Student {field.id}</h5>
                                             <Stack spacing={1} sx={{ width: 600 }}>
                                             {(field.id === 1)? 
-                                            <Select isDisabled={true} options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />
+                                            <Select isDisabled={true} options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />
                                             
                                             : 
-                                            <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} isRequired={true} required/>
+                                            <Select options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} isRequired={true} required/>
                                             }
                                             </Stack>
 
-                                            {(field.id == 1) ?
+                                            {(field.id === 1) ?
                                             <Button
                                                 variant="contained"
                                                 color="error"
@@ -439,7 +518,7 @@ function Apply() {
                                             <div className="innerflex">
                                         <ApplyFormDetailsLabel>Faculty Name: </ApplyFormDetailsLabel>
                                         <Stack spacing={1} sx={{ width: 400 }}>
-                                        <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
+                                        <Select options={searchResultsFaculty} onInputChange={handleInputChangeFaculty} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
                                         </Stack>
                                             </div>
                                         </div>
