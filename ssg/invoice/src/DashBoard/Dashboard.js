@@ -50,8 +50,8 @@ import {ApplyNavigationProfileEmail, ApplyNavigationLogo, ApplyNavigationProfile
 import Logo from '../Icons/BITLogo.png';
 import Bell from '../Icons/bell.png';
 import User from '../Icons/profile.png';
-import { IoNotifications } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
+// import { IoNotifications } from "react-icons/io5";
+// import { FaUserCircle } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
 
@@ -92,20 +92,22 @@ function DashBoard() {
         console.log("Handle failure cases");
     };
 
-    const handleApplyClick = () => {
-        Navigate('/Apply');
-    };
+    // const handleApplyClick = () => {
+    //     Navigate('/Apply');
+    // };
 
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-    };
+    // const handleKeyDown = (event) => {
+    //     if (event.key === 'Enter') {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //     }
+    // };
+
     const matches = UseMediaQuery("(max-width:1025px)");
     const minmatches = MinMediaQuery("(min-width:1025px)");
     const [email, setEmail] = useState('');
     const [showEmail, setShowEmail] = useState(false);
+    const [status, setStatus] = useState('ProposedCount');
 
     const toggleEmail = () => {
         setShowEmail(!showEmail);
@@ -124,17 +126,6 @@ function DashBoard() {
     //     getEmail();
     // }, []);
 
-    useEffect(() => {
-    const dashboard_data = async() => {{
-        const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year })
-        console.log(response);
-        const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
-        // setDashboard(response.data.dashboard);
-        setDashboard(randomNumbers);
-    }}
-    dashboard_data();
-    }, []);
-
     const [proposedcount, setProposedCount] = useState(0);
     const [withdrawncount, setWithdrawnCount] = useState(0);
     const [approvedcount, setApprovedCount] = useState(0);
@@ -146,6 +137,17 @@ function DashBoard() {
     const [date, setDate] = useState("1");
     const [dashboard, setDashboard] = useState(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']);
     // const [dashboard_data, setDashboard_data] = useState({});
+
+    useEffect(() => {
+    const dashboard_data = async() => {{
+        const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, status : status})
+        console.log(response);
+        const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
+        // setDashboard(response.data.dashboard);
+        setDashboard(randomNumbers);
+    }}
+    dashboard_data();
+    }, [status, month, year]);
     
     const data = {
     labels: [
@@ -207,7 +209,23 @@ function DashBoard() {
         },
     },
     };
-    
+
+    ChartJS.register(
+        // Legend,
+        // plugins.tooltip,
+        // options.plugins.tooltip,
+        // tooltip,
+        LineElement,
+        CategoryScale,
+        LinearScale,
+        PointElement,
+    );
+
+    const handlestatuschange = (e) => {
+        console.log(e);
+        // setStatus(e);
+    }
+
     return (
         <DashBoardScreen>
 
@@ -350,7 +368,7 @@ function DashBoard() {
                 <DashBoardMain>
                 <HomeDashBoard>Student Dashboard</HomeDashBoard>
                 <div className="Multi-box">
-                        <DashBoardBox1 className="grid-box">Proposed : {proposedcount}</DashBoardBox1>
+                        <DashBoardBox1 className="grid-box" onClick={handlestatuschange} style={{cursor: "pointer"}}>Proposed : {proposedcount}</DashBoardBox1>
                         <DashBoardBox2 className="grid-box">Withdrawn : {withdrawncount}</DashBoardBox2>
                         <DashBoardBox3 className="grid-box">Approved : {approvedcount}</DashBoardBox3>
                         <DashBoardBox4 className="grid-box">Rejected : {rejectedcount}</DashBoardBox4>
