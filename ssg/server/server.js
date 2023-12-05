@@ -47,6 +47,7 @@ const faculty_approved = require('./routes/faculty routes/faculty_approved.js');
 const faculty_completed = require('./routes/faculty routes/faculty_completed.js');
 const faculty_rejected = require('./routes/faculty routes/faculty_rejected.js');
 const system_number = require('./routes/faculty routes/system_number.js');
+const DashBoard = require('./routes/Dashboard.js');
 app.use(facultyRoutes);
 app.use(userRouter);
 app.use(invoiceRouter);
@@ -61,6 +62,7 @@ app.use(faculty_approved);
 app.use(faculty_completed);
 app.use(faculty_rejected);
 app.use(system_number);
+app.use(DashBoard);
 
 
 // app.get('/checkToken', authenticateToken, (req, res) => {

@@ -1,6 +1,6 @@
 // Dependencies
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import { GoogleLogout } from "react-google-login";
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,21 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { createGlobalStyle } from 'styled-components';
+import { Line } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    LineElement,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    Legend,
+    plugins,
+    options
+    // tooltip,
+    // options.plugins.tooltip,
+} from 'chart.js';
+
 //Styles
 
 import '../Styles/Invoice.css';
@@ -102,6 +117,103 @@ function DashBoard() {
     const toggleEmail = () => {
         setShowEmail(!showEmail);
     }
+
+    // useEffect(() => {
+    //     const token = Cookies.get('token');
+    //     const getEmail = async () => {
+    //         const response = await axios.get(`${API_URL}/user`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //             },
+    //         });
+    //         setEmail(response.data.email);
+    //     };
+    //     getEmail();
+    // }, []);
+
+    useEffect(() => {
+    const dashboard_data = async() => {{
+        const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year })
+        console.log(response);
+        const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
+        // setDashboard(response.data.dashboard);
+        setDashboard(randomNumbers);
+    }}
+    dashboard_data();
+    }, []);
+
+    const [proposedcount, setProposedCount] = useState(0);
+    const [withdrawncount, setWithdrawnCount] = useState(0);
+    const [approvedcount, setApprovedCount] = useState(0);
+    const [rejectedcount, setRejectedCount] = useState(0);
+    const [completedcount, setCompletedCount] = useState(0);
+
+    const [month, setMonth] = useState("1");
+    const [year, setYear] = useState("2023");
+    const [date, setDate] = useState("1");
+    const [dashboard, setDashboard] = useState(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']);
+    // const [dashboard_data, setDashboard_data] = useState({});
+    
+    const data = {
+    labels: [
+        1, 2, 3, 4, 5, 6, 7, 8, 9,
+        10, 11, 12, 13, 14, 15, 16, 17, 18,
+        19, 20, 21, 22, 23, 24, 25, 26, 27,
+        28, 29, 30, 31
+    ],
+    datasets: [
+        {
+        label: 'Count',
+        data: dashboard,
+        fill: false,
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgba(255, 99, 132, 0.2)',
+        },
+    ],
+    };
+
+    const options = {
+    scales: {
+        x: {
+        title: {
+            display: true,
+            text: 'Date',
+            font: {
+            size: 12,
+            },
+        },
+        },
+        y: {
+        title: {
+            display: true,
+            text: 'Count',
+            font: {
+            size: 12,
+            },
+        },
+        beginAtZero: true,
+        },
+    },
+    plugins: {
+        legend: {
+        display: true,
+        position: 'right',
+        labels: {
+            font: {
+            size: 12,
+            },
+        },
+        },
+        tooltip: {
+        enabled: true,
+        callbacks: {
+            label: function (context) {
+            return 'Count' + ': ' + context.parsed.y;
+            },
+        },
+        },
+    },
+    };
     
     return (
         <DashBoardScreen>
@@ -244,14 +356,14 @@ function DashBoard() {
                 <DashBoardMain>
                 <TitleDashBoard>Student Dashboard</TitleDashBoard>
                 <div className="Multi-box">
-                        <DashBoardBox1 className="grid-box"></DashBoardBox1>
-                        <DashBoardBox2 className="grid-box"></DashBoardBox2>
-                        <DashBoardBox3 className="grid-box"></DashBoardBox3>
-                        <DashBoardBox4 className="grid-box"></DashBoardBox4>
-                        <DashBoardBox5 className="grid-box"></DashBoardBox5>
-                        <DashBoardBox6 className="grid-box"></DashBoardBox6>
+                        <DashBoardBox1 className="grid-box">Proposed : {proposedcount}</DashBoardBox1>
+                        <DashBoardBox2 className="grid-box">Withdrawn : {withdrawncount}</DashBoardBox2>
+                        <DashBoardBox3 className="grid-box">Approved : {approvedcount}</DashBoardBox3>
+                        <DashBoardBox4 className="grid-box">Rejected : {rejectedcount}</DashBoardBox4>
+                        <DashBoardBox5 className="grid-box">Completed : {completedcount}</DashBoardBox5>
+                        {/* <DashBoardBox6 className="grid-box"></DashBoardBox6>
                         <DashBoardBox7 className="grid-box"></DashBoardBox7>
-                        <DashBoardBox8 className="grid-box"></DashBoardBox8>
+                        <DashBoardBox8 className="grid-box"></DashBoardBox8> */}
                 </div>
                     <TitleDashBoard>Graph:</TitleDashBoard>
                     <DashBoardGraphContent>
@@ -262,7 +374,17 @@ function DashBoard() {
                             </LocalizationProvider>
                         <DashBoardGraph></DashBoardGraph>
                     </DashBoardGraphContent>
-                    
+                    <HomeDashBoard>Graph:</HomeDashBoard>
+                    <DashBoardGraphContant>
+                        <Line
+                            data={data}
+                            style = {{ height : "100%", width : "100%", margin : "20px"}}
+                            // height={400}
+                            // width={600}
+                            options={options}
+                        />
+                    </DashBoardGraphContant>
+
                 </DashBoardMain>
             </DashBoardContent>
         </DashBoardScreen>

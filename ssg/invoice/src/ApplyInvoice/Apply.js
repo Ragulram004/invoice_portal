@@ -126,13 +126,16 @@ function Apply() {
 
     //Functions
     // Date Picker setting
+    
+    let count = 0; 
 
     useEffect(() => {
         const nextDay = new Date(selectedDate);
         nextDay.setDate(selectedDate.getDate() + 1);
         console.log(`--> ${nextDay}, --> ${selectedDate}`);
         setSelectedDate(nextDay);
-    }, [name]);
+        count = count + 1;
+    }, [(count === 0)]);
 
     //Adding, Changing and deleting student name fields
 
@@ -185,6 +188,7 @@ function Apply() {
     }
 
     useEffect(() => {
+        console.log(selectedDate);
         const fetchData = async () => {
             try {
                 console.log('Sending data...');
