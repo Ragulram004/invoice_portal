@@ -8,6 +8,12 @@ import Stack from '@mui/material/Stack';
 import Select from "react-select";
 import UseMediaQuery from "../Home Page/UseMediaQuery.js";
 import MinMediaQuery from "../Home Page/MinMediaQuery.js";
+import { createGlobalStyle } from 'styled-components'
+import { styled } from '@mui/system';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createGlobalStyle } from 'styled-components';
 import { Line } from 'react-chartjs-2';
 import {
@@ -23,14 +29,12 @@ import {
     // options.plugins.tooltip,
 } from 'chart.js';
 
-
-
 //Styles
 
 import '../Styles/Invoice.css';
 import { DashBoardScreen, DashBoardNavigation, DashBoardSideBar, DashBoardContent, 
         DashBoardMain, DashBoardActionButtons, DashBoardActionTabs, 
-        DashBoardGraphContant, DashBoardActionTabsInput, DashBoardActionTabsLabel,HomeDashBoard, DashBoardTabContent,DashBoardThreeDash,
+         DashBoardActionTabsInput, DashBoardActionTabsLabel,TileDashBoard, DashBoardTabContent,DashBoardThreeDash,
         DashBoardNavigationLogo, DashBoardNavigationTitle, DashBoardNavigationSearch,
         Logoseparation,
         DashBoardNavigationDN,
@@ -41,7 +45,8 @@ import { DashBoardScreen, DashBoardNavigation, DashBoardSideBar, DashBoardConten
         DashBoardSideBarButton,
         DashBoardSideBarSeperationBottom,
         LogoutBoxButton, LogoutBoxHighlight,DashBoardMultibox,DashBoardBox1,DashBoardBox2,DashBoardBox3,
-        DashBoardBox4,DashBoardBox5,DashBoardBox6,DashBoardBox7,DashBoardBox8} from './StyleDashboard.js';
+        DashBoardBox4,DashBoardBox5,DashBoardBox6,DashBoardBox7,DashBoardBox8,DashBoardDate,DashBoardGraph,
+        DashBoardGraphContent, TitleDashBoard,FieldDate} from './StyleDashboard.js';
 
 import {ApplyNavigationProfileEmail, ApplyNavigationLogo, ApplyNavigationProfileToggle, ApplyNavigationProfile }from '../ApplyInvoice/StyleApply.js'
 
@@ -54,8 +59,10 @@ import { IoNotifications } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
+import { FaCalendarDay } from "react-icons/fa6";
 
 import axios from 'axios';
+import { DateField } from "@mui/x-date-pickers";
 
 const clientId = process.env.REACT_APP_CLIENTID;
 const API_URL = process.env.REACT_APP_API_URL;
@@ -274,7 +281,6 @@ function DashBoard() {
                     
                 <ApplyNavigationProfile className="logo2" onClick={toggleEmail} >
                     <RxAvatar id="ProfileAvatar" />
-
                     {showEmail && (
                         <ApplyNavigationProfileToggle>
                             <ApplyNavigationProfileEmail>{ email }</ApplyNavigationProfileEmail>
@@ -348,7 +354,7 @@ function DashBoard() {
                 {/* Home page main content about the proposed, approved and rejected invoices. */}
 
                 <DashBoardMain>
-                <HomeDashBoard>Student Dashboard</HomeDashBoard>
+                <TitleDashBoard>Student Dashboard</TitleDashBoard>
                 <div className="Multi-box">
                         <DashBoardBox1 className="grid-box">Proposed : {proposedcount}</DashBoardBox1>
                         <DashBoardBox2 className="grid-box">Withdrawn : {withdrawncount}</DashBoardBox2>
@@ -359,6 +365,15 @@ function DashBoard() {
                         <DashBoardBox7 className="grid-box"></DashBoardBox7>
                         <DashBoardBox8 className="grid-box"></DashBoardBox8> */}
                 </div>
+                    <TitleDashBoard>Graph:</TitleDashBoard>
+                    <DashBoardGraphContent>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer components={['DatePicker']}>
+                                <DatePicker className="dashboard-date"/>
+                            </DemoContainer>
+                            </LocalizationProvider>
+                        <DashBoardGraph></DashBoardGraph>
+                    </DashBoardGraphContent>
                     <HomeDashBoard>Graph:</HomeDashBoard>
                     <DashBoardGraphContant>
                         <Line
@@ -369,6 +384,7 @@ function DashBoard() {
                             options={options}
                         />
                     </DashBoardGraphContant>
+
                 </DashBoardMain>
             </DashBoardContent>
         </DashBoardScreen>

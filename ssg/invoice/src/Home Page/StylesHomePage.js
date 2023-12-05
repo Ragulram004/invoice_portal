@@ -542,12 +542,12 @@ export const ModalHeaderTitle = styled.h1`
 `;
 
 export const ModalContent = styled.div`
-    display: flex;
+    // display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    height:auto;
+    height:;
     font-family: 'Nunito Sans', sans-serif;
     font-weight:700;
     border-radius:0px 0px 6px 6px;
@@ -558,23 +558,37 @@ export const ModalContent = styled.div`
 export const ModalContentSection1 = styled.div`
     // place-items: center;
     width: 100%;
-    height: 5vh;
-    margin-top: 2vh;
     // margin-left: 2vh;
+    background-color:var(--background);
     .grid1{
         display:grid;
         grid-template-columns: 1fr 1fr;
     }
     .stu-grid{
         display:grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         place-items:center;
-        // background-color:black;
+    }
+    @media(max-width:1050px){
+        .stu-grid{
+            grid-template-columns: 1fr 1fr 1fr 1fr ;
+        }
+    }
+    @media(max-width:860px){
+        .stu-grid{
+            grid-template-columns: 1fr 1fr 1fr ;
+        }
+    }
+    @media(max-width:650px){
+        .stu-grid{
+            grid-template-columns: 1fr 1fr ;
+        }
     }
     .grid2{
         display:grid;
         grid-template-columns: 10vw 1fr;
     }
+    border-radius:0px 0px 6px 6px;
     
 `;
 
@@ -586,6 +600,7 @@ export const ModalContentElementsSection1 = styled.h2`
     font-size: 1em;
     font-family: 'Nunito Sans', sans-serif;
     margin-left: 1vw;
+    word-break: break-all;
     // letter-spacing: 1px;
     span{
         font-weight: 800;
@@ -597,7 +612,7 @@ export const ModalContentSection2 = styled.div`
     height: 5vh;
     width: 100%;
     height: auto;
-    margin-top: 130px;
+    margin-top: 100px;
     span{
         font-weight: 800;
     }
@@ -609,8 +624,6 @@ export const ModalContentSection2 = styled.div`
         // background-color:black;
         }
     .student{
-        border:1px solid black;
-        padding
     }
 `;
 
@@ -701,7 +714,7 @@ export const OtherLinkTable = styled.div`
     grid-template-rows: auto;
     gap: .1vw;
     width: 100%;
-    height: 6vh;
+    height: 5vh;
     background-color: var(--grid-header);
     border-top: 1px solid #91A3B0;
     border-bottom:1px solid #91A3B0;
