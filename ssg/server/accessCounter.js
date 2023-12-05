@@ -1,3 +1,5 @@
+const DashBoard = require('./models/Dashboard.js');
+
 let LoginCount = 0;
 let ProposedCount = 0;
 // let CompletedCount = 0;

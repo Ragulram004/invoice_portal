@@ -190,7 +190,7 @@ function Proposals({activeTab}) {
                         <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
                     <HomeLinkInvoicesButtonsContainer>
-                         <Button  onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Delete</Button>
+                         {/* <Button  onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Delete</Button> */}
                     </HomeLinkInvoicesButtonsContainer>
                     
                     {modalIsOpen && <Modal isOpen={modalIsOpen} style={customStyles}>

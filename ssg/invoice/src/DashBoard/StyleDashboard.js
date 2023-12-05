@@ -367,8 +367,8 @@ export const DashBoardGraphContant = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     background-color: var(--accent);
-    height:30vh;
-    width: 90%;
+    // height:30vh;
+    // width: 90%;
     border-radius:6px  ;
     margin-bottom:2.5vh;
     margin-top:3vh;
@@ -765,3 +765,5 @@ export const LogoutBoxHighlight = styled.div`
             background-color:var(--primary);
     }
 `;
+
+// sty
