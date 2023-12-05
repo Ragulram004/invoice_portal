@@ -22,6 +22,7 @@ import { AiOutlineEye } from "react-icons/ai";
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import mediaquery from "mediaquery";
 const API_URL = process.env.REACT_APP_API_URL;
 
 
@@ -40,7 +41,8 @@ const customStyles = {
         borderRadius: '5px',
         width: '50vw',
         height: '65vh',
-        zIndex: '1000'
+        zIndex: '1000',
+
       },
       overlay: {
         backgroundColor: 'rgba(0, 0, 0, .5)'
@@ -176,8 +178,8 @@ function Proposals({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
 
-                    {proposal.Status === "Approved" &&
-                        <Button variant="outlined" onClick={() => openWithdrawModal(proposal.Title,proposal._id)} color="success">Accept</Button>}
+                    {/* {proposal.Status === "Approved" && */}
+                        {/* <Button variant="outlined" onClick={() => openWithdrawModal(proposal.Title,proposal._id)} color="success">Accept</Button>} */}
                     {/* {{ 
                                     Object.keys(modal.StudentData).map((key, index) => (
                                         <div key={index}>
@@ -186,11 +188,11 @@ function Proposals({activeTab}) {
                                     ))
                                     } &&
                         <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="success">Accept</Button>} */}
-                        <Button variant="outlined" onClick={() => openWithdrawModal(proposal.Title,proposal._id)} color="error">Withdraw</Button>
+                        {/* <Button variant="outlined" onClick={() => openWithdrawModal(proposal.Title,proposal._id)} color="error">Withdraw</Button> */}
                         <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
                     </HomeLinkInvoicesButtonsContainer>
                     <HomeLinkInvoicesButtonsContainer>
-                         <Button  onClick={() => Withdraw(proposal.Title,proposal._id)} color="error">Delete</Button>
+                         <Button  onClick={() => openWithdrawModal(proposal.Title,proposal._id)} color="error">Delete</Button>
                     </HomeLinkInvoicesButtonsContainer>
                     
                     {modalIsOpen && <Modal isOpen={modalIsOpen} style={customStyles}>
@@ -199,17 +201,13 @@ function Proposals({activeTab}) {
                             <ModalHeader>
                                 <ModalHeaderTitle>{ modal.Title }</ModalHeaderTitle>
                             </ModalHeader>
-                            <ModalContent>
-                                <ModalContentSection1>
+                                <ModalContentSection1 className = "eye-contant">
                                     <ModalContentElementsSection1 className="grid1"><span>TAC ID: </span> { modal.TacId }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Date: </span>
                                     { modal.Date }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Preffered Time: </span>{ modal.Time }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Faculty Name: </span>{ modal.FacultyName.label }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Call Time: </span>{ modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
-                                </ModalContentSection1>
-
-                                <ModalContentSection2>
                                     <ModalContentElementsSection1 ><span>Students:</span>
                                     <ModalContentElementsSection1 className="stu-grid">
                                     { 
@@ -220,15 +218,10 @@ function Proposals({activeTab}) {
                                     ))
                                     }
                                     </ModalContentElementsSection1>
+                                    <ModalContentElementsSection1><span>Invoice Description:</span><br /></ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>{ modal.Description }</ModalContentElementsSection1>
                                     </ModalContentElementsSection1>
-                                </ModalContentSection2>
-
-                                <ModalContentSection2>
-                                    <ModalContentElementsSection2><span>Invoice Description:</span><br /></ModalContentElementsSection2>
-                                    <ModalContentElementsSection2>{ modal.Description }</ModalContentElementsSection2>
-                                </ModalContentSection2>
-                            </ModalContent>
-
+                                </ModalContentSection1>
                             <ModalButtonContainer>
                                 <Button variant="outlined" color="error" onClick={closeModal}>Close</Button>
                             </ModalButtonContainer>

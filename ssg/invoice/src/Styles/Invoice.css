@@ -1,10 +1,10 @@
 /* (#31374a)----> for dark mode */
 :root {
-    --background: #eef2f6 ;  /*#f5f7fa*/
+    --background: #f7f7fa ;  /*#f5f7fa*/
     --accent: #ffffff;
     --primary: #1C77FF;
     --secondary: #FF7C7C;
-    --text: #4f4e4e;
+    --text: #2c323f;
     --sidebar: #ffffff;
     --primary-hover: #1563d7;
     --tab-hover: #acb1bdc2;

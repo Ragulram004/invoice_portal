@@ -27,7 +27,7 @@ import { HomePageScreen, HomePageNavigation, HomePageSideBar, HomePageContent,
         HomePageSideBarSeperationBottom,
         LogoutBoxButton, LogoutBoxHighlight} from './StylesHomePage.js';
 
-import {ApplyNavigationProfileEmail, ApplyNavigationLogo, ApplyNavigationProfileToggle, ApplyNavigationProfile }from '../ApplyInvoice/StyleApply.js'
+import {ApplyNavigationProfileEmail, ApplyNavigationLogo, ApplyNavigationProfileToggle, ApplyNavigationProfile  }from '../ApplyInvoice/StyleApply.js'
 
 //Components
 
@@ -173,7 +173,7 @@ function HomePage() {
 
                     {showEmail && (
                         <ApplyNavigationProfileToggle>
-                            <ApplyNavigationProfileEmail>{ email }</ApplyNavigationProfileEmail>
+                            <ApplyNavigationProfileEmail style={{ color: 'var(--text)' }}>{ email }</ApplyNavigationProfileEmail>
                         </ApplyNavigationProfileToggle>
                     )}
                 </ApplyNavigationProfile>   
@@ -244,7 +244,7 @@ function HomePage() {
                 {/* Home page main content about the proposed, approved and rejected invoices. */}
 
                 <HomePageMain>
-                <HomeDashBoard>Student Dashboard</HomeDashBoard>
+                <HomeDashBoard>Student Activity</HomeDashBoard>
                     <HomePageActionContent>
                         <HomePageActionTabs>
                             <HomePageActionTabsInput type="radio" id="proposed" name="tabs" value="Proposed" checked={activeTab === 'Proposed'} onChange={() => handleTabChange('Proposed')} />

@@ -6,7 +6,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-// import Switch from '@mui/material/Switch';
+import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import { GoogleLogout } from "react-google-login";
 // import { useNavigate } from 'react-router-dom';
@@ -458,7 +458,7 @@ function Apply() {
 
                     {showEmail && (
                         <ApplyNavigationProfileToggle>
-                            <ApplyNavigationProfileEmail>{ email }</ApplyNavigationProfileEmail>
+                            <ApplyNavigationProfileEmail style={{ color: 'var(--text)' }}>{ email }</ApplyNavigationProfileEmail>
                         </ApplyNavigationProfileToggle>
                     )}
                 </ApplyNavigationProfile>
@@ -575,9 +575,9 @@ function Apply() {
                                                 placeholder="TAC ID"
                                                 autoComplete="off"  
                                                 variant="outlined"
-                                                // disabled={ !isInputEnabled }
+                                                disabled={ !isInputEnabled }
                                                 onChange={ (e) => setProjectTac(e.target.value) } />
-                                                {/* <FormControlLabel
+                                                <FormControlLabel
                                                     control={
                                                     <Switch
                                                         checked={isInputEnabled}
@@ -585,12 +585,12 @@ function Apply() {
                                                         color="primary"
                                                     />
                                                     }
-                                                /> */}
+                                                />
                                         <ApplyFormDetailsLabel>Faculty Name: </ApplyFormDetailsLabel>
-                                        <Stack spacing={1} sx={{ width: 400 }}>
-                                        <Select options={searchResultsFaculty} onInputChange={handleInputChangeFaculty} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
                                         <Stack spacing={1} >
-                                        <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
+                                        <Select options={searchResultsFaculty} onInputChange={handleInputChangeFaculty} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>
+                                        {/* <Stack spacing={1} >
+                                        <Select options={searchResults} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/> */}
                                         </Stack>
                                     </ApplyFormDetailsProjectElementContainer>
                                     <ApplyFormDetailsProjectElementContainer className="flex-row">
@@ -598,6 +598,7 @@ function Apply() {
                                                 <ApplyFormDetailsLabel>Project Name:</ApplyFormDetailsLabel>
                                                 <input
                                                 autoComplete="off"
+                                                className="pro-name"
                                                 placeholder="Project Name"
                                                 required={true}
                                                 label="Project Name"
@@ -615,8 +616,10 @@ function Apply() {
                                                 name="row-radio-buttons-group"
                                                 onChange={ () => setPreferredTime('PM')}
                                             >
+                                            <div className="FormControl">
                                                 <FormControlLabel id="FormControlRadio" value="Morning" control={<Radio />} label="AM" />
                                                 <FormControlLabel id="FormControlRadio" value="Afternoon" control={<Radio />} label="PM" />
+                                            </div>
                                             </RadioGroup>
                                             </FormControl>
                                             </div>
@@ -627,15 +630,16 @@ function Apply() {
                                                 <input
                                                 autoComplete="off"
                                                 required
+                                                className="pro-name"
                                                 type="date"
                                                 variant="outlined"
                                                 value={selectedDate.toISOString().split('T')[0]}
                                                 disabled
                                             />
                                                 <ApplyFormDetailsLabel>Description: </ApplyFormDetailsLabel>
-                                                <input
-                                                autoComplete="off"
-                                    
+                                                <textarea
+                                                    autoComplete="off"
+                                                    placeholder="Invoice Description"
                                                     multiline
                                                     rows={5}
                                                     label="What is this invoice for?"

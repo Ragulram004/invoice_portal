@@ -295,11 +295,11 @@ function Proposals({activeTab}) {
                     <HomeLinkInvoicesButtonsContainer>
                         {/* <Button variant="outlined" onClick={() => Withdraw(proposal.Title,proposal._id)} color="success">approve</Button>
                         <Button variant="outlined" onClick={() => Reject(proposal.Title,proposal._id)} color="error">reject</Button> */}
-                        <Button variant="outlined" onClick={() => openapproveModal(proposal._id,proposal.Title)} color="success">approve</Button>
-                        <Button variant="outlined" onClick={() => openrejectModal(proposal._id,proposal.Title)} color="error">reject</Button>
-                        <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
-                        <Button  onClick={() => openapproveModal(proposal._id)} color="success">approve</Button>
-                        <Button  onClick={() => openrejectModal(proposal._id)} color="error">reject</Button>
+                        {/* <Button variant="outlined" onClick={() => openapproveModal(proposal._id,proposal.Title)} color="success">approve</Button> */}
+                        {/* <Button variant="outlined" onClick={() => openrejectModal(proposal._id,proposal.Title)} color="error">reject</Button> */}
+                        {/* <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} /> */}
+                        <Button  onClick={() => openapproveModal(proposal._id,proposal.Title)} color="success">approve</Button>
+                        <Button  onClick={() => openrejectModal(proposal._id,proposal.Title)} color="error">reject</Button>
                     </HomeLinkInvoicesButtonsContainer>
 
                     

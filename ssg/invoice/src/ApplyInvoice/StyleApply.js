@@ -137,7 +137,7 @@ export const ApplyNavigationProfileToggle = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background:#91A3B0;
+    background:var(--accent);
     width: 200px;
     height: 40px;
     margin-left: 1vw;
@@ -147,6 +147,7 @@ export const ApplyNavigationProfileToggle = styled.div`
     top: 0;
     right: 1vw;
     z-index: 1;
+    border:1px solid #91A3B0;
 `;
 
 export const ApplyNavigationProfileEmail = styled.p`
@@ -387,6 +388,13 @@ export const ApplyFormDetailsProject = styled.div`
         gap:10vw;
         font-size:
     }
+    @media(max-width:1024px){
+        .flex-row{
+            flex-direction:column;
+            gap:10px;
+        }
+    }
+    overflow-x:hidden;
 `;
 
 export const ApplyFormDetailsProjectElementContainer = styled.div`
@@ -395,8 +403,8 @@ export const ApplyFormDetailsProjectElementContainer = styled.div`
     // align-items: center;
     // justify-content: flex-start;
     width:75%;
-    height: 18vh;
-    // margin-top: 10px;   
+    margin-top: 10px;
+    
     .inner-flex{
         display:flex;
         flex-direction:column;
@@ -406,9 +414,25 @@ export const ApplyFormDetailsProjectElementContainer = styled.div`
         font-size:15px;
         border:1px solid #91A3B0;
         padding:8px;
-        margin-bottom:1vh;
         border-radius:4px;
-        background-color:#fafafa;cd
+        background-color:#fafafa;
+        &:focus{
+            background-color:#eef2f6;
+        }   
+    }
+    .FormControl{
+        display:flex;
+        flex-direction:row;
+    }
+    @media(max-width:1024px){
+        input{
+            width:67vw;
+        }
+    }
+    @media(max-width:600px){
+        input{
+            width:63.5vw;
+        }
     }
 `;
 
@@ -423,12 +447,41 @@ export const ApplyFormDetailsProjectMultiLineContainer = styled.div`
     input{
         font-size:15px;
         border:1px solid #91A3B0;
+        padding:8px;
+        border-radius:4px;
+        background-color:#fafafa;
+    }
+    @media(max-width:1024px){
+        input{
+            width:67vw;
+        }
+    }
+    @media(max-width:600px){
+        input{
+            width:63.5vw;
+        }
+    }
+    textarea{
+        font-size:15px;
+        border:1px solid #91A3B0;
         border-radius:4px;
         padding:8px;
         margin-bottom:1vh;
         background-color:#fafafa;
+        min-width:98%;
+        max-width:98%;
+        min-height:40px;
+        max-height:150px;
+        &:focus{
+            background-color:#eef2f6;
+        }  
     }
-`;
+    @media(max-width:600px){
+        textarea{
+            min-width:93%;
+        }
+    }
+`;  
 
 export const ApplyFormDetailsLabel = styled.label`
     font-family: 'Nunito Sans', sans-serif;
