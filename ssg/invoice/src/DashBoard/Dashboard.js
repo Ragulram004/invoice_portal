@@ -122,25 +122,27 @@ function Dashboard() {
         // const [dashboard_data, setDashboard_data] = useState({});
     
         useEffect(() => {
-            const dashboard_data = async() => {{
-                const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, date: dbdate, status : status})
-                const livedata = await axios.post(`${API_URL}/dashboard-count`, { month: month, year: year, date: date, status : status})
-                console.log(livedata.data);
-                    console.log(response);
-                    // const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
-                    setDashboard(response.data.dashboard);
-                    setProposedCount(livedata.data.proposed);
-                setWithdrawnCount(livedata.data.withdrawn);
-                setApprovedCount(livedata.data.faculty_approved);
-                setRejectedCount(livedata.data.faculty_rejected);
-                setCompletedCount(livedata.data.faculty_completed);
-        
-                console.log(response.data.proposedcount, response.data.withdrawncount, response.data.approvedcount, response.data.rejectedcount, response.data.completedcount);
-        
-                // setDashboard(randomNumbers);
-                }}
-                dashboard_data();
-                }, [status, month, year, date]);
+        const dashboard_data = async() => {{
+
+        const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, date: dbdate, status : status})
+        const livedata = await axios.post(`${API_URL}/dashboard-count`, { month: month, year: year, date: date, status : status})
+        console.log(livedata.data);
+            console.log(response);
+            // const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
+        setDashboard(response.data.dashboard);
+        setProposedCount(livedata.data.proposed);
+        setWithdrawnCount(livedata.data.withdrawn);
+        setApprovedCount(livedata.data.faculty_approved);
+        setRejectedCount(livedata.data.faculty_rejected);
+        setCompletedCount(livedata.data.faculty_completed);
+
+        console.log(response.data.proposedcount, response.data.withdrawncount, response.data.approvedcount, response.data.rejectedcount, response.data.completedcount);
+
+        // setDashboard(randomNumbers);
+
+        }}
+        dashboard_data();
+        }, [status, month, year]);
         
         const data = {
         labels: [
