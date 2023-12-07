@@ -1,4 +1,5 @@
-const DashBoard = require('./models/Dashboard.js');
+// const DashBoard = require('./models/Dashboard.js');
+const router = require('express').Router();
 
 let LoginCount = 0;
 let ProposedCount = 0;
@@ -13,6 +14,7 @@ let Faculty_CompletedCount = 0;
 
 const LoginCountMiddleware = (req, res, next) => {
     LoginCount++;
+    console.log(LoginCount);
     next();
 };
 
@@ -59,8 +61,17 @@ const Faculty_CompletedCountMiddleware = (req, res, next) => {
 
 
 const getValue = () => {
-    return {LoginCount, LoginCount, ProposedCount, WithdrawnCount, Faculty_ApprovedCount, Faculty_RejectedCount, Faculty_CompletedCount}
+    console.log(LoginCount);
+    console.log("+++++++++");
+    // return {LoginCount, LoginCount, ProposedCount, WithdrawnCount, Faculty_ApprovedCount, Faculty_RejectedCount, Faculty_CompletedCount}
+    return {proposed : ProposedCount, withdrawn : WithdrawnCount, faculty_approved : Faculty_ApprovedCount, faculty_rejected : Faculty_RejectedCount, faculty_completed : Faculty_CompletedCount}
 }
+
+// router.post('/dashboard-count', async(req, res) => {
+//     console.log(ProposedCount, WithdrawnCount);
+//     // console.log(Getvalue);
+//     // return res.send({proposed : ProposedCount, withdrawn : WithdrawnCount, faculty_approved : Faculty_ApprovedCount, faculty_rejected : Faculty_RejectedCount, faculty_completed : Faculty_CompletedCount});
+// });
 
 module.exports = {
     LoginCount,

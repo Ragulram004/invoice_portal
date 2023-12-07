@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Modal from 'react-modal';
+import Switch from '@mui/material/Switch';
 
 
 //Styles
@@ -78,6 +79,12 @@ function Approved({activeTab}) {
     const [rollnumber, setRollnumber] = useState('');
     const [proposals, setWithdrawn] = useState('');
     const [modal, setModal] = useState('');
+
+    const [isInputEnabled, setInputEnabled] = useState(false);
+
+    const handleToggleChange = () => {
+        setInputEnabled(!isInputEnabled);
+    };
 
     useEffect(() => {
         if(activeTab === 'Proposed') {
@@ -189,8 +196,8 @@ function Approved({activeTab}) {
 
     const handlemodalsubmit = async() => {
         console.log(systemnumber);
-        if(systemnumber !== '' && worklogdescription !== ''){
-        const wWorklogResponse = await axios.post(`${API_URL}/faculty-worklog`, { email: email , worklog: worklogdescription, modalid: modalid, systemnumber: systemnumber});
+        if(worklogdescription !== '' && ((isInputEnabled === false && systemnumber === '') || (isInputEnabled === true && systemnumber !== ''))){
+            const wWorklogResponse = await axios.post(`${API_URL}/faculty-worklog`, { email: email , worklog: worklogdescription, modalid: modalid, systemnumber: systemnumber});
         console.log(wWorklogResponse.data.message);
         if (wWorklogResponse.status === 200) {
             console.log('Data saved successfully');
@@ -201,6 +208,9 @@ function Approved({activeTab}) {
             console.error('Failed to save data');
         }}
         else{
+            console.log(worklogdescription);
+            console.log(isInputEnabled);
+            console.log(systemnumber);
             console.log("Please Select a system number and worklog description");
             window.alert("Please Select a system number and worklog description");
         }
@@ -309,7 +319,12 @@ function Approved({activeTab}) {
                             />
                             {/* <Select isDisabled={true} options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />   */}
                             </AlignItemContainer><AlignItemContainer>
-                            <Select  options={searchResultSystems} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption)} isRequired={true} required/> 
+                            <Select isDisabled={!isInputEnabled}  options={searchResultSystems} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption)} isRequired={true} required/> 
+                            <Switch
+                                checked={isInputEnabled}
+                                onChange={handleToggleChange}
+                                color="primary"
+                            />
                             </AlignItemContainer>
                         <ModalButtonContainer>
                                 <Button variant="outlined" color="success" onClick={handlemodalsubmit}>Submit</Button>
