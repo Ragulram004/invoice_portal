@@ -9,7 +9,7 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-// import Navbar from "../components/Navbar.js"
+import Navbar from "../components/Navbar.js"
 import {
     Chart as ChartJS,
     LineElement,
@@ -140,10 +140,10 @@ function Dashboard() {
     
         useEffect(() => {
         const dashboard_data = async() => {{
-            // const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, date: dbdate, status : status})
+            const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, date: dbdate, status : status})
         const livedata = await axios.post(`${API_URL}/dashboard-count`, { month: month, year: year, date: date, status : status})
         console.log(livedata.data);
-            // console.log(response);
+            console.log(response);
             // const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
             setDashboard(response.data.dashboard);
             setProposedCount(livedata.data.proposed);
@@ -256,52 +256,61 @@ function Dashboard() {
   return (
     <DashBoardScreen>
         <Navbar />
-            <DashBoardContent >
-                <TitleDashBoard className='title-dashboard'>Student Dashboard</TitleDashBoard>
-                <DashBoardMain>
-                {/* { (proposedcount && withdrawncount && approvedcount && rejectedcount && completedcount) && */}
-                {
-                    <div className="Multi-box">
-                        <DashBoardBox1 className="grid-box" onClick={(e) => handlestatuschange(e,"ProposedCount")} style={{cursor: "pointer"}}> <p>Proposed</p><span>  {(proposedcount) ? proposedcount : "0"}</span></DashBoardBox1>
-                        <DashBoardBox2 className="grid-box" onClick={(e) => handlestatuschange(e," <p>WithdrawnCount")} style={{cursor: "pointer"}}>Withdrawn</p> <span>{withdrawncount}</span> </DashBoardBox2>
-                        <DashBoardBox3 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_ <p>ApprovedCount")} style={{cursor: "pointer"}}>Approved</p> <span> {approvedcount}</span></DashBoardBox3>
-                        <DashBoardBox4 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_ <p>RejectedCount")} style={{cursor: "pointer"}}>Rejected</p> <span> {rejectedcount}</span></DashBoardBox4>
-                        <DashBoardBox5 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_ <p>CompletedCount")} style={{cursor: "pointer"}}>Completed</p> <span> {completedcount}</span></DashBoardBox5>
-                        {/* <DashBoardBox6 className="grid-box"></DashBoardBox6>
-                        <DashBoardBox7 className="grid-box"></DashBoardBox7>
-                        <DashBoardBox8 className="grid-box"></DashBoardBox8> */}
-                    </div>}
-                    
-                    <TitleDashBoard>Graph:</TitleDashBoard>
-                    <DashBoardGraphContent>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer
-                            components={[
-                            'DatePicker',
-                            ]}
-                        >
-                            <DemoItem label="Pick Date">
-                                <MobileDatePicker className='dashboard-date' onChange={handledatechange}/>
-                            </DemoItem>
-                        </DemoContainer>
-                    </LocalizationProvider>
-                    </DashBoardGraphContent>
-                    {/* <HomeDashBoard>Graph:</HomeDashBoard> */}
-                    <DashBoardGraph>
-                    <DashBoardGraph>
-                        <Line
-                            data={data}
-                            style = {{ height : "100%", width : "100%", margin : "20px"}}
-                            // height={400}
-                            // width={600}
-                            options={options}
-                        />
-                    </DashBoardGraph>
+        <DashBoardContent >
+        <TitleDashBoard className='title-dashboard'>Student Dashboard</TitleDashBoard>
+        <DashBoardMain>
+        <div className="Multi-box">
+        <DashBoardBox1 className="grid-box" onClick={(e) => handlestatuschange(e,"ProposedCount")} style={{cursor: "pointer"}}> <p>Proposed</p><span>  {(proposedcount) ? proposedcount : "0"}</span></DashBoardBox1>
+        <DashBoardBox2 className="grid-box" onClick={(e) => handlestatuschange(e,"WithdrawnCount")} style={{cursor: "pointer"}}><p>Withdrawn</p> <span>{withdrawncount}</span> </DashBoardBox2>
+        <DashBoardBox3 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_ApprovedCount")} style={{cursor: "pointer"}}><p>Approved</p> <span> {approvedcount}</span></DashBoardBox3>
+        <DashBoardBox4 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_RejectedCount")} style={{cursor: "pointer"}}><p>Rejected</p> <span> {rejectedcount}</span></DashBoardBox4>
+        <DashBoardBox5 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_CompletedCount")} style={{cursor: "pointer"}}><p>Completed</p> <span> {completedcount}</span></DashBoardBox5>
+        <TitleDashBoard>Graph:</TitleDashBoard>
+        <DashBoardGraphContent>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer
+                components={[
+                'DatePicker',
+                ]}
+            >
+                <DemoItem label="Pick Date">
+                    <MobileDatePicker className='dashboard-date' onChange={handledatechange}/>
+                </DemoItem>
+            </DemoContainer>
+        </LocalizationProvider>
+        </DashBoardGraphContent>
+        {/* <HomeDashBoard>Graph:</HomeDashBoard> */}
+        <DashBoardGraph>
+            <Line
+                data={data}
+                style = {{ height : "100%", width : "100%", margin : "20px"}}
+                // height={400}
+                // width={600}
+                options={options}
+            />
+        </DashBoardGraph>
+        
+        
+        </div>
 
-                </DashBoardMain>
-            </DashBoardContent>
+        </DashBoardMain>
+
+        </DashBoardContent>
+
     </DashBoardScreen>
-  )
+  );
 }
 
 export default Dashboard;
+
+
+                    
+    //                 
+
+                    
+    //                 
+    //                 <DashBoardGraph>
+                    
+
+    //             </DashBoardMain>
+    //         </DashBoardContent>
