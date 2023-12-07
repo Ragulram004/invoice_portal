@@ -11,11 +11,16 @@ router.post('/faculty-approved', async(req, res) => {
 });
 
 router.post('/faculty-worklog',Faculty_CompletedCountMiddleware, async(req, res) => {
+    if (req.body.systemnumber == "") {
+        var systemnumer = "Not applicable";
+    } else {
+        var systemnumer = req.body.systemnumber;
+    }
     console.log(req.body.email);
     console.log(req.body.worklog);
     console.log(req.body.modalid);
     console.log(req.body.systemnumber);
-    await Invoice.updateOne({_id: req.body.modalid}, {$set: {Status: "Completed", Worklog: req.body.worklog, SystemNumber: req.body.systemnumber}});
+    await Invoice.updateOne({_id: req.body.modalid}, {$set: {Status: "Completed", Worklog: req.body.worklog, SystemNumber: systemnumer}});
     return res.status(200).send({message: "Worklog Updates and Status Chnaged"})
 })
 

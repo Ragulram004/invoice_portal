@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { request } = require('express');
 const DashBoard = require('../models/Dashboard');
+// const {ProposedCount, WithdrawnCount, Faculty_ApprovedCount, Faculty_RejectedCount, Faculty_CompletedCount} = require('../accessCounter.js');
+const { getValue } = require('../accessCounter.js');
 
 router.post('/dashboard-data', async(req, res) => {
     console.log(req.body);
@@ -196,13 +198,23 @@ router.post('/dashboard', async(req, res) => {
     console.log(req.body.date);
     console.log(req.body.month);
     console.log(req.body.year);
+    const { date } = req.body;
     const { status } = req.body;
     const { month } = req.body
     const { year  } = req.body;
     // const dashboard = await DashBoard.find({LoginCount: { year }});
-    const dashboard = await DashBoard.findOne({ [`${status}.${year}.${month}`]: { $exists: true } }, { [`${status}.${year}.${month}`]: 1 });
+    const dashboard = await DashBoard.findOne({ [`${status}.${year}.${month}`]: { $exists: true } });
     console.log(dashboard[status][year][month]);
-    return res.send({dashboard: dashboard[status][year][month]});
+    console.log(dashboard.WithdrawnCount[year][month][date]);
+    return res.send({dashboard: dashboard[status][year][month], proposed: dashboard.ProposedCount[year][month][date], withdrawn: dashboard.WithdrawnCount[year][month][date], faculty_approved: dashboard.Faculty_ApprovedCount[year][month][date], faculty_rejected: dashboard.Faculty_RejectedCount[year][month][date], faculty_completed: dashboard.Faculty_CompletedCount[year][month][date]});
 });
+
+router.post('/dashboard-count', async(req, res) => {
+    console.log(getValue());
+    // console.log(getValue);
+    return res.send(getValue());
+    // return res.send({proposed : ProposedCount, withdrawn : WithdrawnCount, faculty_approved : Faculty_ApprovedCount, faculty_rejected : Faculty_RejectedCount, faculty_completed : Faculty_CompletedCount});
+});
+
 
 module.exports = router;

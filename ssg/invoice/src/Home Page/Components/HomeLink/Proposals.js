@@ -22,7 +22,7 @@ import { AiOutlineEye } from "react-icons/ai";
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import mediaquery from "mediaquery";
+// import mediaquery from "mediaquery";
 const API_URL = process.env.REACT_APP_API_URL;
 
 

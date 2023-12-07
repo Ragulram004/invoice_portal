@@ -11,6 +11,11 @@ router.post("/newInvoice",ProposedCountMiddleware, async(req, res) => {
     console.log(req.body.StudentsName);
     console.log(req.body.StudentsEmail);
     console.log(dataArray)
+    if (req.body.projectTac === ''){
+        var projectTac = 'No TAC'
+    }else {
+        var projectTac = res.body.projectTac
+    }
     // const dataArrayString = JSON.stringify(dataArray);
     // console.log(dataArray[1].value);
     await Invoice.insertMany([{
@@ -19,7 +24,7 @@ router.post("/newInvoice",ProposedCountMiddleware, async(req, res) => {
         StudentsName: req.body.StudentsName,
         StudentsEmail: req.body.StudentsEmail,
         StudentData: dataArray,
-        TacId : req.body.projectTac,
+        TacId : projectTac,
         Title : req.body.projectName,
         Description : req.body.projectDescription,
         FacultyName : req.body.facultyName,

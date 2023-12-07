@@ -115,7 +115,7 @@ function Apply() {
     const [selectedDate, setSelectedDate] = useState(new Date());       //Date
     const [ projectName, setProjectName ] = useState('');               //Project Name
     const [projectDescription, setProjectDescription] = useState('');   //Project Description
-    const [projectTac, setProjectTac] = useState('No TAC');             //Project TAC
+    const [projectTac, setProjectTac] = useState('');                   //Project TAC
     const [facultyName, setFacultyName] = useState('');                 //Faculty Name
     const [preferredTime, setPreferredTime] = useState('AM');           //Preferred Time
     const [fields, setFields] = useState([{ id: 1, value: "" }]);       //Student Name Field
@@ -321,8 +321,7 @@ function Apply() {
     //Form submittion button
 
     const handleFormSubmit = () => {
-        if(activeDetail && selectedDate && projectName && projectDescription && projectTac && facultyName && preferredTime && fields && ((isInputEnabled === true && ( projectTac != 'No TAC')) || (isInputEnabled === false && ( projectTac === 'No TAC')))) {
-            // console.log(fields);
+        if(activeDetail && selectedDate && projectName && projectDescription && facultyName && preferredTime && fields && ((!isInputEnabled) || (isInputEnabled === true && projectTac !== ''))) {
 
         const invoiceData = {
           students: fields.map((field) => field.value),
@@ -379,6 +378,7 @@ function Apply() {
         gettingData();
     }
     else {
+        console.log(isInputEnabled, projectTac);
         Swal.fire({
             position: 'center',
             icon: 'error',

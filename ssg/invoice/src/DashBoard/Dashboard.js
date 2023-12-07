@@ -14,7 +14,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { createGlobalStyle } from 'styled-components';
+// import { createGlobalStyle } from 'styled-components';
 import { Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -133,28 +133,55 @@ function DashBoard() {
     //     getEmail();
     // }, []);
 
-    const [proposedcount, setProposedCount] = useState(0);
-    const [withdrawncount, setWithdrawnCount] = useState(0);
-    const [approvedcount, setApprovedCount] = useState(0);
-    const [rejectedcount, setRejectedCount] = useState(0);
-    const [completedcount, setCompletedCount] = useState(0);
+    const [proposedcount, setProposedCount] = useState(1);
+    const [withdrawncount, setWithdrawnCount] = useState(1);
+    const [approvedcount, setApprovedCount] = useState(1);
+    const [rejectedcount, setRejectedCount] = useState(1);
+    const [completedcount, setCompletedCount] = useState(1);
 
     const [month, setMonth] = useState("1");
     const [year, setYear] = useState("2023");
     const [date, setDate] = useState("1");
+    const [dbdate, setDbDate] = useState("1");
     const [dashboard, setDashboard] = useState(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']);
     // const [dashboard_data, setDashboard_data] = useState({});
 
+    let count = 0;
+
+    useEffect(() => {
+        let today = new Date();
+        let currentMonth = today.getMonth() + 1;
+        let currentYear = today.getFullYear();
+        let currentDate = today.getDate();
+
+        setMonth(currentMonth);
+        setYear(currentYear);
+        setDate(currentDate);
+        console.log(currentDate);
+        setDbDate(currentDate-1);
+        count = count + 1;
+    }, [count == 0]);
+
     useEffect(() => {
     const dashboard_data = async() => {{
-        const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, status : status})
+        const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, date: dbdate, status : status})
+        const livedata = await axios.post(`${API_URL}/dashboard-count`, { month: month, year: year, date: date, status : status})
+        console.log(livedata.data);
         console.log(response);
-        const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
-        // setDashboard(response.data.dashboard);
-        setDashboard(randomNumbers);
+        // const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
+        setDashboard(response.data.dashboard);
+        setProposedCount(livedata.data.proposed);
+        setWithdrawnCount(livedata.data.withdrawn);
+        setApprovedCount(livedata.data.faculty_approved);
+        setRejectedCount(livedata.data.faculty_rejected);
+        setCompletedCount(livedata.data.faculty_completed);
+
+        console.log(response.data.proposedcount, response.data.withdrawncount, response.data.approvedcount, response.data.rejectedcount, response.data.completedcount);
+
+        // setDashboard(randomNumbers);
     }}
     dashboard_data();
-    }, [status, month, year]);
+    }, [status, month, year, date]);
     
     const data = {
     labels: [
@@ -228,9 +255,27 @@ function DashBoard() {
         PointElement,
     );
 
-    const handlestatuschange = (e) => {
+    const handlestatuschange = (e,status) => {
         console.log(e);
-        // setStatus(e);
+        setStatus(status);
+    }
+
+    const handledatechange = (e) => {
+        console.log(e);
+        const month = e.format('M');
+        const year = e.format('YYYY');
+        const date = e.format('D');
+        console.log(month);
+        console.log(year);
+        console.log(date);
+
+        setMonth(month);
+        setYear(year);
+        setDate(date);
+        setDbDate(date-1);
+        // setMonth(e.getMonth()+1);
+        // setYear(e.getFullYear());
+        // setDate(e.getDate());
     }
 
     return (
@@ -373,27 +418,29 @@ function DashBoard() {
 
                 <DashBoardMain>
                 <TitleDashBoard>Student Dashboard</TitleDashBoard>
+                {/* { (proposedcount && withdrawncount && approvedcount && rejectedcount && completedcount) && */}
+                {
                 <div className="Multi-box">
-                        <DashBoardBox1 className="grid-box" onClick={handlestatuschange} style={{cursor: "pointer"}}>Proposed : {proposedcount}</DashBoardBox1>
-                        <DashBoardBox2 className="grid-box">Withdrawn : {withdrawncount}</DashBoardBox2>
-                        <DashBoardBox3 className="grid-box">Approved : {approvedcount}</DashBoardBox3>
-                        <DashBoardBox4 className="grid-box">Rejected : {rejectedcount}</DashBoardBox4>
-                        <DashBoardBox5 className="grid-box">Completed : {completedcount}</DashBoardBox5>
+                        <DashBoardBox1 className="grid-box" onClick={(e) => handlestatuschange(e,"ProposedCount")} style={{cursor: "pointer"}}>Proposed : {(proposedcount) ? proposedcount : "0"}</DashBoardBox1>
+                        <DashBoardBox2 className="grid-box" onClick={(e) => handlestatuschange(e,"WithdrawnCount")} style={{cursor: "pointer"}}>Withdrawn : {withdrawncount}</DashBoardBox2>
+                        <DashBoardBox3 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_ApprovedCount")} style={{cursor: "pointer"}}>Approved : {approvedcount}</DashBoardBox3>
+                        <DashBoardBox4 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_RejectedCount")} style={{cursor: "pointer"}}>Rejected : {rejectedcount}</DashBoardBox4>
+                        <DashBoardBox5 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_CompletedCount")} style={{cursor: "pointer"}}>Completed : {completedcount}</DashBoardBox5>
                         {/* <DashBoardBox6 className="grid-box"></DashBoardBox6>
                         <DashBoardBox7 className="grid-box"></DashBoardBox7>
                         <DashBoardBox8 className="grid-box"></DashBoardBox8> */}
-                </div>
+                </div>}
                     <TitleDashBoard>Graph:</TitleDashBoard>
                     <DashBoardGraphContent>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DatePicker']}>
-                                <DatePicker className="dashboard-date"/>
+                                <DatePicker className="dashboard-date" onChange={handledatechange}/>
                             </DemoContainer>
                             </LocalizationProvider>
                         <DashBoardGraph></DashBoardGraph>
                     </DashBoardGraphContent>
-                    <HomeDashBoard>Graph:</HomeDashBoard>
-                    <DashBoardGraphContant>
+                    {/* <HomeDashBoard>Graph:</HomeDashBoard> */}
+                    <DashBoardGraph>
                         <Line
                             data={data}
                             style = {{ height : "100%", width : "100%", margin : "20px"}}
@@ -401,7 +448,7 @@ function DashBoard() {
                             // width={600}
                             options={options}
                         />
-                    </DashBoardGraphContant>
+                    </DashBoardGraph>
 
                 </DashBoardMain>
             </DashBoardContent>
