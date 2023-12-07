@@ -39,7 +39,7 @@ const customStyles = {
         backgroundColor: 'var(--accent)',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
         borderRadius: '5px',
-        width: '50vw',
+        width: window.innerWidth > 768 ? '50%' : '80%',
         height: '65vh',
         zIndex: '1000',
 
@@ -48,7 +48,13 @@ const customStyles = {
         backgroundColor: 'rgba(0, 0, 0, .5)'
       }
   };
-
+  const updateWidthBasedOnWindowSize = () => {
+    customStyles.content.width = window.innerWidth > 768 ? '50%' : '80%';
+  };
+  
+  // Call the function initially and listen for window resize events
+  updateWidthBasedOnWindowSize();
+  window.addEventListener('resize', updateWidthBasedOnWindowSize);
 
 function Proposals({activeTab}) {
 
@@ -218,9 +224,9 @@ function Proposals({activeTab}) {
                                     ))
                                     }
                                     </ModalContentElementsSection1>
+                                    </ModalContentElementsSection1>
                                     <ModalContentElementsSection1><span>Invoice Description:</span><br /></ModalContentElementsSection1>
                                     <ModalContentElementsSection1>{ modal.Description }</ModalContentElementsSection1>
-                                    </ModalContentElementsSection1>
                                 </ModalContentSection1>
                             <ModalButtonContainer>
                                 <Button variant="outlined" color="error" onClick={closeModal}>Close</Button>

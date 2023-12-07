@@ -9,253 +9,18 @@ export const HomePageScreen = styled.div`
     height: 100vh;
     width: 100vw;
 `;
-
-export const HomePageNavigation = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: var(--accent);
-    height: 10vh;
-    width: 100%;
-    border-bottom:1px solid #91A3B0;
-    position:fixed;
-    
-    .logo1{
-        margin-left:94vw;
-        width:30px;
-        height:30px;
-    }
-    .logo2{
-        margin-left:90.5vw;
-        width:30px;
-        height:30px;
-    }
-    @media(max-width:1024px){
-        .logo1{
-            margin-left:90vw;
-        }
-    }
-`;
-export const HomePageThreeDash = styled.div`
-    @media (max-width: 1024px){
-        .sidebarIconToggle {
-            transition: all 0.3s;
-            box-sizing: border-box;
-            cursor: pointer;
-            position: absolute;
-            z-index: 99;
-            height: 100%;
-            width: 100%;
-            top: 4vh;
-            left: 4vw;
-            height: 22px;
-            width: 22px;
-            
-        }
-        .spinner {
-            transition: all 0.3s;
-            box-sizing: border-box;
-            position: absolute;
-            height: 3px;
-            width: 100%;
-            background-color:#4C5866;
-        }
-        .horizontal {
-            transition: all 0.3s;
-            box-sizing: border-box;
-            position: relative;
-            float: left;
-            margin-top: 3px;
-        }
-        .diagonal.part-1 {
-            position: relative;
-            transition: all 0.3s;
-            box-sizing: border-box;
-            float: left;
-           
-        }
-        .diagonal.part-2 {
-            transition: all 0.3s;
-            box-sizing: border-box;
-            position: relative;
-            float: left;
-            margin-top: 3px;
-        }
-        &:
-    }
-`;
-
-export const HomePageNavigationLogo = styled.img`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    height: 5vh;
-    width: 45px;
-    position:fixed;
-    margin-left: 12px;
-`;
-
-export const HomePageNavigationTitle = styled.h1`
-    display: flex;
-    flex-direction: row;
-    align-items: centre;
-    justify-content: centre;
-    font-size: 3.5vh;
-    font-family: 'Nunito Sans', sans-serif;
-    margin-left: 70px;
-    color:#4C5866;
-    position:fixed;
-    font-weight:700;
-    @media(max-width:1024px){
-        font-size:3vh;
-    }
-    @media(max-width:450px){
-        font-size:1.2em;
-        margin-left: 13vw;
-
-    }
-
-`;
-
-export const HomePageNavigationSearch = styled.div`
-    width: 100%;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    margin-left:260px;
-    @media(max-width:450px){
-        margin-left:45vw;
-    }
-    // @media(max-width:820px){
-    //     margin-left:37vw;
-    // }
-`;
-export const Logoseparation = styled.div`
-    
-`;
-
-
-export const HomePageNavigationDN = styled.label`
-    background-color: var(--accent);
-    height: 5vh;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    line-height: 1;
-    position:sticky;
-    margin-left:87vw;
-    
-`;
-
-export const HomePageNavigationDNInput = styled.input`
-    display: none;
-`;
-
-export const HomePageNavigationNotification = styled.button`
-    width: 45px;
-    height: 80px;       
-    border-radius: 50%;
-    background: transparent;
-    color: var(--text);
-    margin-left: 10px;
-    cursor: pointer;
-    border: none;
-`;
-
-export const HomePageNavigationProfile = styled.button`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    height: 5vh;
-    width: 45px;
-    position:fixed;
-    margin-left: 100px;
-`;
-
 export const HomePageContent = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+    background-color:var(--background);
     height:100vh;
     width: 100%;
-    margin-top:10.1vh;
+    margin-top:2vh;
     position:fixed;
 `;
 
-export const HomePageSideBar = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background-color: var(--sidebar);
-    height: 90vh;
-    min-width: 250px;
-    border-right:1px solid #91A3B0;
-
-`;
-
-export const HomePageSideBarSeperation = styled.button`
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    background-color:transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-`;
-
-export const HomePageSideBarSeperationBottom = styled.button`
-    width: 100%;
-    height: 50vh;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: var(--text);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-end;
-`;
-
-export const HomePageSideBarButton = styled.button`
-    width: 100%;
-    height: 8vh;
-    border-radius:6px;
-    border:none;
-    outline: none;
-    margin-top:3px;
-    margin-bottom:3px;
-    background-color:transparent;
-    color: #4C5866;
-    font-family: 'Nunito Sans', sans-serif;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start-flex;
-    padding-left:70px;
-    cursor: pointer;
-    transition: background-color .5s ease-in-out;
-    font-size: 2.1vh;
-    font-weight:700;
-    &:hover{
-        background-color: var(--sidebar-focus);
-        width: 100%;
-    }
-    &:focus {
-        background-color: var(--sidebar-focus);
-        width: 100%;
-        transition: background-color .5s ease-in-out;
-    }
-`;
 
 export const HomePageMain = styled.div`
     display: flex;
@@ -264,7 +29,10 @@ export const HomePageMain = styled.div`
     justify-content: flex-start;
     background-color: transparent;
     height: 90vh;
-    width: 100%;
+    width: 90%;
+    @media(max-width:450px){
+        width:100%;
+    }
 `;
 
 export const HomePageActionButtons = styled.button`
@@ -589,7 +357,9 @@ export const ModalContentSection1 = styled.div`
         grid-template-columns: 10vw 1fr;
     }
     border-radius:0px 0px 6px 6px;
-    
+    .to-right{
+        margin-left:55px;
+    }
 `;
 
 export const ModalContentElementsSection1 = styled.h2`
@@ -623,8 +393,7 @@ export const ModalContentSection2 = styled.div`
         place-items:center;
         // background-color:black;
         }
-    .student{
-    }
+    
 `;
 
 export const ModalContentElementsSection2 = styled.h2`

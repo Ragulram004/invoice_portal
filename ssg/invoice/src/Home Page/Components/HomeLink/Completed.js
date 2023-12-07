@@ -28,23 +28,31 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: 'var(--accent)',
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-      borderRadius: '5px',
-      width: '50vw',
-      height: '65vh',
-      zIndex: '1000'
-    },
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, .5)'
-    }
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'var(--accent)',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+        borderRadius: '5px',
+        width: window.innerWidth > 768 ? '50%' : '80%',
+        height: '65vh',
+        zIndex: '1000',
+
+      },
+      overlay: {
+        backgroundColor: 'rgba(0, 0, 0, .5)'
+      }
   };
+  const updateWidthBasedOnWindowSize = () => {
+    customStyles.content.width = window.innerWidth > 768 ? '50%' : '80%';
+  };
+  
+  // Call the function initially and listen for window resize events
+  updateWidthBasedOnWindowSize();
+  window.addEventListener('resize', updateWidthBasedOnWindowSize);
 
 
 function Completed({activeTab}) {
@@ -149,44 +157,33 @@ function Completed({activeTab}) {
                     
                     {modalIsOpen && <Modal isOpen={modalIsOpen} style={customStyles}>
                     {/* {modal.map((modal, index) => ( */}
-                        <HomeLinkModal>
+                    <HomeLinkModal>
                             <ModalHeader>
                                 <ModalHeaderTitle>{ modal.Title }</ModalHeaderTitle>
                             </ModalHeader>
-                            <ModalContent>
-                                <ModalContentSection1>
-                                    <ModalContentElementsSection1><i></i>TAC ID: { modal.TacId }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Date: { modal.Date }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Preffered Time: { modal.Time }</ModalContentElementsSection1>
-                                </ModalContentSection1>
-
-                                <ModalContentSection1>
-                                    <ModalContentElementsSection1>Faculty Name: { modal.FacultyName.label }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Call Time: Pending....</ModalContentElementsSection1>
-                                </ModalContentSection1>
-
-                                <ModalContentSection2> 
-                                    <ModalContentElementsSection1>Students:</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ 
+                                <ModalContentSection1 className = "eye-contant">
+                                    <ModalContentElementsSection1 className="grid1"><span>TAC ID: </span> { modal.TacId }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Date: </span>
+                                    { modal.Date }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Preffered Time: </span>{ modal.Time }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Faculty Name: </span>{ modal.FacultyName.label }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Call Time: </span>{ modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 ><span>Students:</span>
+                                    <ModalContentElementsSection1 className="stu-grid">
+                                    { 
                                     Object.keys(modal.StudentData).map((key, index) => (
                                         <div key={index}>
-                                            <ModalContentElementsSection1>{modal.StudentData[key].label}</ModalContentElementsSection1>
+                                            <ModalContentElementsSection1 className="student">{modal.StudentData[key].label}</ModalContentElementsSection1>
                                         </div>
                                     ))
-                                    }</ModalContentElementsSection1>
-                                </ModalContentSection2>
-
-                                <ModalContentSection2>
-                                    <ModalContentElementsSection2>Invoice Description:</ModalContentElementsSection2>
-                                    <ModalContentElementsSection2>{ modal.Description }</ModalContentElementsSection2>
-                                </ModalContentSection2>
-
-                                <ModalContentSection2>
-                                    <ModalContentElementsSection2>Worklog Description:</ModalContentElementsSection2>
-                                    <ModalContentElementsSection2>{ modal.Worklog }</ModalContentElementsSection2>
-                                </ModalContentSection2>
-                            </ModalContent>
-
+                                    }
+                                    </ModalContentElementsSection1>
+                                    </ModalContentElementsSection1>
+                                    <ModalContentElementsSection1><span>Invoice Description:</span></ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>{ modal.Description }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1><span>Worklog Description:</span></ModalContentElementsSection1>
+                                    <ModalContentElementsSection1>{ modal.Worklog }</ModalContentElementsSection1>
+                                </ModalContentSection1>
                             <ModalButtonContainer>
                                 <Button variant="outlined" color="error" onClick={closeModal}>Close</Button>
                             </ModalButtonContainer>
