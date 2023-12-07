@@ -49,6 +49,7 @@ export const SidebarData = [
     path:'/',
     icon:<FaIcons.FaSignOutAlt/>,
     cName:'nav-text logout',
+    class:'logout',
     onClick: () => {
       clientId && onSuccess && onFailure(clientId, onSuccess, onFailure);
     }
