@@ -1,0 +1,128 @@
+:root {
+  --background: #f7f7fax ;  /*#f5f7fa*/
+  --accent: #ffffff;
+  --primary: #1C77FF;
+  --secondary: #FF7C7C;
+  --text: #2c323f;
+  --sidebar: #ffffff;
+  --primary-hover: #1563d7;
+  --tab-hover: #acb1bdc2;
+  --tab-active: #ffffff;
+  --sidebar-focus: #0080ff97;
+  --grid-header: #f1f5f9;
+  --border:#91A3B0;
+}
+
+.navbar {
+  background-color:var(--accent);
+  height: 65px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Nunito Sans', sans-serif;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 1.6rem;
+  background: none;
+}
+.toggle-botton{
+  width: 22px;
+}
+
+.nav-menu {
+  background-color:var(--accent);
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0 px;
+  left: -100%;
+  transition: 850ms;
+  border-right:1px solid var(--border) ;
+  font-family: 'Nunito Sans', sans-serif;
+  z-index: 1;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 18px;
+  width: 95%;
+  font-weight: 500;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.nav-text a:hover {
+  color: var(--primary);
+}
+.nav-text a:focus {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.nav-menu-items {
+  width: 100%;
+  margin-left: -50px;
+  margin-top:-5px;
+}
+
+.navbar-toggle {
+  background-color: var(--accent);
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  z-index: -1;
+  border-bottom: 1px solid var(--border);
+}
+
+span {
+  margin-left: 16px;
+}
+
+.bit-logo{
+  max-width: 50px;
+  max-height: 50px;
+  margin-left: 15px;
+}
+.nav-title{
+  font-family: 'Nunito Sans', sans-serif;
+  color:var(--text);
+  margin-left: 15px;
+  text-wrap: nowrap;
+}
+.nav-user{
+  width: 30px;
+  margin-left: auto;
+  margin-right: 30px;
+  color: #4f4b4b;
+}

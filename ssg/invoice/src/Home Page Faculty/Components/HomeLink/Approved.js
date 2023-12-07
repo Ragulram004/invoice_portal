@@ -248,9 +248,7 @@ function Approved({activeTab}) {
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
-                    <Button variant="outlined" onClick={() => openWorklogModal(proposal._id,proposal.Title)} color="success">Worklog</Button>
-                       <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />
-                    <Button  onClick={() => openModal(proposal._id)} color="success">Worklog</Button>
+                    <Button  onClick={() => openWorklogModal(proposal._id,proposal.Title)} color="success">Worklog</Button>
                     </HomeLinkInvoicesButtonsContainer>
                     <HomeLinkInvoicesButtonsContainer>
                     <AiOutlineEye id="EyeIcon" onClick={() => openModal(proposal._id)} />

@@ -263,7 +263,10 @@ export const HomePageMain = styled.div`
     justify-content: flex-start;
     background-color: transparent;
     height: 90vh;
-    width: 100%;
+    width: 90%;
+    @media(max-width:450px){
+        width:100%;
+    }
 `;
 
 export const HomePageActionButtons = styled.button`
@@ -516,7 +519,7 @@ export const HomeLinkModal = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    height:100%;
+    height:10vh;
 `;
 
 export const ModalHeader = styled.div`
@@ -525,9 +528,10 @@ export const ModalHeader = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 5vh;
-    background-color: var(--sidebar);
+    height: 6vh;
+    background-color:var(--background);
     border-radius:6px 6px 0px 0px;
+    border-bottom:1px solid #91A3B0;
 `;
 
 export const ModalHeaderTitle = styled.h1`
@@ -542,48 +546,90 @@ export const ModalHeaderTitle = styled.h1`
 `;
 
 export const ModalContent = styled.div`
-    display: flex;
+    // display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    height:auto;
+    height:;
     font-family: 'Nunito Sans', sans-serif;
     font-weight:700;
     border-radius:0px 0px 6px 6px;
+    background-color:var(--background);
 
 `;
 
 export const ModalContentSection1 = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+    // place-items: center;
     width: 100%;
-    height: 5vh;
-    margin-top: 2vh;
+    // margin-left: 2vh;
+    background-color:var(--background);
+    .grid1{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .stu-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        place-items:center;
+    }
+    @media(max-width:1050px){
+        .stu-grid{
+            grid-template-columns: 1fr 1fr 1fr 1fr ;
+        }
+    }
+    @media(max-width:860px){
+        .stu-grid{
+            grid-template-columns: 1fr 1fr 1fr ;
+        }
+    }
+    @media(max-width:650px){
+        .stu-grid{
+            grid-template-columns: 1fr 1fr ;
+        }
+    }
+    .grid2{
+        display:grid;
+        grid-template-columns: 10vw 1fr;
+    }
+    border-radius:0px 0px 6px 6px;
+    .to-right{
+        margin-left:40px;
+    }
 `;
 
 export const ModalContentElementsSection1 = styled.h2`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+    // justify-content: flex-start;
     font-size: 1em;
     font-family: 'Nunito Sans', sans-serif;
     margin-left: 1vw;
-    letter-spacing: 1px;
-    font-weight: 700;
+    word-break: break-all;
+    // letter-spacing: 1px;
+    span{
+        font-weight: 800;
+    }
 `;
 
 export const ModalContentSection2 = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    width: 100%;
+    height: 5vh;
     width: 100%;
     height: auto;
-    margin-top: 3vh;
+    margin-top: 100px;
+    span{
+        font-weight: 800;
+    }
+    
+    .stu-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+        place-items:center;
+        // background-color:black;
+        }
+    
 `;
 
 export const ModalContentElementsSection2 = styled.h2`
@@ -609,6 +655,7 @@ export const ModalButtonContainer = styled.div`
     margin-top: 3vh;
     margin-bottom: 3vh;
 `;
+
 
 
 //For Component: TAC

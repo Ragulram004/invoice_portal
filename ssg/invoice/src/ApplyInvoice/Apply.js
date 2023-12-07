@@ -20,6 +20,7 @@ import Select from 'react-select'
 import './Apply.css'
 import UseMediaQuery from "../Home Page/UseMediaQuery.js";
 import MinMediaQuery from "../Home Page/MinMediaQuery.js";
+import Navbar from "../components/Navbar.js"
 
 //Styles
 
@@ -42,7 +43,7 @@ import User from '../Icons/profile.png';
 import { IoNotificationsOutline, IoHome } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { MdDeleteOutline } from "react-icons/md";
-import { InvoiceContext } from '../InvoiceContext';
+import { InvoiceContext } from '../InvoiceContext.js';
 import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
 
 import axios from 'axios';
@@ -409,107 +410,10 @@ function Apply() {
     const minmatches = MinMediaQuery("(min-width:1025px)");
     return(
         <ApplyScreen>
-            {/* Navigation Bar */}
-
-            <ApplyNavigation>
-
-                {/* Navigation threedash */}
-                <HomePageThreeDash >{matches?(
-                      <label for="openSidebarMenu" class="sidebarIconToggle">
-                      <div class="spinner diagonal part-1"></div>
-                      <div class="spinner horizontal"></div>
-                      <div class="spinner diagonal part-2"></div>
-                    </label>
-                ):null}</HomePageThreeDash>
-
-                {/* Navigation Bar Logo */}
-
-                {
-                    minmatches?(
-                        <ApplyNavigationLogo src={Logo} alt="BIT Logo" />
-                        
-                    ):null
-                }
-
-                {/* Navigation Bar Title */}
-
-                <ApplyNavigationTitle>Invoice Portal</ApplyNavigationTitle>
-                <ApplyNavigationLogo className="logo1" src={User} alt='BIT Logo'/>
-
-                {/* Navigation Bar Search functionality box */}
-
-                {/* <ApplyNavigationSearch>
-                    <Stack spacing={1} sx={{ width: '100%' }}>
-                    <Select options={[]} onKeyDown={handleKeyDown} />
-                    </Stack>
-                </ApplyNavigationSearch> */}
-
-                {/* Navigation Bar Home Button */}
-
-                {/* <ApplyBackToHome onClick={ handleBackToHome }>
-                    <IoHome id="BackToHome" />
-                </ApplyBackToHome> */}
-
-                {/* Natification bell constainer */}
-
-                {/* <ApplyNavigationNotification src={Bell}>
-                </ApplyNavigationNotification> */}
-
-                {/* Profile Avatar */}
-
-                <ApplyNavigationProfile className="logo2" onClick={toggleEmail} >
-                    <RxAvatar id="ProfileAvatar" />
-
-                    {showEmail && (
-                        <ApplyNavigationProfileToggle>
-                            <ApplyNavigationProfileEmail style={{ color: 'var(--text)' }}>{ email }</ApplyNavigationProfileEmail>
-                        </ApplyNavigationProfileToggle>
-                    )}
-                </ApplyNavigationProfile>
-            </ApplyNavigation>
-
+             <Navbar />
             {/* Apply Invoice Form Goes Here */}
-
-            <ApplyContent>
-                {/* sidebar */}
-                `{(minmatches)?(
-                    <HomePageSideBar>
-
-                        {/* Home page side bar navigation links. */}
-
-                        <HomePageSideBarSeperation>
-
-                            {/* Showing the navigation links for the Home Page Side Bar. */}
-                            <HomePageSideBarButton onClick={ () => handleLinkChange('Home') }>
-                                <AiOutlineHome id="SideBarHomeIcon" />
-                                <div className="sidebar-text">Home</div>
-                            </HomePageSideBarButton>
-                        </HomePageSideBarSeperation>
-
-                        {/* Home page side bar logout button. */}
-
-                        <HomePageSideBarSeperationBottom>
-                        <LogoutBoxButton>
-                            <LogoutBoxHighlight>
-                            <GoogleLogout
-                                clientId={clientId}
-                                buttonText="Logout"
-                                onLogoutSuccess={() => onSuccess()}
-                                onFailure={() => onFailure()}
-                                className="logout-button"
-                            />
-                            </LogoutBoxHighlight>
-                            </LogoutBoxButton>
-                        </HomePageSideBarSeperationBottom>
-                    </HomePageSideBar>
-                    ):
-                    null
-                    }
-
-                
-
+            <ApplyContent>          
                 {/* Apply Form Content Starts Here */}
-
                 <ApplyMain>
                     {/* Apply Invoice Form Title */}
 
