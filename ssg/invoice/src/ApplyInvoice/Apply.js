@@ -120,7 +120,7 @@ function Apply() {
     const [facultyName, setFacultyName] = useState('');                 //Faculty Name
     const [preferredTime, setPreferredTime] = useState('AM');           //Preferred Time
     const [fields, setFields] = useState([{ id: 1, value: "" }]);       //Student Name Field
-    const [isInputEnabled, setInputEnabled] = useState(false);          //TAC Input Enable/Disable
+    // const [isInputEnabled, setInputEnabled] = useState(false);          //TAC Input Enable/Disable
 
 
     const navigate = useNavigate();                                    //Navigation
@@ -309,9 +309,9 @@ function Apply() {
 
     //TAC Input Enable/Disable
 
-    const handleToggleChange = () => {
-        setInputEnabled(!isInputEnabled);
-    };
+    // const handleToggleChange = () => {
+    //     setInputEnabled(!isInputEnabled);
+    // };
 
     //Navigation for submit and back to home buttons
 
@@ -322,7 +322,9 @@ function Apply() {
     //Form submittion button
 
     const handleFormSubmit = () => {
-        if(activeDetail && selectedDate && projectName && projectDescription && facultyName && preferredTime && fields && ((!isInputEnabled) || (isInputEnabled === true && projectTac !== ''))) {
+        if(activeDetail && selectedDate && projectName && projectDescription && facultyName && preferredTime && fields 
+            // && ((!isInputEnabled) || (isInputEnabled === true && projectTac !== ''))
+        ) {
 
         const invoiceData = {
           students: fields.map((field) => field.value),
@@ -361,7 +363,7 @@ function Apply() {
                     facultyName: facultyName,
                     preferredTime: preferredTime,
                     fields: fields,
-                    isInputEnabled: isInputEnabled,
+                    // isInputEnabled: isInputEnabled,
                     status: "Proposed"
                 });
                 console.log(response);
@@ -379,10 +381,12 @@ function Apply() {
         gettingData();
     }
     else {
-        console.log(isInputEnabled, projectTac);
+        // console.log(isInputEnabled, projectTac);
+        console.log(projectTac);
         Swal.fire({
             position: 'center',
             icon: 'error',
+            iconHtml: 'X',
             title: 'Please fill all the fields',
             showConfirmButton: false,
             timer: 1500
@@ -483,9 +487,9 @@ function Apply() {
                                                 placeholder="TAC ID"
                                                 autoComplete="off"  
                                                 variant="outlined"
-                                                disabled={ !isInputEnabled }
+                                                // disabled={ !isInputEnabled }
                                                 onChange={ (e) => setProjectTac(e.target.value) } />
-                                                <FormControlLabel
+                                                {/* <FormControlLabel
                                                     control={
                                                     <Switch
                                                         checked={isInputEnabled}
@@ -493,7 +497,7 @@ function Apply() {
                                                         color="primary"
                                                     />
                                                     }
-                                                />
+                                                /> */}
                                         <ApplyFormDetailsLabel>Faculty Name: </ApplyFormDetailsLabel>
                                         <Stack spacing={1} >
                                         <Select options={searchResultsFaculty} onInputChange={handleInputChangeFaculty} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChangeFaculty(selectedOption)} isRequired={true}/>

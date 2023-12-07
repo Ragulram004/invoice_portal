@@ -140,13 +140,13 @@ function Dashboard() {
     
         useEffect(() => {
         const dashboard_data = async() => {{
-            const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, date: dbdate, status : status})
+        const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, date: dbdate, status : status})
         const livedata = await axios.post(`${API_URL}/dashboard-count`, { month: month, year: year, date: date, status : status})
         console.log(livedata.data);
             console.log(response);
             // const randomNumbers = Array.from({ length: 31 }, () => Math.floor(Math.random() * 30) + 1);
-            setDashboard(response.data.dashboard);
-            setProposedCount(livedata.data.proposed);
+        setDashboard(response.data.dashboard);
+        setProposedCount(livedata.data.proposed);
         setWithdrawnCount(livedata.data.withdrawn);
         setApprovedCount(livedata.data.faculty_approved);
         setRejectedCount(livedata.data.faculty_rejected);
