@@ -227,11 +227,11 @@ function Dashboard() {
                 <TitleDashBoard className='title-dashboard'>Student Dashboard</TitleDashBoard>
                 <DashBoardMain>
                     <div className="Multi-box">
-                        <DashBoardBox1 className="grid-box" onClick={handlestatuschange} style={{cursor: "pointer"}}> <p>Proposed</p><span>  {proposedcount}</span></DashBoardBox1>
-                        <DashBoardBox2 className="grid-box"> <p>Withdrawn</p> <span>{withdrawncount}</span> </DashBoardBox2>
-                        <DashBoardBox3 className="grid-box"> <p>Approved</p> <span> {approvedcount}</span></DashBoardBox3>
-                        <DashBoardBox4 className="grid-box"> <p>Rejected</p> <span> {rejectedcount}</span></DashBoardBox4>
-                        <DashBoardBox5 className="grid-box"> <p>Completed</p> <span> {completedcount}</span></DashBoardBox5>
+                    <DashBoardBox1 className="grid-box" onClick={(e) => handlestatuschange(e,"ProposedCount")} style={{cursor: "pointer"}}> <p>Proposed</p><span>  {(proposedcount) ? proposedcount : "0"}</span></DashBoardBox1>
+        <DashBoardBox2 className="grid-box" onClick={(e) => handlestatuschange(e,"WithdrawnCount")} style={{cursor: "pointer"}}><p>Withdrawn</p> <span>{withdrawncount}</span> </DashBoardBox2>
+        <DashBoardBox3 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_ApprovedCount")} style={{cursor: "pointer"}}><p>Approved</p> <span> {approvedcount}</span></DashBoardBox3>
+        <DashBoardBox4 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_RejectedCount")} style={{cursor: "pointer"}}><p>Rejected</p> <span> {rejectedcount}</span></DashBoardBox4>
+        <DashBoardBox5 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_CompletedCount")} style={{cursor: "pointer"}}><p>Completed</p> <span> {completedcount}</span></DashBoardBox5>
                         {/* <DashBoardBox6 className="grid-box"></DashBoardBox6>
                         <DashBoardBox7 className="grid-box"></DashBoardBox7>
                         <DashBoardBox8 className="grid-box"></DashBoardBox8> */}
