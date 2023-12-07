@@ -165,7 +165,7 @@ export const ApplyContent = styled.div`
     display: flex;
     flex-direction:row;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
     background-color: transparent;
     height:100vh;
     width: 100%;
@@ -202,10 +202,13 @@ export const ApplyMain = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     background-color: transparent;
     height: 90vh;
-    width: 100%;
+    width: 90%;
+    @media(max-width:450px){
+        width:100%;
+    }
 `;
 
 export const ApplyFormContent = styled.form`
@@ -225,7 +228,7 @@ export const ApplyFormContent = styled.form`
 export const ApplyFormDetails = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     width: 97%;
     height: 100%;
@@ -248,7 +251,9 @@ export const ApplyFormDetailsName = styled.div`
     button{
         color:white;
         background-color:var(--primary)
-        // border-radius:50%;
+    }
+    .add-student{
+        margin-right:10vw;
     }
 `;
 
