@@ -180,9 +180,9 @@ function Completed({activeTab}) {
                                     </ModalContentElementsSection1>
                                     </ModalContentElementsSection1>
                                     <ModalContentElementsSection1><span>Invoice Description:</span></ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ modal.Description }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="to-right">{ modal.Description }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1><span>Worklog Description:</span></ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ modal.Worklog }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="to-right">{ modal.Worklog }</ModalContentElementsSection1>
                                 </ModalContentSection1>
                             <ModalButtonContainer>
                                 <Button variant="outlined" color="error" onClick={closeModal}>Close</Button>

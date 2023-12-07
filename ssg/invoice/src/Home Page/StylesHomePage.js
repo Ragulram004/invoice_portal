@@ -192,7 +192,7 @@ export const HomeLinkContent = styled.div`
 
 export const HomeLinkTable = styled.div`
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr 2fr;
     grid-template-rows: auto;
     gap: .5vw;
     width: 100%;
@@ -233,7 +233,7 @@ export const HomeLinkTableHeaderTitle = styled.h2`
 
 export const HomeLinkInvoicesTable = styled.div`
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr 2fr;
     grid-template-rows: auto;
     gap: .5vw;
     width: 100%;

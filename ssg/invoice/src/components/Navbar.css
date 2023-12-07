@@ -34,6 +34,7 @@
 }
 .toggle-botton{
   width: 22px;
+  margin-top: 8px;
 }
 
 .nav-menu {
@@ -64,6 +65,9 @@
   list-style: none;
   height: 60px;
   font-family: 'Nunito Sans', sans-serif;
+}
+.logout{
+  color:red;
 }
 
 .nav-text a {
@@ -102,7 +106,7 @@
   justify-content: start;
   align-items: center;
   z-index: -1;
-  border-bottom: 1px solid var(--border);
+  /* border-bottom: 1px solid var(--border); */
 }
 
 span {
@@ -125,4 +129,13 @@ span {
   margin-left: auto;
   margin-right: 30px;
   color: #4f4b4b;
+}
+@media(max-width:600px){
+  .nav-title{
+    font-size: 1.5em;
+  }
+  .toggle-botton{
+    width: 15px;
+    margin-top: 8px;
+  }
 }

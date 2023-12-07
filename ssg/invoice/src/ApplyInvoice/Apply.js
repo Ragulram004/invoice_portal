@@ -20,7 +20,7 @@ import Select from 'react-select'
 import './Apply.css'
 import UseMediaQuery from "../Home Page/UseMediaQuery.js";
 import MinMediaQuery from "../Home Page/MinMediaQuery.js";
-import Navbar from "../components/Navbar.js"
+import Navbar from "../components/Navbar.js";
 
 //Styles
 

@@ -109,37 +109,21 @@ function Dashboard() {
         //     getEmail();
         // }, []);
     
-        const [proposedcount, setProposedCount] = useState(1);
-        const [withdrawncount, setWithdrawnCount] = useState(1);
-        const [approvedcount, setApprovedCount] = useState(1);
-        const [rejectedcount, setRejectedCount] = useState(1);
-        const [completedcount, setCompletedCount] = useState(1);
+        const [proposedcount, setProposedCount] = useState(0);
+        const [withdrawncount, setWithdrawnCount] = useState(0);
+        const [approvedcount, setApprovedCount] = useState(0);
+        const [rejectedcount, setRejectedCount] = useState(0);
+        const [completedcount, setCompletedCount] = useState(0);
     
         const [month, setMonth] = useState("1");
         const [year, setYear] = useState("2023");
         const [date, setDate] = useState("1");
-    const [dbdate, setDbDate] = useState("1");
         const [dashboard, setDashboard] = useState(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']);
         // const [dashboard_data, setDashboard_data] = useState({});
-
-    let count = 0;
-
-    useEffect(() => {
-        let today = new Date();
-        let currentMonth = today.getMonth() + 1;
-        let currentYear = today.getFullYear();
-        let currentDate = today.getDate();
-
-        setMonth(currentMonth);
-        setYear(currentYear);
-        setDate(currentDate);
-        console.log(currentDate);
-        setDbDate(currentDate-1);
-        count = count + 1;
-    }, [count == 0]);
     
         useEffect(() => {
         const dashboard_data = async() => {{
+
         const response = await axios.post(`${API_URL}/dashboard`, { month: month, year: year, date: dbdate, status : status})
         const livedata = await axios.post(`${API_URL}/dashboard-count`, { month: month, year: year, date: date, status : status})
         console.log(livedata.data);
@@ -155,9 +139,10 @@ function Dashboard() {
         console.log(response.data.proposedcount, response.data.withdrawncount, response.data.approvedcount, response.data.rejectedcount, response.data.completedcount);
 
         // setDashboard(randomNumbers);
+
         }}
         dashboard_data();
-        }, [status, month, year, date]);
+        }, [status, month, year]);
         
         const data = {
         labels: [
@@ -231,86 +216,54 @@ function Dashboard() {
             PointElement,
         );
     
-        const handlestatuschange = (e,status) => {
-        console.log(e);
-        setStatus(status);
-    }
-
-    const handledatechange = (e) => {
+        const handlestatuschange = (e) => {
             console.log(e);
-            const month = e.format('M');
-        const year = e.format('YYYY');
-        const date = e.format('D');
-        console.log(month);
-        console.log(year);
-        console.log(date);
-
-        setMonth(month);
-        setYear(year);
-        setDate(date);
-        setDbDate(date-1);
-        // setMonth(e.getMonth()+1);
-        // setYear(e.getFullYear());
-        // setDate(e.getDate());
+            // setStatus(e);
         }
   return (
     <DashBoardScreen>
         <Navbar />
-        <DashBoardContent >
-        <TitleDashBoard className='title-dashboard'>Student Dashboard</TitleDashBoard>
-        <DashBoardMain>
-        <div className="Multi-box">
-        <DashBoardBox1 className="grid-box" onClick={(e) => handlestatuschange(e,"ProposedCount")} style={{cursor: "pointer"}}> <p>Proposed</p><span>  {(proposedcount) ? proposedcount : "0"}</span></DashBoardBox1>
-        <DashBoardBox2 className="grid-box" onClick={(e) => handlestatuschange(e,"WithdrawnCount")} style={{cursor: "pointer"}}><p>Withdrawn</p> <span>{withdrawncount}</span> </DashBoardBox2>
-        <DashBoardBox3 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_ApprovedCount")} style={{cursor: "pointer"}}><p>Approved</p> <span> {approvedcount}</span></DashBoardBox3>
-        <DashBoardBox4 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_RejectedCount")} style={{cursor: "pointer"}}><p>Rejected</p> <span> {rejectedcount}</span></DashBoardBox4>
-        <DashBoardBox5 className="grid-box" onClick={(e) => handlestatuschange(e,"Faculty_CompletedCount")} style={{cursor: "pointer"}}><p>Completed</p> <span> {completedcount}</span></DashBoardBox5>
-        <TitleDashBoard>Graph:</TitleDashBoard>
-        <DashBoardGraphContent>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer
-                components={[
-                'DatePicker',
-                ]}
-            >
-                <DemoItem label="Pick Date">
-                    <MobileDatePicker className='dashboard-date' onChange={handledatechange}/>
-                </DemoItem>
-            </DemoContainer>
-        </LocalizationProvider>
-        </DashBoardGraphContent>
-        {/* <HomeDashBoard>Graph:</HomeDashBoard> */}
-        <DashBoardGraph>
-            <Line
-                data={data}
-                style = {{ height : "100%", width : "100%", margin : "20px"}}
-                // height={400}
-                // width={600}
-                options={options}
-            />
-        </DashBoardGraph>
-        
-        
-        </div>
-
-        </DashBoardMain>
-
-        </DashBoardContent>
-
+            <DashBoardContent >
+                <TitleDashBoard className='title-dashboard'>Student Dashboard</TitleDashBoard>
+                <DashBoardMain>
+                    <div className="Multi-box">
+                        <DashBoardBox1 className="grid-box" onClick={handlestatuschange} style={{cursor: "pointer"}}> <p>Proposed</p><span>  {proposedcount}</span></DashBoardBox1>
+                        <DashBoardBox2 className="grid-box"> <p>Withdrawn</p> <span>{withdrawncount}</span> </DashBoardBox2>
+                        <DashBoardBox3 className="grid-box"> <p>Approved</p> <span> {approvedcount}</span></DashBoardBox3>
+                        <DashBoardBox4 className="grid-box"> <p>Rejected</p> <span> {rejectedcount}</span></DashBoardBox4>
+                        <DashBoardBox5 className="grid-box"> <p>Completed</p> <span> {completedcount}</span></DashBoardBox5>
+                        {/* <DashBoardBox6 className="grid-box"></DashBoardBox6>
+                        <DashBoardBox7 className="grid-box"></DashBoardBox7>
+                        <DashBoardBox8 className="grid-box"></DashBoardBox8> */}
+                    </div>
+                    
+                    <TitleDashBoard>Graph:</TitleDashBoard>
+                    <DashBoardGraphContent>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer
+                            components={[
+                            'DatePicker',
+                            ]}
+                        >
+                            <DemoItem label="Pick Date">
+                                <MobileDatePicker className='dashboard-date'/>
+                            </DemoItem>
+                        </DemoContainer>
+                    </LocalizationProvider>
+                    </DashBoardGraphContent>
+                    <DashBoardGraph>
+                        <Line
+                            data={data}
+                            style = {{ height : "100%", width : "100%", margin : "20px"}}
+                            // height={400}
+                            // width={600}
+                            options={options}
+                        />
+                    </DashBoardGraph>
+                </DashBoardMain>
+            </DashBoardContent>
     </DashBoardScreen>
-  );
+  )
 }
 
 export default Dashboard;
-
-
-                    
-    //                 
-
-                    
-    //                 
-    //                 <DashBoardGraph>
-                    
-
-    //             </DashBoardMain>
-    //         </DashBoardContent>

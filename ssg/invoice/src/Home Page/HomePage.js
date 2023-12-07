@@ -9,7 +9,7 @@ import Select from "react-select";
 import UseMediaQuery from "./UseMediaQuery.js";
 import MinMediaQuery from "./MinMediaQuery.js";
 import { createGlobalStyle } from 'styled-components';
-import Navbar from "../components/Navbar.js"
+import Navbar from "../components/Navbar.js";
 
 //Styles
 
