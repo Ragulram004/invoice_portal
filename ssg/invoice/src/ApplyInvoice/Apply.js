@@ -449,11 +449,12 @@ function Apply() {
                                             <Button
                                                 variant="contained"
                                                 color="error"
-                                                onClick={() => deleteField(field.id)}
+                                                // onClick={() => deleteField(field.id)}
                                                 disabled
                                             >
                                                 <MdDeleteOutline id="deleteIcon" />
-                                            </Button> : 
+                                            </Button> :
+                                            (field.id === 2) ?
                                             <Button
                                                 variant="contained"
                                                 color="error"
@@ -461,6 +462,8 @@ function Apply() {
                                             >
                                                 <MdDeleteOutline id="deleteIcon" />
                                             </Button>
+                                            : <></>
+                                            // }
                                             }
                                         </ApplyFormDetailsNameInside>
                                         ))}
