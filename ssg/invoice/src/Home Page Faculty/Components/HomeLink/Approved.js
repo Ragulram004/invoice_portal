@@ -13,7 +13,7 @@ import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader,
         HomeLinkTable, HomeLinkTableHeaderTitle, HomeLinkInvoicesButtonsContainer, 
         HomeLinkModal, ModalHeader, ModalHeaderTitle, ModalContent, ModalContentElementsSection1, 
         ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,AlignItemContainer
-         } from "../../StylesHomePage";
+        ,Noinvoice} from "../../StylesHomePage";
 
 //Components
 
@@ -24,6 +24,7 @@ import Select from 'react-select';
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Stack } from "@mui/material";
 const API_URL = process.env.REACT_APP_API_URL;
 
 
@@ -31,22 +32,22 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: 'var(--accent)',
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-      borderRadius: '5px',
-      width: '50vw',
-      height: '65vh',
-      zIndex: '1000'
-    },
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, .5)'
-    }
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'var(--accent)',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+        borderRadius: '5px',
+        width: window.innerWidth > 768 ? '50%' : '80%',
+        height: '65vh',
+        zIndex: '1000',
+      },
+      overlay: {
+        backgroundColor: 'rgba(0, 0, 0, .5)'
+      }
   };
 
 const worklogmodalcustomStyles = {
@@ -60,15 +61,22 @@ const worklogmodalcustomStyles = {
         backgroundColor: 'var(--accent)',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
         borderRadius: '5px',
-        width: '50vw',
-        height: '80vh',
-        zIndex: '1000'
-    },
-    overlay: {
-        backgroundColor: 'rgba(0, 0, 0, .5)'
-    }
-};
+        width: window.innerWidth > 768 ? '50%' : '80%',
+        height: '65vh',
+        zIndex: '1000',
 
+      },
+      overlay: {
+        backgroundColor: 'rgba(0, 0, 0, .5)'
+      }
+  };
+  const updateWidthBasedOnWindowSize = () => {
+    customStyles.content.width = window.innerWidth > 768 ? '50%' : '80%';
+  };
+  
+  // Call the function initially and listen for window resize events
+  updateWidthBasedOnWindowSize();
+  window.addEventListener('resize', updateWidthBasedOnWindowSize);
 
 function Approved({activeTab}) {
 
@@ -267,64 +275,67 @@ function Approved({activeTab}) {
                     
                     {modalIsOpen && <Modal isOpen={modalIsOpen} style={customStyles}>
                     {/* {modal.map((modal, index) => ( */}
-                        <HomeLinkModal>
+                    <HomeLinkModal>
                             <ModalHeader>
                                 <ModalHeaderTitle>{ modal.Title }</ModalHeaderTitle>
                             </ModalHeader>
-                            <ModalContent>
-                                <ModalContentSection1>
-                                    <ModalContentElementsSection1><i></i>TAC ID: { modal.TacId }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Date: { modal.Date }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Preffered Time: { modal.Time }</ModalContentElementsSection1>
-                                </ModalContentSection1>
-
-                                <ModalContentSection1>
-                                    <ModalContentElementsSection1>Faculty Name: { modal.FacultyName }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>Call Time: { modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
-                                </ModalContentSection1>
-
-                                <ModalContentSection2> 
-                                    <ModalContentElementsSection1>Students:</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1>{ 
+                                <ModalContentSection1 className = "eye-contant">
+                                    <ModalContentElementsSection1 className="grid1"><span>TAC ID: </span> { modal.TacId }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Date: </span>
+                                    { modal.Date }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Preffered Time: </span>{ modal.Time }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Faculty Name: </span>{ modal.FacultyName.label }</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Call Time: </span>{ modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 ><span>Students:</span>
+                                    <ModalContentElementsSection1 className="stu-grid">
+                                    { 
                                     Object.keys(modal.StudentData).map((key, index) => (
                                         <div key={index}>
-                                            <ModalContentElementsSection1>{modal.StudentData[key].label}</ModalContentElementsSection1>
+                                            <ModalContentElementsSection1 className="student">{modal.StudentData[key].label}</ModalContentElementsSection1>
                                         </div>
                                     ))
-                                    }</ModalContentElementsSection1>
-                                </ModalContentSection2>
-
-                                <ModalContentSection2>
-                                    <ModalContentElementsSection2>Invoice Description:</ModalContentElementsSection2>
-                                    <ModalContentElementsSection2>{ modal.Description }</ModalContentElementsSection2>
-                                </ModalContentSection2>
-                            </ModalContent>
-
+                                    }
+                                    </ModalContentElementsSection1>
+                                    </ModalContentElementsSection1>
+                                    <ModalContentElementsSection1><span>Invoice Description:</span><br /></ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="to-right">{ modal.Description }</ModalContentElementsSection1>
+                                </ModalContentSection1>
                             <ModalButtonContainer>
                                 <Button variant="outlined" color="error" onClick={closeModal}>Close</Button>
                             </ModalButtonContainer>
-                        </HomeLinkModal>
+                    </HomeLinkModal>
                         {/* ))} */}
                     </Modal>}
                     {worklogmodalIsOpen &&
                     <Modal isOpen={worklogmodalIsOpen} style={worklogmodalcustomStyles}>
                         <ModalHeader>
                                 <ModalHeaderTitle>{ modaltitle }</ModalHeaderTitle>
-                            </ModalHeader>
+                        </ModalHeader>
                             <AlignItemContainer>
-                            <TextField
+                            <h4>Worklog Description</h4>
+                            <textarea className="Worklog-input"
+                                    placeholder="Worllog Description"
                                     required={true}
                                     label="Worklog Description"
                                     onChange={ (e) => setWorklogDescription(e.target.value) }
                             />
                             {/* <Select isDisabled={true} options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />   */}
-                            </AlignItemContainer><AlignItemContainer>
-                            <Select isDisabled={!isInputEnabled}  options={searchResultSystems} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption)} isRequired={true} required/> 
-                            <Switch
-                                checked={isInputEnabled}
-                                onChange={handleToggleChange}
-                                color="primary"
-                            />
+                            <h4>system no</h4>
+                            <Stack spacing={1} sx={{ width: '75%'}}>
+                                    <Select 
+                                    // isDisabled={!isInputEnabled}  
+                                    options={searchResultSystems} 
+                                    onInputChange={handleInputChange} 
+                                    onKeyDown={handleKeyDown} 
+                                    onChange={(selectedOption) => handleSelectChange(selectedOption)} 
+                                    isRequired={true} required 
+                                    /> 
+                                {/* <Switch
+                                    checked={isInputEnabled}
+                                    onChange={handleToggleChange}
+                                    color="primary"
+                                /> */}
+                                </Stack>
                             </AlignItemContainer>
                         <ModalButtonContainer>
                                 <Button variant="outlined" color="success" onClick={handlemodalsubmit}>Submit</Button>
@@ -334,7 +345,7 @@ function Approved({activeTab}) {
                 </HomeLinkInvoicesTable>
             ))
             ) : (
-                <div> No invoice Is Proposed </div>
+                <Noinvoice>No Invoice Is Proposed</Noinvoice>
             )
         }
         </HomeLinkContent>

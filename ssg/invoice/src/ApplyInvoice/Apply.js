@@ -438,11 +438,11 @@ function Apply() {
                                             <h5>Student {field.id}</h5>
                                             <Stack spacing={1} sx={{ width: 600 }}>
                                             {(field.id === 1)? 
-                                            <Select isDisabled={true} options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />
-                                            
-                                            : 
-                                            <Select options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} isRequired={true} required/>
-                                            }
+                                                <Select isDisabled={true} options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} placeholder={`${name}`} />
+                                                
+                                                : 
+                                                <Select options={searchResultsStudent} onInputChange={handleInputChange} onKeyDown={handleKeyDown} onChange={(selectedOption) => handleSelectChange(selectedOption,field.id)} isRequired={true} required/>
+                                                }
                                             </Stack>
 
                                             {(field.id === 1) ?

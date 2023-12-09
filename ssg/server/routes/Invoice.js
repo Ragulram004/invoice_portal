@@ -13,7 +13,9 @@ router.post("/newInvoice",ProposedCountMiddleware, async(req, res) => {
     console.log(dataArray)
     if (req.body.projectTac === ''){
         var projectTac = 'No TAC'
-    }else {
+
+    }
+else {
         var projectTac = req.body.projectTac
     }
     // const dataArrayString = JSON.stringify(dataArray);

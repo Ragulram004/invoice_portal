@@ -258,7 +258,7 @@ export const HomeLinkContent = styled.div`
     width: 100%;
     overflow-y: auto;
     overflow-x:hidden;
-
+    
 `;
 
 export const HomeLinkTable = styled.div`
@@ -348,6 +348,8 @@ export const HomeLinkInvoicesButtonsContainer = styled.div`
     }
 `;
 
+
+
 export const HomeLinkModal = styled.div`
     display: flex;
     flex-direction: column;
@@ -355,6 +357,7 @@ export const HomeLinkModal = styled.div`
     justify-content: flex-start;
     width: 100%;
     height:10vh;
+
 `;
 
 export const ModalHeader = styled.div`
@@ -487,8 +490,9 @@ export const ModalButtonContainer = styled.div`
     justify-content: flex-end;
     width: 100%;
     height: 10vh;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    gap:2vw;
 `;
 
 
@@ -606,7 +610,35 @@ export const LogoutBoxHighlight = styled.div`
 `;
 
 export const AlignItemContainer = styled.div`
-    height: 20%;`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-contant:center;
+    background-color:var(--background);
+    padding:0vh 30px 7vh 30px;
+    border-radius: 0px 0px 6px 6px; 
+    h4{
+        font-family: 'Nunito Sans', sans-serif;
+        font-size:18px;
+    }
+    textarea{
+        font-family: 'Nunito Sans', sans-serif;
+        padding:10px;
+        font-size:15px;
+        min-width:71.5%;
+        max-width:71.5%;
+        min-height:10vh;
+        max-height:10vh;
+        border-radius:8px;
+        margin-bottom:2vh;
+    }
+    textarea:focus{
+        outline: none;
+        border:1px solid var(--primary);
+        box-shadow: 0 0 5px #719ECE;
+       
+    }
+`;
     
 export const FacultyRejectContainer = styled.div`
     height: 50%;
@@ -615,4 +647,35 @@ export const FacultyRejectContainer = styled.div`
     justify-content: center;
     align-items: center;
 
+`;
+
+export const CustomTimePickerContainer = styled.div`
+    // .MuiPickersStaticTimePicker-picker {
+        background-color: black;
+        background : blue;
+        /* other styles */
+    // }
+`;
+
+export const Noinvoice = styled.div`
+    margin-top:15%;
+    margin-left:43%;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size:20px;
+    @media(max-width:1250px){
+        margin-top:20%;
+         margin-left:41%;
+    }
+    @media(max-width:1000px){
+        margin-top:27%;
+         margin-left:40%;
+    }
+    @media(max-width:700px){
+        margin-top:36%;
+         margin-left:35%;
+    }
+    @media(max-width:450px){
+        margin-top:60%;
+         margin-left:27%;
+    }
 `;

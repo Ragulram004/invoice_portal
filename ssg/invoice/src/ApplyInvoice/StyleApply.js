@@ -11,126 +11,7 @@ export const ApplyScreen = styled.div`
     overflow: hidden;
 `;
 
-export const ApplyNavigation = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: var(--accent);
-    height: 10vh;
-    width: 100%;
-    border-bottom:1px solid #91A3B0;
 
-    .logo1{
-        margin-left:94vw;
-        width:30px;
-        height:30px;
-    }
-    .logo2{
-        margin-left:94vw;
-        color:transparent;
-        width:30px;
-        height:30px;   
-        z-index:1; 
-    }
-    @media(max-width:1024px){
-        .logo1{
-            margin-left:90vw;
-        }
-    }
-    @media(max-width:1024px){
-        .logo2{
-            margin-left:90vw;
-        }        
-    }
-`;
-
-export const ApplyNavigationLogo = styled.img`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    height: 5vh;
-    width: 45px;
-    position:fixed;
-    margin-left: 12px;
-    
-`;
-
-export const ApplyNavigationTitle = styled.h1`
-    display: flex;
-    flex-direction: row;
-    align-items: centre;
-    justify-content: centre;
-    font-size: 3.5vh;
-    font-family: 'Nunito Sans', sans-serif;
-    margin-left: 70px;
-    color:#4C5866;
-    position:fixed;
-    font-weight:700;
-    @media(max-width:1024px){
-        font-size:3vh;
-    }
-    @media(max-width:450px){
-        font-size:1.2em;
-        margin-left: 13vw;
-
-    }
-`;
-
-export const ApplyNavigationSearch = styled.div`
-    width: 100%;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    margin-left:260px;
-`;
-
-export const ApplyBackToHome = styled.button`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 3vw;
-    height: 5vh;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--text);
-    margin-left: 1vw;
-    cursor: pointer;
-    border: none;
-`;
-
-export const ApplyNavigationNotification = styled.button`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 3vw;
-    height: 5vh;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--text);
-    margin-left: 1vw;
-    cursor: pointer;
-    border: none;
-`;
-
-export const ApplyNavigationProfile = styled.button`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 3vw;
-    height: 5vh;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--text);
-    margin-left: 1vw;
-    cursor: pointer;
-    border: none;
-    margin-right:2vw;
-`;
 
 export const ApplyNavigationProfileToggle = styled.div`
     display: flex;
@@ -273,13 +154,22 @@ export const ApplyFormDetailsNameInside = styled.div`
     gap:15px;
     align-items: center;
     justify-content: center;
-    width: 95%;
+    width: 50%;
     height: 7vh;
     background: var(--background);
     border-radius: 6px;
     margin-top: 1.5vh;
     margin-left:2vh;
     padding:1.5vh;
+    h5{
+        white-space: nowrap;
+    }
+    @media(max-width:760px){
+        width:70%;
+    }
+    @media(max-width:450px){
+        width:100%;
+    }
 `;
 
 
@@ -383,7 +273,8 @@ export const ApplyFormDetailsProject = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap:10px;
     width: 100%;
     height: 100%;
     // margin-top: 1vh;
@@ -406,7 +297,7 @@ export const ApplyFormDetailsProjectElementContainer = styled.div`
     display: flex;
     flex-direction:column;
     // align-items: center;
-    // justify-content: flex-start;
+    justify-content: flex-start;
     width:75%;
     margin-top: 10px;
     
@@ -417,14 +308,17 @@ export const ApplyFormDetailsProjectElementContainer = styled.div`
     }
     input{
         font-size:15px;
-        border:1px solid #91A3B0;
+        font-family: 'Nunito Sans', sans-serif;
+        border:none;
         padding:8px;
-        border-radius:4px;
+        border-bottom:2px solid var(--border);
+        margin-bottom:1vh;
         background-color:#fafafa;
-        &:focus{
-            background-color:#eef2f6;
-        }   
     }
+    input:focus{
+            outline: none;
+            border-bottom:2px solid var(--primary);
+    }   
     .FormControl{
         display:flex;
         flex-direction:row;
@@ -444,18 +338,24 @@ export const ApplyFormDetailsProjectElementContainer = styled.div`
 export const ApplyFormDetailsProjectMultiLineContainer = styled.div`
     display: flex;
     flex-direction: column;
-    // align-items: flex-start;
+    align-items: center;
     // justify-content: space-evenly;
     width:75%;
     // height: 10vh;
     // margin-top: 10px;
     input{
         font-size:15px;
-        border:1px solid #91A3B0;
+        font-family: 'Nunito Sans', sans-serif;
+        border:none;
         padding:8px;
-        border-radius:4px;
-        background-color:#fafafa;
+        border-bottom:2px solid var(--border);
+        margin-bottom:1vh;
+        width:97%;
     }
+    input:focus{
+            outline: none;
+            border-bottom:2px solid var(--primary);
+    }   
     @media(max-width:1024px){
         input{
             width:67vw;
@@ -468,19 +368,21 @@ export const ApplyFormDetailsProjectMultiLineContainer = styled.div`
     }
     textarea{
         font-size:15px;
-        border:1px solid #91A3B0;
-        border-radius:4px;
+        font-family: 'Nunito Sans', sans-serif;
+        border:none;
         padding:8px;
-        margin-bottom:1vh;
         background-color:#fafafa;
+        border-bottom:2px solid var(--border);
+        margin-bottom:1vh;
         min-width:98%;
         max-width:98%;
         min-height:40px;
         max-height:150px;
-        &:focus{
-            background-color:#eef2f6;
-        }  
     }
+    textarea:focus{
+        outline: none;
+        border-bottom:2px solid var(--primary);
+}   
     @media(max-width:600px){
         textarea{
             min-width:93%;

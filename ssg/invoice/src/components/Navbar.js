@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -20,6 +20,27 @@ function Navbar() {
 
   const minmatches = MinMediaQuery("(min-width:710px)");
 
+  const [open, setOpen] = useState(false);
+
+  let menuRef = useRef();
+
+  useEffect(() => {
+    let handler = (e)=>{
+      if(!menuRef.current.contains(e.target)){
+        setOpen(false);
+        console.log(menuRef.current);
+      }      
+    };
+
+    document.addEventListener("mousedown", handler);
+    
+
+    return() =>{
+      document.removeEventListener("mousedown", handler);
+    }
+
+  });
+
   return (
     <>
       <IconContext.Provider value={{ color: '#484e5b' }}>
@@ -34,7 +55,24 @@ function Navbar() {
             (null)
           }
           <h1  className='nav-title'>Invoice Portal</h1>
-          <img className="nav-user" src={User} alt="" />
+          <div className="App">
+            <div className='menu-container' ref={menuRef}>
+              <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+                <img src={User}></img>
+              </div>
+
+              <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+                <ul>
+                  <DropdownItem  text = {"ragulram.ad22@bitsathy.ac.in"}/>
+                  <DropdownItem text = {"Dark"}/>
+                  <DropdownItem  text = {"Light"}/>
+                  {/* <DropdownItem img = {settings} text = {"Settings"}/>
+                  <DropdownItem img = {help} text = {"Helps"}/>
+                  <DropdownItem img = {logout} text = {"Logout"}/> */}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
@@ -57,6 +95,14 @@ function Navbar() {
         </nav>
       </IconContext.Provider>
     </>
+  );
+}
+function DropdownItem(props){
+  return(
+    <li className = 'dropdownItem'>
+      <img src={props.img}></img>
+      <a> {props.text} </a>
+    </li>
   );
 }
 

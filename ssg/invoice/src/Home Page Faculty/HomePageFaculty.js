@@ -32,6 +32,11 @@ import Logo from '../Icons/BITLogo.png';
 import User from '../Icons/profile.png';
 import Bell from '../Icons/bell.png';
 import { AiOutlineHome, AiFillSlackCircle } from "react-icons/ai";
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { SidebarData } from '../components/SidebarData';
+import { IconContext } from 'react-icons';
 
 import Proposals from "./Components/HomeLink/Proposals.js";
 import Approved from "./Components/HomeLink/Approved.js";
@@ -85,6 +90,15 @@ function HomePageFaculty() {
     
     return (
         <HomePageScreen>
+            {/* navigationbar */}
+            <IconContext.Provider value={{ color: '#484e5b' }}>
+                <div className='navbar'>
+                    <img className='bit-logo' src={Logo} alt="" />
+                    <h1  className='nav-title'>Invoice Portal</h1>
+                    <img className="nav-user" src={User} alt="" />
+                </div>
+            </IconContext.Provider>
+            {/* end navigationbar */}
             <HomePageContent>
                 <HomePageMain>
                     <HomePageActionContent>
