@@ -76,7 +76,8 @@ function LandingPage() {
                 Cookies.set('token', response.data.accesstoken);
                 if(response.data.role === "student"){
                     console.log(response.data.role);
-                    window.location.href = "/Home"}
+                    window.location.href = "/Home"
+                }
                 // window.location.href = "/Home"}
                 else if (response.data.role === "faculty"){
                     console.log(response.data.role);

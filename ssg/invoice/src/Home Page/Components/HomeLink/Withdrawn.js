@@ -12,7 +12,7 @@ import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader,
         HomeLinkTable, HomeLinkTableHeaderTitle, HomeLinkInvoicesButtonsContainer, 
         HomeLinkModal, ModalHeader, ModalHeaderTitle, ModalContent, ModalContentElementsSection1, 
         ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,
-         } from "../../StylesHomePage";
+        Noinvoice} from "../../StylesHomePage";
 
 //Components
 
@@ -39,7 +39,7 @@ const customStyles = {
         borderRadius: '5px',
         width: window.innerWidth > 768 ? '50%' : '80%',
         height: '65vh',
-        zIndex: '1000',
+        zIndex: '1000', 
 
       },
       overlay: {
@@ -201,7 +201,7 @@ function Withdrawn({activeTab}) {
                 </HomeLinkInvoicesTable>
             ))
             ) : (
-                <div> No invoice Is Proposed </div>
+                <Noinvoice>No Invoice Is Proposed</Noinvoice>
             )
         }
         </HomeLinkContent>

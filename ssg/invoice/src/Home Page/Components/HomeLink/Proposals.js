@@ -13,7 +13,7 @@ import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader,
         HomeLinkTable, HomeLinkTableHeaderTitle, HomeLinkInvoicesButtonsContainer, 
         HomeLinkModal, ModalHeader, ModalHeaderTitle, ModalContent, ModalContentElementsSection1, 
         ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,AlignItemContainer
-         } from "../../StylesHomePage";
+        ,Noinvoice } from "../../StylesHomePage";
 
 //Components
 
@@ -254,7 +254,7 @@ function Proposals({activeTab}) {
                 </HomeLinkInvoicesTable>
             ))
             ) : (
-                <div> No invoice Is Proposed </div>
+                <Noinvoice>No Invoice Is Proposed</Noinvoice>
             )
         }
         </HomeLinkContent>

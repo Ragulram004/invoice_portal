@@ -11,8 +11,9 @@ import dayjs from 'dayjs';
 // import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 // import TextField from '@mui/material/TextField';  
 // import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'; 
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 import TextField from '@mui/material/TextField';
 
@@ -23,8 +24,8 @@ import '../../../Styles/Invoice.css';
 import { HomeLinkContent, HomeLinkInvoicesTable, HomeLinkInvoicesTableHeader, 
         HomeLinkTable, HomeLinkTableHeaderTitle, HomeLinkInvoicesButtonsContainer, 
         HomeLinkModal, ModalHeader, ModalHeaderTitle, ModalContent, ModalContentElementsSection1, 
-        ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,AlignItemContainer
-         } from "../../StylesHomePage";
+        ModalContentSection1, ModalContentSection2, ModalContentElementsSection2, ModalButtonContainer,AlignItemContainer, CustomTimePickerContainer
+        ,Noinvoice} from "../../StylesHomePage";
 
 //Components
 
@@ -343,7 +344,7 @@ function Proposals({activeTab}) {
                             <ModalButtonContainer>
                                 <Button variant="outlined" color="error" onClick={closeModal}>Close</Button>
                             </ModalButtonContainer>
-                        </HomeLinkModal>
+                    </HomeLinkModal>
                         {/* ))} */}
                     
                     </Modal>}
@@ -351,14 +352,18 @@ function Proposals({activeTab}) {
                     <Modal isOpen={approvemodalIsOpen} style={approvemodalcustomStyles}>
                         <ModalHeader>
                                 <ModalHeaderTitle>{ modaltitle }</ModalHeaderTitle>
-                            </ModalHeader>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <StaticTimePicker defaultValue={dayjs('2022-04-17T15:30')} onAccept={handleAccept}/>
-                        </LocalizationProvider>
-
+                        </ModalHeader>
+                        <AlignItemContainer>
+                            <h4>Set Time</h4>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoItem>
+                                <StaticTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+                                </DemoItem>
+                            </LocalizationProvider>
+                        </AlignItemContainer>
                         <ModalButtonContainer>
                                 <Button variant="outlined" color="error" onClick={closeapproveModal}>Close</Button>
-                            </ModalButtonContainer>
+                        </ModalButtonContainer>
                     </Modal>}
                 {rejectmodalIsOpen &&
                     <Modal isOpen={rejectmodalIsOpen} style={rejectmodalcustomStyles}>
@@ -366,7 +371,9 @@ function Proposals({activeTab}) {
                                 <ModalHeaderTitle>{ modaltitle }</ModalHeaderTitle>
                             </ModalHeader>
                             <AlignItemContainer>
-                            <TextField
+                                <h4>Rejection Description</h4>
+                            <textarea
+                            placeholder="Rejection Description"
                                     required={true}
                                     label="Reject Description"
                                     onChange={ (e) => setRejectDescription(e.target.value) }
@@ -380,7 +387,7 @@ function Proposals({activeTab}) {
                 </HomeLinkInvoicesTable>
             ))
             ) : (
-                <div> No invoice Is Proposed </div>
+                <Noinvoice>No Invoice Is Proposed</Noinvoice>
             )
         }
         </HomeLinkContent>

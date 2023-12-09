@@ -187,7 +187,7 @@ export const HomeLinkContent = styled.div`
     width: 100%;
     overflow-y: auto;
     overflow-x:hidden;
-
+    
 `;
 
 export const HomeLinkTable = styled.div`
@@ -420,7 +420,6 @@ export const ModalButtonContainer = styled.div`
     margin-bottom: 3vh;
 `;
 
-
 //For Component: TAC
 
 export const TACLinkContent = styled.div`
@@ -543,4 +542,26 @@ export const AlignItemContainer = styled.div`
     justify-content: center;
     align-items: center;
 
+`;
+export const Noinvoice = styled.div`
+    margin-top:15%;
+    margin-left:43%;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size:20px;
+    @media(max-width:1250px){
+        margin-top:20%;
+         margin-left:41%;
+    }
+    @media(max-width:1000px){
+        margin-top:27%;
+         margin-left:40%;
+    }
+    @media(max-width:700px){
+        margin-top:36%;
+         margin-left:35%;
+    }
+    @media(max-width:450px){
+        margin-top:60%;
+         margin-left:27%;
+    }
 `;
