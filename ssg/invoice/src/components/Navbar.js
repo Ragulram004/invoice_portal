@@ -10,6 +10,10 @@ import UseMediaQuery from '../Home Page/UseMediaQuery';
 import MinMediaQuery from '../Home Page/MinMediaQuery';
 import User from "../Icons/profile.png"
 import { GoogleLogout } from "react-google-login";
+import Cookies from 'js-cookie';
+import axios from 'axios';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -23,6 +27,41 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   let menuRef = useRef();
+
+  const [name, setName] = useState('');
+
+  // useEffect(() => {
+  //   if(activeTab === 'Proposed') {
+  //       console.log("HomeLink is active");
+  //   }
+  //   const authToken = Cookies.get('token');
+
+  //   const verifyToken = async () => {
+  //       try {
+  //           const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
+  //           if (response.status === 200) {
+  //               setName(response.data.name);
+
+  let count = 0;
+
+  useEffect(() => {
+    const authToken = Cookies.get('token');
+
+    const verifyToken = async () => {
+      try {
+        const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
+        if (response.status === 200) {
+          setName(response.data.name);
+          count += 1;
+        }
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }
+    verifyToken();
+  }
+    , [count === 0]);
 
   useEffect(() => {
     let handler = (e)=>{
@@ -63,7 +102,7 @@ function Navbar() {
 
               <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
                 <ul>
-                  <DropdownItem  text = {"ragulram.ad22@bitsathy.ac.in"}/>
+                  <DropdownItem  text = {name}/>
                   <DropdownItem text = {"Dark"}/>
                   <DropdownItem  text = {"Light"}/>
                   {/* <DropdownItem img = {settings} text = {"Settings"}/>
