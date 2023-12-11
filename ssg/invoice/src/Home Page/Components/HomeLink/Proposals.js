@@ -240,7 +240,9 @@ function Proposals({activeTab}) {
                                 <ModalHeaderTitle>{ modaltitle }</ModalHeaderTitle>
                             </ModalHeader>
                             <AlignItemContainer>
-                            <TextField
+                                <h4>Withdraw Description</h4>
+                            <textarea
+                                    placeholder="Withdraw Description"
                                     required={true}
                                     label="Withdrawn Description"
                                     onChange={ (e) => setwithdrawDescription(e.target.value) }

@@ -416,8 +416,9 @@ export const ModalButtonContainer = styled.div`
     justify-content: flex-end;
     width: 100%;
     height: 10vh;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    gap:2vw;
 `;
 
 //For Component: TAC
@@ -536,12 +537,34 @@ export const LogoutBoxHighlight = styled.div`
 `;
 
 export const AlignItemContainer = styled.div`
-    height: 50%;
-    display: flex;
-    // flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-contant:center;
+    background-color:var(--background);
+    padding:0vh 30px 7vh 30px;
+    border-radius: 0px 0px 6px 6px; 
+    h4{
+        font-family: 'Nunito Sans', sans-serif;
+        font-size:18px;
+    }
+    textarea{
+        font-family: 'Nunito Sans', sans-serif;
+        padding:10px;
+        font-size:15px;
+        min-width:71.5%;
+        max-width:71.5%;
+        min-height:10vh;
+        max-height:10vh;
+        border-radius:8px;
+        margin-bottom:2vh;
+    }
+    textarea:focus{
+        outline: none;
+        border:1px solid var(--primary);
+        box-shadow: 0 0 5px #719ECE;
+    
+    }
 `;
 export const Noinvoice = styled.div`
     margin-top:15%;

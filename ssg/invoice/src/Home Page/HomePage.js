@@ -62,12 +62,12 @@ function HomePage() {
 
     const handleTabChange = (e) => {
         setActiveTab(e);
-        const winthdraw = async () => {
-            const id = "616b4b3b4b3b4b3b4b3b4b3b";
-        const response = await axios.post(`${API_URL}/withdraw`, { id: id });
-        console.log(response);
-        }
-        winthdraw();
+        // const winthdraw = async () => {
+        //     const id = "616b4b3b4b3b4b3b4b3b4b3b";
+        // const response = await axios.post(`${API_URL}/withdraw`, { id: id });
+        // console.log(response);
+        // }
+        // winthdraw();
     }
 
     const handleLinkChange = (e) => {

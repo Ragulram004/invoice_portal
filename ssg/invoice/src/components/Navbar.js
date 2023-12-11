@@ -30,6 +30,8 @@ function Navbar() {
 
   const [name, setName] = useState('');
 
+  
+
   // useEffect(() => {
   //   if(activeTab === 'Proposed') {
   //       console.log("HomeLink is active");

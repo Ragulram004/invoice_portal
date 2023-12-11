@@ -1,6 +1,6 @@
 // Dependencies
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Cookies from 'js-cookie';
 import { GoogleLogout } from "react-google-login";
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import Select from "react-select";
 import UseMediaQuery from "../Home Page/UseMediaQuery.js";
 import MinMediaQuery from "../Home Page/MinMediaQuery.js";
+import "./HomePageFaculty.css";
 
 
 //Styles
@@ -87,6 +88,33 @@ function HomePageFaculty() {
     };
     const matches = UseMediaQuery("(max-width:1024px)");
     const minmatches = MinMediaQuery("(min-width:1024px)");
+
+    const [open, setOpen] = useState(false);
+
+    let menuRef = useRef();
+
+    const [name, setName] = useState('');
+
+    let count = 0;
+
+    useEffect(() => {
+      const authToken = Cookies.get('token');
+  
+      const verifyToken = async () => {
+        try {
+          const response = await axios.post(`${API_URL}/verifyToken`, { token: authToken });
+          if (response.status === 200) {
+            setName(response.data.name);
+            count += 1;
+          }
+        }
+        catch (error) {
+          console.log(error);
+        }
+      }
+      verifyToken();
+    }
+      , [count === 0]);
     
     return (
         <HomePageScreen>
@@ -95,7 +123,24 @@ function HomePageFaculty() {
                 <div className='navbar'>
                     <img className='bit-logo' src={Logo} alt="" />
                     <h1  className='nav-title'>Invoice Portal</h1>
-                    <img className="nav-user" src={User} alt="" />
+                    <div className="App">
+                    <div className='menu-container' ref={menuRef}>
+                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+                        <img src={User}></img>
+                    </div>
+
+                    <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+                        <ul>
+                        <DropdownItem  text = {name}/>
+                        <DropdownItem text = {"Dark"}/>
+                        <DropdownItem  text = {"Light"}/>
+                        {/* <DropdownItem img = {settings} text = {"Settings"}/>
+                        <DropdownItem img = {help} text = {"Helps"}/>
+                        <DropdownItem img = {logout} text = {"Logout"}/> */}
+                        </ul>
+                    </div>
+                    </div>
+                    </div>
                 </div>
             </IconContext.Provider>
             {/* end navigationbar */}
@@ -150,5 +195,13 @@ function HomePageFaculty() {
         </HomePageScreen>
     );
 }
+
+function DropdownItem(props){
+    return(
+      <li className = 'dropdownItem'>
+        <img src={props.img}></img>
+        <a> {props.text} </a>
+      </li>
+    );}
 
 export default HomePageFaculty;

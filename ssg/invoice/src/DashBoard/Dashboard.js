@@ -149,6 +149,7 @@ function Dashboard() {
         setDashboard(response.data.dashboard);
         setProposedCount(livedata.data.proposed);
         setWithdrawnCount(livedata.data.withdrawn);
+        console.log(withdrawncount);
         setApprovedCount(livedata.data.faculty_approved);
         setRejectedCount(livedata.data.faculty_rejected);
         setCompletedCount(livedata.data.faculty_completed);
@@ -163,6 +164,7 @@ function Dashboard() {
         
         const handledatechange = (e) => {
             console.log(e);
+            if(e){
             const month = e.format('M');
             const year = e.format('YYYY');
             const date = e.format('D');
@@ -170,6 +172,9 @@ function Dashboard() {
             setYear(year);
             setDate(date);
             setDbDate(date - 1);
+            } else {
+                window.alert("Select any one date")
+            }
         }
 
 

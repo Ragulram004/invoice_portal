@@ -124,14 +124,14 @@ function Completed({activeTab}) {
         await setModalIsOpen(true);
     }
 
-    const Withdraw = async(Title,_id) => {
-        const response = await axios.post(`${API_URL}/withdraw`, {Status: Title, id: _id});
-        if (response.status === 200) {
-            console.log('Data saved successfully');
-            } else {
-                console.log(response);
-                console.error('Failed to save data');
-        }}
+    // const Withdraw = async(Title,_id) => {
+    //     const response = await axios.post(`${API_URL}/withdraw`, {Status: Title, id: _id});
+    //     if (response.status === 200) {
+    //         console.log('Data saved successfully');
+    //         } else {
+    //             console.log(response);
+    //             console.error('Failed to save data');
+    //     }}
 
     const closeModal = () => {
         setModalIsOpen(false);
