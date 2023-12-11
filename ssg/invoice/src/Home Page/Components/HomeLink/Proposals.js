@@ -179,7 +179,7 @@ function Proposals({activeTab}) {
             </HomeLinkTable>
             {Array.isArray(proposals) && (proposals.length !== 0) ? (
             proposals.map((proposal, index) => (
-                <HomeLinkInvoicesTable key={proposal._id}>
+                <HomeLinkInvoicesTable key={proposal._id} style={{ backgroundColor: proposal.CallTime ? '#AFC8AD' : 'inherit' }}>
                     <HomeLinkInvoicesTableHeader> {index+1} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesTableHeader> {proposal.Title} </HomeLinkInvoicesTableHeader>
                     <HomeLinkInvoicesButtonsContainer>
@@ -210,10 +210,10 @@ function Proposals({activeTab}) {
                                 <ModalContentSection1 className = "eye-contant">
                                     <ModalContentElementsSection1 className="grid1"><span>TAC ID: </span> { modal.TacId }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Date: </span>
-                                    { modal.Date }</ModalContentElementsSection1>
+                                    {modal.Date.split('T')[0]}</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Preffered Time: </span>{ modal.Time }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Faculty Name: </span>{ modal.FacultyName.label }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1 className="grid1"><span>Call Time: </span>{ modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Call Time: </span>{ modal.CallTime ? modal.CallTime.split('T')[1].slice(0, 8) : <>Pending....</>}</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 ><span>Students:</span>
                                     <ModalContentElementsSection1 className="stu-grid">
                                     { 

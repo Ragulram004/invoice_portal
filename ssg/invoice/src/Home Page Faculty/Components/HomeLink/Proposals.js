@@ -323,10 +323,10 @@ function Proposals({activeTab}) {
                                 <ModalContentSection1 className = "eye-contant">
                                     <ModalContentElementsSection1 className="grid1"><span>TAC ID: </span> { modal.TacId }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Date: </span>
-                                    { modal.Date }</ModalContentElementsSection1>
+                                    {modal.Date.split('T')[0]}</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Preffered Time: </span>{ modal.Time }</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 className="grid1"><span>Faculty Name: </span>{ modal.FacultyName.label }</ModalContentElementsSection1>
-                                    <ModalContentElementsSection1 className="grid1"><span>Call Time: </span>{ modal.CallTime ? modal.CallTime : <>Pending....</>}</ModalContentElementsSection1>
+                                    <ModalContentElementsSection1 className="grid1"><span>Call Time: </span>{ modal.CallTime ? modal.CallTime.split('T')[1].slice(0, 8) : <>Pending....</>}</ModalContentElementsSection1>
                                     <ModalContentElementsSection1 ><span>Students:</span>
                                     <ModalContentElementsSection1 className="stu-grid">
                                     { 
@@ -357,7 +357,7 @@ function Proposals({activeTab}) {
                             <h4>Set Time</h4>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoItem>
-                                <StaticTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+                                <StaticTimePicker defaultValue={dayjs('2022-04-17T15:30')} onAccept={handleAccept} />
                                 </DemoItem>
                             </LocalizationProvider>
                         </AlignItemContainer>
